@@ -48,8 +48,8 @@
 				// $bl = substr($date,5,2);
 				// $tg = substr($date,8,2);
 				// pr($tg);
-				$tahunajaran = getField('replid','aka_tahunajaran','tahunajaran',substr($_GET['tanggal'],7,4));
 				if(isset($_GET['subaksi']) && $_GET['subaksi']=='rek'){ // rekening
+					$tahunajaran = getField('replid','aka_tahunajaran','tahunajaran',substr($_GET['tanggal'],7,4));
 					$ss='SELECT
 							r.replid,
 							r.kode,
@@ -386,7 +386,6 @@
 					
 					// jurnal umum 
 					case 'ju':
-					// pr($_POST);
 						$jurnalArr = $ju_detjenistrans ='';
 						if(isset($_POST['jenisAllCB'])){ //select all
 							$s='SELECT replid FROM keu_detjenistransaksi';
@@ -414,7 +413,7 @@
 										uraian like "%'.$ju_uraian.'%" '.$ju_detjenistrans.' AND 
 										tanggal between "'.tgl_indo6($_POST['tgl1TB']).'" AND "'.tgl_indo6($_POST['tgl2TB']).'" 
 									ORDER BY	
-										replid DESC';
+										tanggal desc';
 										// pr($sql);
 						if(isset($_POST['starting'])){ //nilai awal halaman
 							$starting=$_POST['starting'];
@@ -436,6 +435,9 @@
 							while($res = mysql_fetch_assoc($result)){	
 								$jDetTrans = getJenisTransaksi($res['detjenistransaksi']);
 								$btn ='<td align="center">
+											<a target="_blank" data-hint="kwitansi"  class="button" href="report/r_kwitansi.php?transArr='.$res['replid'].'">
+												<i class="icon-printer on-left"></i>
+											</a>
 											<button data-hint="ubah"  class="button" onclick="loadFR(\''.$jDetTrans.'\','.$res['replid'].');">
 												<i class="icon-pencil on-left"></i>
 											</button>
@@ -1257,6 +1259,7 @@
 
 			// add / edit -----------------------------------------------------------------
 			case 'simpan':
+				$transArr=array();
 				$sub = $_POST['subaksiH']; // ju, in, out
 				if($sub=='ju'){
 					// 1. simpan transaksi
@@ -1273,6 +1276,7 @@
 					// pr($s);
 					$e  = mysql_query($s);
 					$id = mysql_insert_id();
+					$transArr[]=$id;
 					if(!$e) $stat='gagal_insert_transaksi';
 					else{
 						// 2.a hapus jurnal (jika ada)
@@ -1288,7 +1292,6 @@
 						
 						if(!$stat22) $stat='gagal_delete_jurnal'; // ada hapus jurnal AND gagal 
 						else{ // tidak ada hapus jurnal OR sukses hapus
-							
 							foreach ($rekArr as $i => $v) {
 								$nom2  = getuang($_POST[$sub.'_nominal'.$v.'TB']);
 								$jenis = $_POST[$sub.'_jenis'.$v.'TB'];
@@ -1345,6 +1348,7 @@
 										transaksi     ='.$_POST['idformH'];
 							$ejk = mysql_query($sjk);
 							$stat2=!$ejk || !$ejd?false:true;
+							$transArr[]=$_POST['idformH'];
 						}else{ // add
 							foreach ($rekArr as $i => $v) {
 								$nom = intval(getuang($_POST[$sub.'_nominal'.$v.'TB']));
@@ -1357,6 +1361,7 @@
 								// pr($s);
 								$e   = mysql_query($s);
 								$idTransaksi = mysql_insert_id();
+								$transArr[]=$idTransaksi;
 								// 2. simpan jurnal umum 
 								if(!$e) $stat1= false;
 								else {
@@ -1423,6 +1428,7 @@
 								// pr($s);
 								$e   = mysql_query($s);
 								$idTransaksi = mysql_insert_id();
+								$transArr[]=$idTransaksi;
 								// 2. simpan jurnal umum 
 								if(!$e) $stat1= false;
 								else {
@@ -1446,7 +1452,7 @@
 						}
 						$stat=!$stat1?'gagal_insert_transaksi':(!$stat2?'gagal_jurnal':(!$stat3?'gagal_update_saldoawal':'sukses'));						
 					}
-				}$out = json_encode(array('status'=>$stat));
+				}$out = json_encode(array('status'=>$stat,'transArr'=>$transArr));
 			break;
 			// add / edit -----------------------------------------------------------------
 			
