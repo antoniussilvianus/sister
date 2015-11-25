@@ -420,6 +420,20 @@ pr($s);
     return $terbilang;
   
 }
+	function getDetAnggaranFull($id){
+		$s='SELECT  
+				da.detilanggaran,
+				ka.kategorianggaran,
+				getAnggaranPerItem('.$id.')kuota 
+			FROM keu_anggarantahunan ath
+				JOIN keu_detilanggaran da on da.replid = ath.detilanggaran
+				JOIN keu_kategorianggaran ka on ka.replid = da.kategorianggaran
+			WHERE ath.replid='.$id;
+		// pr($s);
+		$e=mysql_query($s);
+		$r=mysql_fetch_assoc($e);
+		return $r['detilanggaran'].' ('.$r['kategorianggaran'].') | kuota : '.setuang($r['kuota']);
+	}
 	function getKatAnggaran2($f,$id){
 		$s='SELECT '.$f.' FROM keu_kategorianggaran WHERE replid='.$id;
 		// print_r($s);exit();

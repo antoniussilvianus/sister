@@ -237,13 +237,13 @@
                     <a data-hint="opsi rekening" target="_blank" href="jenis-laporan" class="button fg-white bg-orange place-right"><i class="icon-enter"></i></a>
                     <button id="li_cetakBC" data-hint="cetak" class="fg-white bg-blue place-right"><i class="icon-printer"></i></button>
                     <div class="input-control select size3">
-                        <select class="li_cari" name="li_departemenS" id="li_departemenS" data-hint="Departemen"></select>
+                        <select onchange="cmbtingkat($(this).val(),'li_tingkatS','');" class="li_cari" name="li_departemenS" id="li_departemenS" data-hint="Departemen"></select>
                     </div>    
                     <div class="input-control select size3">
-                        <select class="li_cari"  name="li_tahunajaranS" id="li_tahunajaranS" data-hint="Tahun Ajaran"></select>
+                        <select onchange="cmbtahunajaran('li_tahunajaranS');" class="li_cari"  name="li_tingkatS" id="li_tingkatS" data-hint="Tingkat"><option value="">-Pilih Dept. Dahulu-</option></select>
                     </div>    
                     <div class="input-control select size3">
-                        <select class="li_cari"  name="li_tingkatS" id="li_tingkatS" data-hint="Tingkat"></select>
+                        <select class="li_cari"  name="li_tahunajaranS" id="li_tahunajaranS" data-hint="Tahun Ajaran"><option value="">-Pilih Dept. dahulu-</option></select>
                     </div>    
                     <!-- group 2 -->
                     <div class="input-control select">

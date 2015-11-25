@@ -47,33 +47,23 @@
                       </td>
                     </tr>
                   </table>';
-              $jurnalArr = $ju_detjenistrans ='';
-              if(isset($_GET['jenisAllCB'])){ //select all
-                $s='SELECT replid FROM keu_detjenistransaksi';
-                $e=mysql_query($s);
-                while($r=mysql_fetch_assoc($e)){
-                  $jurnalArr.=','.$r['replid'];
-                }$jurnalArr=substr($jurnalArr,1);
-              }else{ // tidak select all
-                if(isset($_GET['detjenisTB'])){
-                  foreach ($_GET['detjenisTB'] as $i=>$v) {
-                    $jurnalArr.=','.$i;
-                  }$jurnalArr=substr($jurnalArr,1);
-                }else{
-                  $jurnalArr=0;
-                }
-              }$ju_detjenistrans=' AND detjenistransaksi in('.$jurnalArr.')';
-              $ju_no     = isset($_GET['ju_noS'])?filter($_GET['ju_noS']):'';
-              $ju_uraian = isset($_GET['ju_uraianS'])?filter($_GET['ju_uraianS']):'';
-              // pr($ju_detjenistrans);
-              $s= 'SELECT * 
-                    from keu_transaksi
-                    WHERE 
-                      (idkwitansi like "%'.$ju_no.'%" OR nobukti like "%'.$ju_no.'%" ) AND
-                      uraian like "%'.$ju_uraian.'%" '.$ju_detjenistrans.' AND 
-                      tanggal between "'.tgl_indo6($_GET['tgl1']).'" AND "'.tgl_indo6($_GET['tgl2']).'" 
-                    ORDER BY  
-                      replid DESC';
+            $no     = isset($_GET['ls_noS'])?filter($_GET['ls_noS']):'';
+            $uraian = isset($_GET['ls_uraianS'])?filter($_GET['ls_uraianS']):'';
+            $rekArr = '';
+
+            $s='SELECT *
+              FROM keu_transaksi
+              WHERE(
+                  idkwitansi LIKE "%'.$no.'%"
+                  OR nobukti LIKE "%'.$no.'%"
+                )
+                AND uraian LIKE "%'.$uraian.'%"
+                AND tanggal BETWEEN "'.tgl_indo6($_GET['tgl1']).'"
+                AND "'.tgl_indo6($_GET['tgl2']).'"
+                AND type="sar"
+              ORDER BY
+                replid DESC';
+                // uraian like "%'.$ju_uraian.'%" '.$ju_detjenistrans.' AND 
                       // pr($s);
               $e=mysql_query($s);
               $n = mysql_num_rows($e);

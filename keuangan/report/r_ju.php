@@ -73,7 +73,7 @@
                       uraian like "%'.$ju_uraian.'%" '.$ju_detjenistrans.' AND 
                       tanggal between "'.tgl_indo6($_GET['tgl1']).'" AND "'.tgl_indo6($_GET['tgl2']).'" 
                     ORDER BY  
-                      replid DESC';
+                      tanggal asc';
                       // pr($s);
               $e=mysql_query($s);
               $n = mysql_num_rows($e);

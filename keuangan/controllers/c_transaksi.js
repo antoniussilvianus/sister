@@ -168,17 +168,6 @@ var detilanggaranArr=rekArr=[];
         });
         
     // filtering 
-        // li : report penerimaan & pengeluaran 
-        $('#li_departemenS').on('change',function(){
-            cmbtahunajaran('li',$(this).val());
-        });
-        $('#li_tahunajaranS').on('change',function(){
-            cmbtingkat('li',$(this).val());
-            cmbthn($(this).val());
-        });        
-        $('#li_tingkatS').on('change',function(){
-            viewTB('li');
-        });
         $('#li_tahunS').on('change',function(){
             cmbbln($('#li_tahunajaranS').val(),$(this).val());
         });
@@ -262,6 +251,14 @@ var detilanggaranArr=rekArr=[];
         var token = encode64(x+tok);
         window.open('report/r_'+mn+'.php?token='+token+par,'_blank');
     }
+    //print kwitansi to PDF -------
+    function kwitansiPDF(transArr){
+        var tok=transArr;
+        // alert(tok);
+        var x  = $('#id_loginS').val();
+        var token = encode64(x+(tok.toString()));
+        window.open('report/r_kwitansi.php?token='+token+'&transArr='+transArr,'_blank');
+    }
 
      function loadAll(){
         viewTB('ju');   // jurnal umum 
@@ -272,10 +269,10 @@ var detilanggaranArr=rekArr=[];
         viewTB('lr');   // laba /rugi
         viewTB('pkb');  // posisi kas bank
         viewTB('bt');   // buku tambahan 
-        // viewTB('li');   // laporan income (penerimaan siswa)
-        // viewTB('lo');   // laporan outcome (pengeluaran)
+            // viewTB('li');   // laporan income (penerimaan siswa)
+            // viewTB('lo');   // laporan outcome (pengeluaran)
         viewTB('ls');   // laporan outcome (pengeluaran)
-        cmbdepartemen('li','');
+        cmbdepartemen('li_departemenS','');
     }
     
     // function loadLi() {
@@ -412,7 +409,10 @@ var detilanggaranArr=rekArr=[];
             ajax(url,data).done(function(dt){
                 notif(dt.status,dt.status!='sukses'?'red':'green');
                 if(dt.status=='sukses'){
-                    if($('#kwitansiCB').prop('checked')) printPDF('kwitansi');
+                    if($('#kwitansiCB').prop('checked')) {
+                        kwitansiPDF(dt.transArr);
+                    }
+                    // if($('#kwitansiCB').prop('checked')) printPDF('kwitansi');
                     $.Dialog.close();
                     $('#rekTBL').html('');
                     loadAll();
@@ -653,7 +653,7 @@ var detilanggaranArr=rekArr=[];
                     // tingkat
                     +'<td align="center">'
                         +'<div class="input-control select">'
-                            +'<select  id="'+typ+'_tingkat'+ke+'TB" name="'+typ+'_tingkat'+ke+'TB" required onchange="autoSuggest(\'\',\''+typ+'_detilanggaran'+ke+'\',\'detilanggaran\',\'\');"></select>'
+                            +'<select  id="'+typ+'_tingkat'+ke+'TB" name="'+typ+'_tingkat'+ke+'TB" required onchange="autoSuggest(\'\',\''+typ+'_detilanggaran'+ke+'\',\'detilanggaran\',\'\');"><option value="">-Pilih Dept.-</option></select>'
                         +'</div>'
                     +'</td>'
                     // detail anggaran 
@@ -775,7 +775,7 @@ var detilanggaranArr=rekArr=[];
                     'align':'left',
                     'columnName':'noinvoice',
                     'hide':true,
-                    'width':'15',
+                    'width':'17',
                     'label':'No. Invoice'
                 },{   
                     'align':'left',
@@ -785,7 +785,7 @@ var detilanggaranArr=rekArr=[];
                 },{   
                     'align':'left',
                     'columnName':'tgl',
-                    'width':'10',
+                    'width':'15',
                     'label':'Tanggal'
                 },{   
                     'align':'left',
@@ -1002,10 +1002,8 @@ var detilanggaranArr=rekArr=[];
                             +'<th class="text-center">Hapus</th>'
                         +'</tr>';
                         tr3+='<tr style="color:white;"class="info">'
-                                +'<th '+(typx=='out'?'colspan="3"':'')+'></th>'
-                                +'<th id="totNominalTD" class="text-right">Rp. 0</th>'
+                                +'<th '+(typx=='out'?'colspan="5"':'')+'></th>'
                                 +'<th></th>'
-                                +'<th id="totNominalTD" class="text-right">Rp. 0</th>'
                                 +'<th id="totNominalTD" class="text-right">Rp. 0</th>'
                                 +'<th></th>'
                                 +'<th></th>'
@@ -1307,9 +1305,9 @@ var detilanggaranArr=rekArr=[];
     }
 
 // combo tahunajaran ---
-    function cmbtahunajaran(el,dep){
+    function cmbtahunajaran(el){
         var u = dir4;
-        var d = 'aksi=cmb'+mnu4+(dep!=''?'&departemen='+dep:'');
+        var d = 'aksi=cmb'+mnu4;
         ajax(u,d).done(function(dt){
             var out='';
             if(dt.status!='sukses'){
@@ -1319,20 +1317,10 @@ var detilanggaranArr=rekArr=[];
                     out+='<option value="">kosong</option>';
                 }else{
                     $.each(dt.tahunajaran, function(id,item){
-                        out+='<option value="'+item.replid+'">'+item.tahunajaran+(item.aktif=='1'?' (aktif)':'')+'</option>';
+                        out+='<option value="'+item.replid+'">'+item.tahunajaran+'</option>';
                     });
                 }
-            }
-            if(dep==''){
-                $('#'+el+'_tahunajaranS').html('<option value="">-SEMUA-</option>');
-                cmbtingkat(el,'');
-                cmbthn('');
-            }else{
-                $('#'+el+'_tahunajaranS').html('<option value="">-SEMUA-</option>'+out);
-                cmbtingkat(el,'');
-                cmbthn('');
-                // cmbthn(dt.tahunajaran[0].replid);
-            }
+            }viewTB('li');
         });
     }
 //end of combo tahunajaran ----
