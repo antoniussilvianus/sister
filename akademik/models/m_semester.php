@@ -128,6 +128,7 @@
 				$s	= ' SELECT 
 							replid,
 							if(semester=1,"Ganjil","Genap")semester,
+							semester kodesemester,
 							tglMulai,
 							tglSelesai
 						from '.$tb.'

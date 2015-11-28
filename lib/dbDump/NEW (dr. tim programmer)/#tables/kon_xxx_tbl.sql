@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-11-02 13:39:46
+Date: 2015-11-28 10:56:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -341,7 +341,7 @@ CREATE TABLE `kon_loginhistory` (
   PRIMARY KEY (`id_loginhistory`),
   KEY `id_login` (`id_login`) USING BTREE,
   CONSTRAINT `kon_loginhistory_ibfk_1` FOREIGN KEY (`id_login`) REFERENCES `kon_login` (`id_login`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of kon_loginhistory
@@ -352,6 +352,106 @@ INSERT INTO `kon_loginhistory` VALUES ('25', '17', '2015-11-02 04:40:03');
 INSERT INTO `kon_loginhistory` VALUES ('26', '17', '2015-11-02 04:40:03');
 INSERT INTO `kon_loginhistory` VALUES ('27', '17', '2015-11-02 05:16:52');
 INSERT INTO `kon_loginhistory` VALUES ('28', '17', '2015-11-02 05:16:52');
+INSERT INTO `kon_loginhistory` VALUES ('29', '17', '2015-11-02 17:29:56');
+INSERT INTO `kon_loginhistory` VALUES ('30', '17', '2015-11-02 17:29:56');
+INSERT INTO `kon_loginhistory` VALUES ('31', '17', '2015-11-02 19:58:49');
+INSERT INTO `kon_loginhistory` VALUES ('32', '17', '2015-11-02 19:58:49');
+INSERT INTO `kon_loginhistory` VALUES ('33', '17', '2015-11-03 17:20:18');
+INSERT INTO `kon_loginhistory` VALUES ('34', '17', '2015-11-03 17:20:18');
+INSERT INTO `kon_loginhistory` VALUES ('35', '17', '2015-11-03 21:30:44');
+INSERT INTO `kon_loginhistory` VALUES ('36', '17', '2015-11-03 21:30:44');
+INSERT INTO `kon_loginhistory` VALUES ('37', '17', '2015-11-04 11:15:00');
+INSERT INTO `kon_loginhistory` VALUES ('38', '17', '2015-11-04 11:15:00');
+INSERT INTO `kon_loginhistory` VALUES ('39', '17', '2015-11-08 12:33:31');
+INSERT INTO `kon_loginhistory` VALUES ('40', '17', '2015-11-08 12:33:31');
+INSERT INTO `kon_loginhistory` VALUES ('41', '17', '2015-11-09 09:28:29');
+INSERT INTO `kon_loginhistory` VALUES ('42', '17', '2015-11-09 09:28:29');
+INSERT INTO `kon_loginhistory` VALUES ('43', '17', '2015-11-09 12:40:28');
+INSERT INTO `kon_loginhistory` VALUES ('44', '17', '2015-11-09 12:40:28');
+INSERT INTO `kon_loginhistory` VALUES ('45', '17', '2015-11-09 14:28:51');
+INSERT INTO `kon_loginhistory` VALUES ('46', '17', '2015-11-09 14:28:51');
+INSERT INTO `kon_loginhistory` VALUES ('47', '17', '2015-11-10 03:38:29');
+INSERT INTO `kon_loginhistory` VALUES ('48', '17', '2015-11-10 03:38:29');
+INSERT INTO `kon_loginhistory` VALUES ('49', '17', '2015-11-10 19:00:27');
+INSERT INTO `kon_loginhistory` VALUES ('50', '17', '2015-11-10 19:00:27');
+INSERT INTO `kon_loginhistory` VALUES ('51', '17', '2015-11-11 16:26:56');
+INSERT INTO `kon_loginhistory` VALUES ('52', '17', '2015-11-11 16:26:56');
+INSERT INTO `kon_loginhistory` VALUES ('53', '17', '2015-11-12 12:27:39');
+INSERT INTO `kon_loginhistory` VALUES ('54', '17', '2015-11-12 12:27:39');
+INSERT INTO `kon_loginhistory` VALUES ('55', '17', '2015-11-12 21:56:31');
+INSERT INTO `kon_loginhistory` VALUES ('56', '17', '2015-11-12 21:56:31');
+INSERT INTO `kon_loginhistory` VALUES ('57', '17', '2015-11-13 11:34:49');
+INSERT INTO `kon_loginhistory` VALUES ('58', '17', '2015-11-13 11:34:49');
+INSERT INTO `kon_loginhistory` VALUES ('59', '17', '2015-11-13 15:50:28');
+INSERT INTO `kon_loginhistory` VALUES ('60', '17', '2015-11-13 15:50:28');
+INSERT INTO `kon_loginhistory` VALUES ('61', '17', '2015-11-13 15:50:51');
+INSERT INTO `kon_loginhistory` VALUES ('62', '17', '2015-11-13 15:50:52');
+INSERT INTO `kon_loginhistory` VALUES ('63', '17', '2015-11-14 00:08:16');
+INSERT INTO `kon_loginhistory` VALUES ('64', '17', '2015-11-14 00:08:16');
+INSERT INTO `kon_loginhistory` VALUES ('65', '17', '2015-11-14 17:46:51');
+INSERT INTO `kon_loginhistory` VALUES ('66', '17', '2015-11-14 17:46:51');
+INSERT INTO `kon_loginhistory` VALUES ('67', '17', '2015-11-15 09:06:18');
+INSERT INTO `kon_loginhistory` VALUES ('68', '17', '2015-11-15 09:06:18');
+INSERT INTO `kon_loginhistory` VALUES ('69', '17', '2015-11-15 09:06:39');
+INSERT INTO `kon_loginhistory` VALUES ('70', '17', '2015-11-15 09:06:39');
+INSERT INTO `kon_loginhistory` VALUES ('71', '17', '2015-11-15 22:11:56');
+INSERT INTO `kon_loginhistory` VALUES ('72', '17', '2015-11-15 22:11:56');
+INSERT INTO `kon_loginhistory` VALUES ('73', '17', '2015-11-16 10:02:28');
+INSERT INTO `kon_loginhistory` VALUES ('74', '17', '2015-11-16 10:02:28');
+INSERT INTO `kon_loginhistory` VALUES ('75', '17', '2015-11-16 14:36:09');
+INSERT INTO `kon_loginhistory` VALUES ('76', '17', '2015-11-16 14:36:09');
+INSERT INTO `kon_loginhistory` VALUES ('77', '17', '2015-11-17 13:32:59');
+INSERT INTO `kon_loginhistory` VALUES ('78', '17', '2015-11-17 13:32:59');
+INSERT INTO `kon_loginhistory` VALUES ('79', '17', '2015-11-17 22:48:21');
+INSERT INTO `kon_loginhistory` VALUES ('80', '17', '2015-11-17 22:48:21');
+INSERT INTO `kon_loginhistory` VALUES ('81', '17', '2015-11-18 02:14:42');
+INSERT INTO `kon_loginhistory` VALUES ('82', '17', '2015-11-18 02:14:42');
+INSERT INTO `kon_loginhistory` VALUES ('83', '17', '2015-11-18 16:35:28');
+INSERT INTO `kon_loginhistory` VALUES ('84', '17', '2015-11-18 16:35:28');
+INSERT INTO `kon_loginhistory` VALUES ('85', '17', '2015-11-20 04:52:38');
+INSERT INTO `kon_loginhistory` VALUES ('86', '17', '2015-11-20 04:52:38');
+INSERT INTO `kon_loginhistory` VALUES ('87', '17', '2015-11-20 21:31:50');
+INSERT INTO `kon_loginhistory` VALUES ('88', '17', '2015-11-20 21:31:50');
+INSERT INTO `kon_loginhistory` VALUES ('89', '17', '2015-11-21 16:35:53');
+INSERT INTO `kon_loginhistory` VALUES ('90', '17', '2015-11-21 20:06:21');
+INSERT INTO `kon_loginhistory` VALUES ('91', '17', '2015-11-21 20:06:21');
+INSERT INTO `kon_loginhistory` VALUES ('92', '17', '2015-11-21 22:51:06');
+INSERT INTO `kon_loginhistory` VALUES ('93', '17', '2015-11-21 22:51:06');
+INSERT INTO `kon_loginhistory` VALUES ('94', '17', '2015-11-22 01:51:03');
+INSERT INTO `kon_loginhistory` VALUES ('95', '17', '2015-11-22 09:36:46');
+INSERT INTO `kon_loginhistory` VALUES ('96', '17', '2015-11-22 09:36:46');
+INSERT INTO `kon_loginhistory` VALUES ('97', '17', '2015-11-22 11:37:07');
+INSERT INTO `kon_loginhistory` VALUES ('98', '17', '2015-11-22 11:37:07');
+INSERT INTO `kon_loginhistory` VALUES ('99', '17', '2015-11-22 13:15:46');
+INSERT INTO `kon_loginhistory` VALUES ('100', '17', '2015-11-22 13:15:46');
+INSERT INTO `kon_loginhistory` VALUES ('101', '17', '2015-11-22 14:15:26');
+INSERT INTO `kon_loginhistory` VALUES ('102', '17', '2015-11-22 14:15:26');
+INSERT INTO `kon_loginhistory` VALUES ('103', '17', '2015-11-22 14:27:21');
+INSERT INTO `kon_loginhistory` VALUES ('104', '17', '2015-11-22 14:27:21');
+INSERT INTO `kon_loginhistory` VALUES ('105', '17', '2015-11-22 15:57:51');
+INSERT INTO `kon_loginhistory` VALUES ('106', '17', '2015-11-22 15:57:51');
+INSERT INTO `kon_loginhistory` VALUES ('107', '17', '2015-11-22 11:44:47');
+INSERT INTO `kon_loginhistory` VALUES ('108', '17', '2015-11-22 11:44:47');
+INSERT INTO `kon_loginhistory` VALUES ('109', '17', '2015-11-23 00:32:06');
+INSERT INTO `kon_loginhistory` VALUES ('110', '17', '2015-11-23 00:32:06');
+INSERT INTO `kon_loginhistory` VALUES ('111', '17', '2015-11-23 01:40:10');
+INSERT INTO `kon_loginhistory` VALUES ('112', '17', '2015-11-23 01:40:10');
+INSERT INTO `kon_loginhistory` VALUES ('113', '17', '2015-11-23 15:28:10');
+INSERT INTO `kon_loginhistory` VALUES ('114', '17', '2015-11-23 15:28:10');
+INSERT INTO `kon_loginhistory` VALUES ('115', '17', '2015-11-23 15:45:13');
+INSERT INTO `kon_loginhistory` VALUES ('116', '17', '2015-11-23 15:45:13');
+INSERT INTO `kon_loginhistory` VALUES ('117', '17', '2015-11-23 23:54:25');
+INSERT INTO `kon_loginhistory` VALUES ('118', '17', '2015-11-23 23:54:25');
+INSERT INTO `kon_loginhistory` VALUES ('119', '17', '2015-11-24 01:36:00');
+INSERT INTO `kon_loginhistory` VALUES ('120', '17', '2015-11-24 01:36:00');
+INSERT INTO `kon_loginhistory` VALUES ('121', '17', '2015-11-24 15:16:22');
+INSERT INTO `kon_loginhistory` VALUES ('122', '17', '2015-11-24 15:16:22');
+INSERT INTO `kon_loginhistory` VALUES ('123', '17', '2015-11-26 00:29:24');
+INSERT INTO `kon_loginhistory` VALUES ('124', '17', '2015-11-26 00:29:24');
+INSERT INTO `kon_loginhistory` VALUES ('125', '17', '2015-11-26 22:06:43');
+INSERT INTO `kon_loginhistory` VALUES ('126', '17', '2015-11-26 22:06:43');
+INSERT INTO `kon_loginhistory` VALUES ('127', '17', '2015-11-27 14:43:48');
+INSERT INTO `kon_loginhistory` VALUES ('128', '17', '2015-11-27 14:43:48');
 
 -- ----------------------------
 -- Table structure for kon_menu

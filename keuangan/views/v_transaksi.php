@@ -237,18 +237,18 @@
                     <a data-hint="opsi rekening" target="_blank" href="jenis-laporan" class="button fg-white bg-orange place-right"><i class="icon-enter"></i></a>
                     <button id="li_cetakBC" data-hint="cetak" class="fg-white bg-blue place-right"><i class="icon-printer"></i></button>
                     <div class="input-control select size3">
-                        <select onchange="cmbtingkat($(this).val(),'li_tingkatS','');" class="li_cari" name="li_departemenS" id="li_departemenS" data-hint="Departemen"></select>
+                        <select  class="li_cari" name="li_departemenS" id="li_departemenS" data-hint="Departemen"></select>
                     </div>    
                     <div class="input-control select size3">
-                        <select onchange="cmbtahunajaran('li_tahunajaranS');" class="li_cari"  name="li_tingkatS" id="li_tingkatS" data-hint="Tingkat"><option value="">-Pilih Dept. Dahulu-</option></select>
+                        <select class="li_cari"  name="li_tingkatS" id="li_tingkatS" data-hint="Tingkat"><option value="">-semua-</option></select>
                     </div>    
                     <div class="input-control select size3">
-                        <select class="li_cari"  name="li_tahunajaranS" id="li_tahunajaranS" data-hint="Tahun Ajaran"><option value="">-Pilih Dept. dahulu-</option></select>
+                        <select class="li_cari"  name="li_tahunajaranS" id="li_tahunajaranS" data-hint="Tahun Ajaran"><option value="">-semua-</option></select>
                     </div>    
                     <!-- group 2 -->
                     <div class="input-control select">
-                        <select class="span2 li_cari" name="li_tahunS" id="li_tahunS" data-hint="Tahun"></select>
-                        <select class="span2 li_cari" name="li_bulanS" id="li_bulanS" data-hint="Bulan"></select>
+                        <select class="span2 li_cari" name="li_semesterS" id="li_semesterS" data-hint="Semester"><option value="">-semua-</option></select>
+                        <select class="span2 li_cari" name="li_bulanS" id="li_bulanS" data-hint="Bulan"><option value="">-semua-</option></select>
                     </div>    
                     <!-- group 3 -->
                     <div class="input-control select size3">

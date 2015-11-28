@@ -5,12 +5,26 @@
 	// 	$r=mysql_fetch_assoc($e);
 	// 	return $r['nominal'];
 	// }
+	function getTahunAjaranTrans($tgl)	{
+		$s= 'SELECT getTahunAjaran("'.$tgl.'")idtahunajaran';
+		$e=mysql_query($s);
+		$r=mysql_fetch_assoc($e);
+		return $r['idtahunajaran'];
+	}
 	function getSaldoAwalRek($idRek,$idThn){
 		$s='SELECT nominal FROM keu_saldorekening WHERE detilrekening='.$idRek.' AND tahunajaran='.$idThn;
 		$e=mysql_query($s);
 		$r=mysql_fetch_assoc($e);
 		return $r['nominal'];
 	}
+
+	function getSaldoRekeningSkrg($idRek,$idThn){
+		$s='SELECT getSaldoRekeningSkrg('.$idRek.','.$idThn.') saldoRekening';
+		// pr($s);
+		$e=mysql_query($s);
+		$r=mysql_fetch_assoc($e);
+		return $r['saldoRekening'];
+	}	
 	function getSaldoRek($idRek,$idThn){
 		$s='SELECT nominal2 FROM keu_saldorekening WHERE detilrekening='.$idRek.' AND tahunajaran='.$idThn;
 		$e=mysql_query($s);
@@ -434,6 +448,17 @@ pr($s);
 		$r=mysql_fetch_assoc($e);
 		return $r['detilanggaran'].' ('.$r['kategorianggaran'].') | kuota : '.setuang($r['kuota']);
 	}
+	function getNamaAnggaran($ath){
+		$s='SELECT getNamaAnggaran('.$ath.')nama';
+		$e=mysql_query($s);
+		$r=mysql_fetch_assoc($e);
+		return $r['nama'];
+	}
+	// function getNamaKatAnggaran($id){
+	// 	$s=getField('kategorianggaran','keu_kategorianggaran','replid',$id);
+	// 	$e=mysql_query($s);
+	// 	return $r['detilanggaran'];
+	// }
 	function getKatAnggaran2($f,$id){
 		$s='SELECT '.$f.' FROM keu_kategorianggaran WHERE replid='.$id;
 		// print_r($s);exit();

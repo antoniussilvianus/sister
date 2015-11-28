@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-11-22 09:48:03
+Date: 2015-11-28 13:29:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,7 +52,7 @@ INSERT INTO `keu_anggarantahunan` VALUES ('29', '12', '2000', '12');
 INSERT INTO `keu_anggarantahunan` VALUES ('30', '13', '0', '3');
 INSERT INTO `keu_anggarantahunan` VALUES ('31', '13', '0', '5');
 INSERT INTO `keu_anggarantahunan` VALUES ('32', '13', '110000', '12');
-INSERT INTO `keu_anggarantahunan` VALUES ('33', '14', '0', '3');
+INSERT INTO `keu_anggarantahunan` VALUES ('33', '14', '4000000', '3');
 INSERT INTO `keu_anggarantahunan` VALUES ('34', '14', '400000', '5');
 INSERT INTO `keu_anggarantahunan` VALUES ('35', '14', '500000', '12');
 INSERT INTO `keu_anggarantahunan` VALUES ('36', '15', '0', '3');
@@ -958,7 +958,7 @@ CREATE TABLE `keu_jenislaporan` (
   `kategori` enum('o','n') NOT NULL DEFAULT 'o',
   `rekening` int(11) NOT NULL,
   PRIMARY KEY (`replid`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_jenislaporan
@@ -971,6 +971,7 @@ INSERT INTO `keu_jenislaporan` VALUES ('11', 'in', 'n', '194');
 INSERT INTO `keu_jenislaporan` VALUES ('12', 'out', 'o', '219');
 INSERT INTO `keu_jenislaporan` VALUES ('13', 'out', 'o', '30');
 INSERT INTO `keu_jenislaporan` VALUES ('14', 'out', 'o', '54');
+INSERT INTO `keu_jenislaporan` VALUES ('15', 'out', 'n', '164');
 
 -- ----------------------------
 -- Table structure for keu_jenisreport
@@ -1023,23 +1024,21 @@ CREATE TABLE `keu_jurnal` (
   KEY `detilrekening` (`detilrekening`) USING BTREE,
   CONSTRAINT `detilrekeningFK2` FOREIGN KEY (`detilrekening`) REFERENCES `keu_detilrekening` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `transaksiFK` FOREIGN KEY (`transaksi`) REFERENCES `keu_transaksi` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=270 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_jurnal
 -- ----------------------------
-INSERT INTO `keu_jurnal` VALUES ('203', '138', '193', '300000', 'k', '2015-11-19 07:11:22');
-INSERT INTO `keu_jurnal` VALUES ('204', '138', '1', '300000', 'd', '2015-11-19 07:11:22');
-INSERT INTO `keu_jurnal` VALUES ('205', '139', '263', '100000', 'd', '2015-11-19 07:13:08');
-INSERT INTO `keu_jurnal` VALUES ('206', '139', '4', '100000', 'k', '2015-11-19 07:13:08');
-INSERT INTO `keu_jurnal` VALUES ('207', '140', '14', '300000', 'd', '2015-11-19 07:18:29');
-INSERT INTO `keu_jurnal` VALUES ('208', '140', '194', '300000', 'k', '2015-11-19 07:18:29');
-INSERT INTO `keu_jurnal` VALUES ('209', '141', '35', '4500000', 'd', '2015-11-19 10:34:37');
-INSERT INTO `keu_jurnal` VALUES ('210', '141', '4', '4500000', 'k', '2015-11-19 10:34:38');
-INSERT INTO `keu_jurnal` VALUES ('211', '142', '1', '20000', 'k', '2015-11-19 10:35:57');
-INSERT INTO `keu_jurnal` VALUES ('212', '142', '83', '20000', 'd', '2015-11-19 10:35:57');
-INSERT INTO `keu_jurnal` VALUES ('213', '143', '4', '35000', 'd', '2015-11-19 10:37:05');
-INSERT INTO `keu_jurnal` VALUES ('214', '143', '198', '35000', 'k', '2015-11-19 10:37:05');
+INSERT INTO `keu_jurnal` VALUES ('256', '164', '193', '300000', 'k', '2015-11-28 12:50:35');
+INSERT INTO `keu_jurnal` VALUES ('257', '164', '1', '300000', 'd', '2015-11-28 12:50:36');
+INSERT INTO `keu_jurnal` VALUES ('260', '166', '35', '4500000', 'd', '2015-11-28 13:03:09');
+INSERT INTO `keu_jurnal` VALUES ('261', '166', '4', '4500000', 'k', '2015-11-28 13:03:09');
+INSERT INTO `keu_jurnal` VALUES ('262', '167', '14', '300000', 'd', '2015-11-28 13:05:26');
+INSERT INTO `keu_jurnal` VALUES ('263', '167', '194', '300000', 'k', '2015-11-28 13:05:27');
+INSERT INTO `keu_jurnal` VALUES ('266', '169', '1', '20000', 'd', '2015-11-28 13:07:15');
+INSERT INTO `keu_jurnal` VALUES ('267', '169', '83', '20000', 'k', '2015-11-28 13:07:15');
+INSERT INTO `keu_jurnal` VALUES ('268', '170', '4', '35000', 'd', '2015-11-28 13:09:07');
+INSERT INTO `keu_jurnal` VALUES ('269', '170', '198', '35000', 'k', '2015-11-28 13:09:07');
 
 -- ----------------------------
 -- Table structure for keu_kategorianggaran
@@ -1420,18 +1419,18 @@ INSERT INTO `keu_nominalanggaran` VALUES ('345', '32', '9', '2');
 INSERT INTO `keu_nominalanggaran` VALUES ('346', '32', '10', '2');
 INSERT INTO `keu_nominalanggaran` VALUES ('347', '32', '11', '2');
 INSERT INTO `keu_nominalanggaran` VALUES ('348', '32', '12', '2');
-INSERT INTO `keu_nominalanggaran` VALUES ('349', '33', '1', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('350', '33', '2', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('351', '33', '3', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('352', '33', '4', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('353', '33', '5', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('354', '33', '6', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('355', '33', '7', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('356', '33', '8', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('357', '33', '9', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('358', '33', '10', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('359', '33', '11', '0');
-INSERT INTO `keu_nominalanggaran` VALUES ('360', '33', '12', '0');
+INSERT INTO `keu_nominalanggaran` VALUES ('349', '33', '1', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('350', '33', '2', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('351', '33', '3', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('352', '33', '4', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('353', '33', '5', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('354', '33', '6', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('355', '33', '7', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('356', '33', '8', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('357', '33', '9', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('358', '33', '10', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('359', '33', '11', '1');
+INSERT INTO `keu_nominalanggaran` VALUES ('360', '33', '12', '1');
 INSERT INTO `keu_nominalanggaran` VALUES ('361', '34', '1', '1');
 INSERT INTO `keu_nominalanggaran` VALUES ('362', '34', '2', '1');
 INSERT INTO `keu_nominalanggaran` VALUES ('363', '34', '3', '1');
@@ -1600,12 +1599,12 @@ CREATE TABLE `keu_penerimaansiswa` (
   KEY `viabayar2` (`viabayar2`) USING BTREE,
   CONSTRAINT `siswabiayaFK2` FOREIGN KEY (`siswabiaya`) REFERENCES `psb_siswabiaya` (`replid`) ON UPDATE CASCADE,
   CONSTRAINT `viabayarFK3` FOREIGN KEY (`viabayar2`) REFERENCES `keu_viabayar` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_penerimaansiswa
 -- ----------------------------
-INSERT INTO `keu_penerimaansiswa` VALUES ('5', '683', '300000', '2', '2015-11-19', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `keu_penerimaansiswa` VALUES ('6', '683', '300000', '2', '2014-04-08', '1', '', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for keu_rekening
@@ -2043,10 +2042,10 @@ CREATE TABLE `keu_saldorekening` (
 -- ----------------------------
 INSERT INTO `keu_saldorekening` VALUES ('1184', '1', '3', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1185', '1', '5', '1000000', '1000000');
-INSERT INTO `keu_saldorekening` VALUES ('1186', '1', '12', '10000', '846875');
+INSERT INTO `keu_saldorekening` VALUES ('1186', '1', '12', '10000', '4348750');
 INSERT INTO `keu_saldorekening` VALUES ('1187', '2', '3', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1188', '2', '5', '10000', '10000');
-INSERT INTO `keu_saldorekening` VALUES ('1189', '2', '12', '10000', '10000');
+INSERT INTO `keu_saldorekening` VALUES ('1189', '2', '12', '10000', '1610000');
 INSERT INTO `keu_saldorekening` VALUES ('1190', '3', '3', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1191', '3', '5', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1192', '3', '12', '10000', '10000');
@@ -2081,7 +2080,7 @@ INSERT INTO `keu_saldorekening` VALUES ('1220', '13', '3', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1221', '13', '5', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1222', '13', '12', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1223', '14', '3', '10000', '10000');
-INSERT INTO `keu_saldorekening` VALUES ('1224', '14', '5', '5000000', '5700000');
+INSERT INTO `keu_saldorekening` VALUES ('1224', '14', '5', '5000000', '6000000');
 INSERT INTO `keu_saldorekening` VALUES ('1225', '14', '12', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1226', '15', '3', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1227', '15', '5', '10000', '10000');
@@ -2621,11 +2620,11 @@ INSERT INTO `keu_saldorekening` VALUES ('1760', '193', '3', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1761', '193', '5', '1000000', '1000000');
 INSERT INTO `keu_saldorekening` VALUES ('1762', '193', '12', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1763', '194', '3', '10000', '10000');
-INSERT INTO `keu_saldorekening` VALUES ('1764', '194', '5', '5000000', '5700000');
-INSERT INTO `keu_saldorekening` VALUES ('1765', '194', '12', '10000', '846875');
+INSERT INTO `keu_saldorekening` VALUES ('1764', '194', '5', '5000000', '6000000');
+INSERT INTO `keu_saldorekening` VALUES ('1765', '194', '12', '10000', '4348750');
 INSERT INTO `keu_saldorekening` VALUES ('1766', '195', '3', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1767', '195', '5', '10000', '10000');
-INSERT INTO `keu_saldorekening` VALUES ('1768', '195', '12', '10000', '10000');
+INSERT INTO `keu_saldorekening` VALUES ('1768', '195', '12', '10000', '1610000');
 INSERT INTO `keu_saldorekening` VALUES ('1769', '196', '3', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1770', '196', '5', '10000', '10000');
 INSERT INTO `keu_saldorekening` VALUES ('1771', '196', '12', '10000', '10000');
@@ -3170,20 +3169,21 @@ CREATE TABLE `keu_transaksi` (
   `detjenistransaksi` int(11) NOT NULL,
   `idref` int(11) NOT NULL,
   `type` enum('sar','') DEFAULT NULL,
+  `departemen` int(11) DEFAULT NULL,
+  `tingkat` int(11) DEFAULT NULL,
   PRIMARY KEY (`replid`),
   KEY `detjenistransaksi` (`detjenistransaksi`) USING BTREE,
   CONSTRAINT `detjenistransaksiFK` FOREIGN KEY (`detjenistransaksi`) REFERENCES `keu_detjenistransaksi` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_transaksi
 -- ----------------------------
-INSERT INTO `keu_transaksi` VALUES ('138', '1', '', '2015-11-02', 'Penerimaan dari donatur', '0', '3', '0', null);
-INSERT INTO `keu_transaksi` VALUES ('139', '2', '', '2015-11-05', 'bayar PDAM', '34', '6', '0', null);
-INSERT INTO `keu_transaksi` VALUES ('140', '3', '', '2015-11-19', 'Pembayaran Formulir siswa <br> Nama : jacklyn anastasha<br> Kelas :Toddler - 1A', '0', '1', '5', null);
-INSERT INTO `keu_transaksi` VALUES ('141', '4', '', '2015-11-19', 'komputer', '37', '6', '0', 'sar');
-INSERT INTO `keu_transaksi` VALUES ('142', '7', '', '2015-11-19', 'bayar gaji pegawai', '0', '7', '0', null);
-INSERT INTO `keu_transaksi` VALUES ('143', '6', '', '2015-11-19', 'sumbangan xxx', '0', '7', '0', null);
+INSERT INTO `keu_transaksi` VALUES ('164', '1', '', '2014-03-06', 'Penerimaan dari donatur', '0', '3', '0', null, '1', '1');
+INSERT INTO `keu_transaksi` VALUES ('166', '3', 'INV1606150001', '2015-11-26', 'service komputer', '37', '6', '0', null, '2', '6');
+INSERT INTO `keu_transaksi` VALUES ('167', '4', '', '2014-04-08', 'Pembayaran Formulir siswa <br> Nama : jacklyn anastasha<br> Kelas :Toddler - 1A', '0', '1', '6', null, null, null);
+INSERT INTO `keu_transaksi` VALUES ('169', '5', '', '2015-11-16', 'gaji pegawai', '0', '7', '0', null, null, null);
+INSERT INTO `keu_transaksi` VALUES ('170', '6', '', '2015-11-19', 'sumbangan ', '0', '7', '0', null, null, null);
 
 -- ----------------------------
 -- Table structure for keu_viabayar
@@ -3203,5 +3203,69 @@ INSERT INTO `keu_viabayar` VALUES ('1', 'Kartu Kredit', 'pembayaran via kartu kr
 INSERT INTO `keu_viabayar` VALUES ('2', 'Kartu Debit ', 'pembayaran melalui debt card . misal : ATM/debt card BCA, dll');
 INSERT INTO `keu_viabayar` VALUES ('3', 'Transfer Bank', 'pembayaran via tranfer antar sejenis/beda bank');
 INSERT INTO `keu_viabayar` VALUES ('5', 'Uang Tunai', 'bayar uang dengan uang cash');
+DROP TRIGGER IF EXISTS `ins_keu_anggarantahunan`;
+DELIMITER ;;
+CREATE TRIGGER `ins_keu_anggarantahunan` AFTER INSERT ON `keu_anggarantahunan` FOR EACH ROW BEGIN
 
+declare i int DEFAULT 1;
+	WHILE i <=12 DO
+		INSERT INTO keu_nominalanggaran SET 
+			anggarantahunan = NEW.replid, 
+			bulan = i;
+		SET i:=i+1;
+    END WHILE;
+END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `ins_keu_detilanggaran`;
+DELIMITER ;;
+CREATE TRIGGER `ins_keu_detilanggaran` AFTER INSERT ON `keu_detilanggaran` FOR EACH ROW BEGIN
 
+/* tahun ajaran ---------------------------------------------------------------*/
+BLOCK1: begin
+		declare vTahunajaran int;
+		declare rowsHabis1 INT DEFAULT 0;  
+		declare cursor1 cursor for  
+				SELECT replid FROM aka_tahunajaran ;
+		declare continue handler for not found set rowsHabis1 =1;
+		open cursor1;
+		LOOP1: loop
+						fetch cursor1
+						into  vTahunajaran;
+						if rowsHabis1 then  close cursor1; leave LOOP1;
+						end if;
+						/*insert saldo rekening ---------------------------------------------------------------*/
+						INSERT INTO keu_anggarantahunan SET 
+								detilanggaran = NEW.replid, 
+								tahunajaran = vTahunajaran;
+				end loop LOOP1;
+		end BLOCK1;
+END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `ins_keu_detilrekening`;
+DELIMITER ;;
+CREATE TRIGGER `ins_keu_detilrekening` AFTER INSERT ON `keu_detilrekening` FOR EACH ROW BEGIN
+
+/* tahun ajaran ---------------------------------------------------------------*/
+BLOCK1: begin
+		declare vTahunajaran int;
+		declare rowsHabis1 INT DEFAULT 0;  
+		declare cursor1 cursor for  
+				SELECT replid FROM aka_tahunajaran ;
+		declare continue handler for not found set rowsHabis1 =1;
+		open cursor1;
+		LOOP1: loop
+						fetch cursor1
+						into  vTahunajaran;
+						if rowsHabis1 then  close cursor1; leave LOOP1;
+						end if;
+						/*insert saldo rekening ---------------------------------------------------------------*/
+						INSERT INTO keu_saldorekening SET 
+								detilrekening  = NEW.replid, 
+								tahunajaran = vTahunajaran;
+				end loop LOOP1;
+		end BLOCK1;
+END
+;;
+DELIMITER ;
