@@ -55,23 +55,40 @@ if(isset($_POST['submit'])){
 	$nama 		= $_POST['nama'];
 	$jenis 		= $_POST['jenis'];
 	$jumlah 		= int_filter($_POST['jumlah']);
+		$jumlah2 		= int_filter($_POST['jumlah2']);
 	$hargabeli 		= int_filter($_POST['hargabeli']);
 	$hargajual 		= int_filter($_POST['hargajual']);
-	
+	$stokawal = ceksaldoawal($kode);
 	$error 	= '';
-		if ($koneksi_db->sql_numrows($koneksi_db->sql_query("SELECT jenjang FROM pos_produk WHERE jenjang='$jenjang' and jenis='$jenis' and kode='$kode'")) > 1) $error .= "Error: Produk sudah terdaftar , silahkan ulangi.<br />";
+	/*
+	if($jumlah2<>$jumlah){
+if ($koneksi_db->sql_numrows($koneksi_db->sql_query("SELECT id FROM pos_alur_stok WHERE transaksi like 'Stok Awal' and kodebarang like'$kode'")) > 0) $error .= "Error: Produk sudah terdapat Stok Awal , silahkan ulangi.<br />";
+	}
+	*/
+if ($koneksi_db->sql_numrows($koneksi_db->sql_query("SELECT jenjang FROM pos_produk WHERE jenjang='$jenjang' and jenis='$jenis' and kode='$kode'")) > 1) $error .= "Error: Produk sudah terdaftar , silahkan ulangi.<br />";
 	if ($error){
-		$tengah .= '<div class="error">'.$error.'</div>';
+		$admin .= '<div class="error">'.$error.'</div>';
 	}else{
 	
-	setsaldoawal($kode);
-		$hasil  = mysql_query( "UPDATE `pos_produk` SET `kode`='$kode',`jenjang`='$jenjang',`nama`='$nama',`jenis`='$jenis',`jumlah`='$jumlah',`hargabeli`='$hargabeli',`hargajual`='$hargajual' WHERE `id`='$id'" );
+//	setsaldoawal($kode);
+if($stokawal > 0){
+$hasil  = mysql_query( "UPDATE `pos_produk` SET `kode`='$kode',`jenjang`='$jenjang',`nama`='$nama',`jenis`='$jenis',`hargabeli`='$hargabeli',`hargajual`='$hargajual' WHERE `id`='$id'" );
+}else{
+$hasil  = mysql_query( "UPDATE `pos_produk` SET `kode`='$kode',`jenjang`='$jenjang',`nama`='$nama',`jenis`='$jenis',`jumlah`='$jumlah2',`hargabeli`='$hargabeli',`hargajual`='$hargajual' WHERE `id`='$id'" );	
+	
+}
 		if($hasil){
 			$admin .= '<div class="sukses"><b>Berhasil di Update.</b></div>';
 			$style_include[] ='<meta http-equiv="refresh" content="1; url=admin.php?pilih=produk&amp;mod=yes" />';	
 		}else{
 			$admin .= '<div class="error"><b>Gagal di Update.</b></div>';
 		}
+						unset($kode);
+		unset($nama);
+		unset($jumlah);
+		unset($jumlah2);
+		unset($hargabeli);
+		unset($hargajual);
 	}
 
 }
@@ -82,6 +99,7 @@ $jenjang  			= $data['jenjang'];
 $kode = $data['kode'];
 $generatekode=generatekodeedit('KPR','kode','pos_produk',$id);
 if(!$kode){$kode = $generatekode;}
+$stokawal = ceksaldoawal($kode);
 $admin .= '<div class="panel panel-info">
 <div class="panel-heading"><h3 class="panel-title">Edit Produk</h3></div>';
 $admin .= '
@@ -114,19 +132,27 @@ $admin .='</select></td>
 	<tr>
 		<td>Kode Barang</td>
 		<td>:</td>
-		<td><input type="text" name="kode" size="25"class="form-control" value="'.$kode.'" required  maxlength="15"></td>
+		<td>'.$kode.'<input type="hidden" name="kode" size="25"class="form-control" value="'.$kode.'" required  maxlength="15"></td>
 	</tr>
 	<tr>
 		<td>Nama Barang</td>
 		<td>:</td>
 		<td><input type="text" name="nama" size="25"class="form-control" value="'.$data['nama'].'" required></td>
-	</tr>
-	<tr>
+	</tr>';
+if($stokawal > 0){
+$admin .='<tr>
 		<td>Jumlah</td>
 		<td>:</td>
-		<td><input type="text" name="jumlah2" size="25"class="form-control"value="'.$data['jumlah'].'" disabled></td>
-	</tr>
-		<tr>
+		<td><input type="text" name="jumlah3" size="25"class="form-control"value="'.$data['jumlah'].'" disabled></td>
+	</tr>';	
+}else{
+$admin .='<tr>
+		<td>Jumlah</td>
+		<td>:</td>
+		<td><input type="text" name="jumlah2" size="25"class="form-control"value="'.$data['jumlah'].'"></td>
+	</tr>';
+}
+$admin .='<tr>
 		<td>Harga Beli</td>
 		<td>:</td>
 		<td><input type="text" name="hargabeli" size="25"class="form-control"value="'.$data['hargabeli'].'"></td>
@@ -174,7 +200,7 @@ $hargajual 		= int_filter($_POST['hargajual']);
 	}
 
 }
-$generatekode=generatekode('KPR','kode','pos_produk',$id);
+$generatekode=generatekode('KPR','kode','pos_produk');
 $kode     		= !isset($kode) ? $generatekode : $kode;
 $jenjang     		= !isset($jenjang) ? '' : $jenjang;
 $nama     		= !isset($nama) ? '' : $nama;
@@ -214,7 +240,7 @@ $admin .='</select></td>
 	<tr>
 		<td>Kode Barang</td>
 		<td>:</td>
-		<td><input type="text" name="kode"value="'.$kode.'" size="25" maxlength="15" class="form-control" required>*kode otomatis apabila tidak diisi</td>
+		<td><b>'.$kode.'</b><input type="hidden" name="kode"value="'.$kode.'" size="25" maxlength="15" class="form-control" required></td>
 	</tr>
 	<tr>
 		<td>Nama Barang</td>

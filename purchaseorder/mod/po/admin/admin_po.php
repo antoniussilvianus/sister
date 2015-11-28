@@ -285,7 +285,8 @@ $kodesupplier 		= !isset($kodesupplier) ? $_SESSION['kodesupplier'] : $kodesuppl
 $kodepr 		= !isset($kodepr) ? $_SESSION['kodepr'] : $kodepr;
 $discount 		= !isset($discount) ? '0' : $discount; 
 $harga 		= !isset($harga) ? '0' : $harga; 
-$carabayar 		= !isset($carabayar) ? 'Tunai' : $carabayar;
+$carabayar = getcarabayar($kodesupplier);
+$termin = gettermin($kodesupplier);
 $termin 		= !isset($termin) ? '0' : $termin;
 $sel2 = '<select name="carabayar" class="form-control">';
 $arr2 = array ('Tunai','Hutang');
