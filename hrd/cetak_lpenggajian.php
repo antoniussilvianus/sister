@@ -38,6 +38,9 @@ echo '<table class="border">
 <th>TKT</th>
 <th>Nama</th>
 <th>N.P.W.P</th>
+<th>Alamat NPWP</th>
+<th>KTP</th>
+<th>Alamat KTP</th>
 <th>Position</th>
 <th>Pangkat & Tahun</th>
 <th>Status Pegawai</th>
@@ -62,6 +65,8 @@ $no =1;
 $s = mysql_query ("SELECT * FROM `hrd_penggajian`where bulan='$bulan' and tahun='$tahun'");	
 while($datas = mysql_fetch_array($s)){
 $idphoto = $datas['id'];
+$ktp = $datas['ktp'];
+$alamat = $datas['alamat'];
 $idkary = $datas['karyawan'];
 $gajipokok 	= $datas['gajipokok'];
 $tstruktural = $datas['tstruktural'];
@@ -87,6 +92,7 @@ $nama=$data['nama'];
 $norek=$data['norek'];
 $namarek=$data['namarek'];
 $npwp=$data['npwp'];
+$npwpalamat=$data['npwpalamat'];
 $golongan=$data['golongan'];
 $jabatan=$data['jabatan'];
 $status=$data['status'];
@@ -100,6 +106,9 @@ echo '
 <td>'.$tkt.'</td>
 <td>'.$nama.'</td>
 <td>'.$npwp.'</td>
+<td>'.$npwpalamat.'</td>
+<td>'.$ktp.'</td>
+<td>'.$alamat.'</td>
 <td>'.getjabatan($jabatan).'</td>
 <td>'.getgolongan($golongan).'</td>
 <td>'.getstatus($status).'</td>
