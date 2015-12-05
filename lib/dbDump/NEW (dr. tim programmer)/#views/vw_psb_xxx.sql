@@ -2,7 +2,7 @@ CREATE
 ALGORITHM=UNDEFINED 
 DEFINER=`root`@`localhost` 
 SQL SECURITY DEFINER 
-VIEW `vw_psb_siswa_kriteria`AS 
+VIEW `vw_psb_siswa_kriteria` AS 
 SELECT
 	`siswa`.`replid` AS `idsiswa`,
 	`siswa`.`nis` AS `nis`,

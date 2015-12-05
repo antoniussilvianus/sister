@@ -187,6 +187,9 @@ var detilanggaranArr=rekArr=[];
             jenisLaporan('change');
             // viewTB('li');
         });
+        $('#li_bulanS').on('change',function(){
+            viewTB('li');
+        });
 
     // general filtering
         jenisTrans(); // load checkbox jenis transaksi
@@ -245,12 +248,14 @@ var detilanggaranArr=rekArr=[];
             });
         }else if(mn=='li'){
             var opt = $('form#filterFR2').serialize();
-            $('.jenisLaporanCB').each(function(id,item){
+            $('.jenisLaporanCB').each(function (id,item){
                 if($(this).is(':checked')){
                     par+='&'+$(this).attr('name')+'='+$(this).val();
                     tok+=$(this).val();
                 } 
             });
+            console.log('par='+par);
+            console.log('tok='+tok);
         }else if(mn=='kwitansi'){
             var n = $('.rekTR').length;
             tok+=n;
@@ -262,6 +267,7 @@ var detilanggaranArr=rekArr=[];
         var token = encode64(x+tok);
         window.open('report/r_'+mn+'.php?token='+token+par,'_blank');
     }
+
     //print kwitansi to PDF -------
     function kwitansiPDF(transArr){
         var tok=transArr;
@@ -719,6 +725,7 @@ var detilanggaranArr=rekArr=[];
             }
         }
     
+        // rekTotNominal(); 
         if(isLoop) iTR+=n;
         else iTR++;
     
@@ -1043,6 +1050,7 @@ var detilanggaranArr=rekArr=[];
                                     $('#tanggalTB').val(dt.transaksiArr.tanggal);
                                     $('#rekkasTB').val(dt.transaksiArr.rekkas);
                                     $('#rekkassaldo').html(dt.transaksiArr.saldokas);
+                                    // alert(dt.transaksiArr.saldokas);
                                     $('#rekkasH').val(dt.transaksiArr.idrekkas);
                                     var income = dt.transaksiArr.income;
                                     addRekTR(typx,1,income);
@@ -1079,14 +1087,16 @@ var detilanggaranArr=rekArr=[];
                                 var url  = dir;
                                 var data = 'aksi=ambiledit&subaksi='+typx+'&replid='+id;
                                 ajax(url,data).done(function (dt) {
+                                    $('#addTRBC').attr('style','display:none;');
                                     $('#idformH').val(id);
                                     $('#nomerTB').html(dt.transaksiArr.nomer);
                                     $('#rekkasH').val(dt.transaksiArr.idrekkas);
-                                    $('#rekkassaldo').val(dt.transaksiArr.saldokas);
+                                    $('#rekkassaldo').html(dt.transaksiArr.saldokas);
                                     $('#rekkasTB').val(dt.transaksiArr.rekkas);
                                     $('#nobuktiTB').val(dt.transaksiArr.nobukti);
                                     $('#tanggalTB').val(dt.transaksiArr.tanggal);
-                                    if(dt.transaksiArr.nobuktiTyp=='1') $('#nobuktiCB1').attr('checked',true);
+                                    $('#totNominalTD').html(dt.transaksiArr.outcome.nominal);
+                                    if(dt.transaksiArr.nobuktiTyp=='1') $('#nobuktiCB2').attr('checked',true);
                                     var outcome= dt.transaksiArr.outcome;
                                     addRekTR(typx,1,outcome);
                                     cmbdetjenistransaksi('out',dt.transaksiArr.detjenistransaksi);
@@ -1395,6 +1405,7 @@ var detilanggaranArr=rekArr=[];
                     });
                 }$('#li_semesterS').html('<option value="">-semua-</option>'+out);
                 cmbbulan('');
+                viewTB('li');
             }
         });
     }
@@ -1402,6 +1413,7 @@ var detilanggaranArr=rekArr=[];
     function cmbbulan(sem){
         if(sem==''){
             $('#li_bulanS').html('<option value="">-semua-</option>');
+            viewTB('li');
         }else{
             var u = dir7; 
             var d = 'aksi=cmb'+mnu7+'&replid='+sem; 
@@ -1427,6 +1439,7 @@ var detilanggaranArr=rekArr=[];
                             for (var i=1; i<=m2; i++) out+='<option value="'+i+'">'+monthFormat(i)+' '+y2+'</option>';
                         }
                     }$('#li_bulanS').html('<option value="">-semua-</option>'+out);
+                    viewTB('li');
                 }
             });
         }

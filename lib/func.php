@@ -118,9 +118,9 @@
 				$ww.='AND '.$v[0].' '.$v[1].' "'.($v[1]=='LIKE'?'%':'').$v[2].($v[1]=='LIKE'?'%':'').'" ';// replid = 13
 			}$s.=substr($ww,4);
 		}
-		$e = mysql_query($s);
-		$r=mysql_fetch_assoc($e);
 		// pr($s);
+		$e = mysql_query($s);
+		// $r=mysql_fetch_assoc($e);
 		return $r[$f];
 	}	
 	
@@ -186,10 +186,10 @@
 	// general function : query data 
 	function getField($f,$tb,$w='',$k=''){
 		$s = 'SELECT '.$f.' FROM '.$tb.($w!=''?' WHERE '.$w.' = "'.$k.'"':'');
+		// pr($s);
 		$e = mysql_query($s) or die(mysql_error());
 		$r = mysql_fetch_assoc($e);
 		$ret = ($f=='*' || $f=='all'?$r:$r[$f]);
-		// pr($ret);
 		return $ret;
 	}
 	function vd($x){

@@ -1,6 +1,6 @@
-
-CREATE DEFINER = `root`@`localhost` FUNCTION `getAnggaranKuota`(`idAnggaranTahunan` int)
- RETURNS decimal(14,0)
+/*getAnggaranKuota*/
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `getAnggaranKuota`(`idAnggaranTahunan` int) RETURNS decimal(14,0)
 BEGIN
 	DECLARE anggaranKuota DECIMAL; 
 		SELECT 
@@ -11,10 +11,12 @@ BEGIN
 		WHERE 
 			na.anggarantahunan = idAnggaranTahunan;
 	RETURN anggaranKuota;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getAnggaranPerItem`(`idanggarantahunan` int)
- RETURNS decimal(14,0)
+/*getAnggaranPerItem*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getAnggaranPerItem`(`idanggarantahunan` int) RETURNS decimal(14,0)
 BEGIN
 	DECLARE detilanggaranTotal DECIMAL;
 	SELECT
@@ -28,10 +30,12 @@ BEGIN
 	WHERE
 		na.anggarantahunan = idanggarantahunan;
 	RETURN detilanggaranTotal;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getAnggaranPerKategori`(`idkategorianggaran` int,`idtahunajaran` int)
- RETURNS decimal(14,0)
+/*getAnggaranPerKategori*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getAnggaranPerKategori`(`idkategorianggaran` int,`idtahunajaran` int) RETURNS decimal(14,0)
 BEGIN
 	DECLARE nom DECIMAL(14);
 	SELECT 
@@ -42,38 +46,43 @@ BEGIN
 		ath.tahunajaran = idtahunajaran and 
 		da.kategorianggaran = idkategorianggaran;
 	RETURN nom;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getBiayaAfterDiskonReg`(`idsiswabiaya` INT)
- RETURNS decimal(14,0)
-    READS SQL DATA
+
+/*getBiayaAfterDiskonReg*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getBiayaAfterDiskonReg`(`idsiswabiaya` INT) RETURNS decimal(14,0) READS SQL DATA
 BEGIN
-		declare biayaAfterDR DECIMAL default getBiayaAwal(idsiswabiaya);
-		declare vDiskon FLOAT;
-		declare rowHabis1 INT DEFAULT 0;  
-		declare cursor1 cursor for
-			SELECT
-				dd.nilai
-			FROM
-				psb_siswadiskon sd
-				JOIN psb_detaildiskon dd on dd.replid = sd.detaildiskon
-			WHERE
-				sd.siswabiaya = idsiswabiaya;
-		declare continue handler for not found set rowHabis1 = 1;
-		open cursor1;
-		LOOP1: loop
-			fetch cursor1
-			into  vDiskon;
-			if rowHabis1 then close cursor1; leave LOOP1;
-			end if;
-			
-			SET biayaAfterDR=biayaAfterDR-(biayaAfterDR*vDiskon/100);
-		END loop LOOP1;
-		return biayaAfterDR;
-END;
+	declare biayaAfterDR DECIMAL default getBiayaAwal(idsiswabiaya);
+	declare vDiskon FLOAT;
+	declare rowHabis1 INT DEFAULT 0;  
+	declare cursor1 cursor for
+		SELECT
+			dd.nilai
+		FROM
+			psb_siswadiskon sd
+			JOIN psb_detaildiskon dd on dd.replid = sd.detaildiskon
+		WHERE
+			sd.siswabiaya = idsiswabiaya;
+	declare continue handler for not found set rowHabis1 = 1;
+	open cursor1;
+	LOOP1: loop
+		fetch cursor1
+		into  vDiskon;
+		if rowHabis1 then close cursor1; leave LOOP1;
+		end if;
+		
+		SET biayaAfterDR=biayaAfterDR-(biayaAfterDR*vDiskon/100);
+	END loop LOOP1;
+	return biayaAfterDR;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getBiayaAwal`(`idsiswabiaya` INT)
- RETURNS decimal(11,0)
+
+/*getBiayaAwal*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getBiayaAwal`(`idsiswabiaya` INT) RETURNS decimal(11,0)
 BEGIN
 	DECLARE hasil int;
 		SELECT
@@ -83,9 +92,12 @@ BEGIN
 		WHERE 
 			sb.replid = idsiswabiaya;
 	RETURN hasil;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `getBiayaNett`(`idsiswabiaya` int) RETURNS decimal(14,0)
+/*getbiayaNett*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getbiayaNett`(`idsiswabiaya` int) RETURNS decimal(14,0)
 BEGIN
 	DECLARE ret decimal default getBiayaAfterDiskonReg(idsiswabiaya);
 		declare r decimal;
@@ -94,20 +106,24 @@ BEGIN
         where replid=idsiswabiaya;
 	set ret=ret-r;
     RETURN ret;
-END;
-CREATE DEFINER = `root`@`localhost` FUNCTION `getBiayaTerbayar`(`idsiswabiaya` INT)
- RETURNS decimal(10,0)
-    READS SQL DATA
+END $$
+DELIMITER ;
+
+/*getBiayaTerbayar*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getBiayaTerbayar`(`idsiswabiaya` INT) RETURNS decimal(10,0) READS SQL DATA
 BEGIN
 	declare ret decimal default getBiayaNett(idsiswabiaya);
 	declare r decimal;
 	SELECT IFNULL(sum(nominal),0) INTO r  from keu_penerimaansiswa where siswabiaya = idsiswabiaya;
 	set ret=ret-r;
 	RETURN r;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getDiskonKhusus`(`idsiswa` int,`idbiaya` int)
- RETURNS int(11)
+/*getDiskonKhusus*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getDiskonKhusus`(`idsiswa` int,`idbiaya` int) RETURNS int(11)
 BEGIN
 	DECLARE hasil int;
 		SELECT
@@ -118,10 +134,12 @@ BEGIN
 			db.biaya = idbiaya and 
 			sb.siswa = idsiswa;
 	RETURN hasil;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getKuotaAnggaran2`(`idDetilAnggaran` int,`idTahunAjaran` int)
- RETURNS decimal(14,0)
+/*getKuotaAnggaran2*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getKuotaAnggaran2`(`idDetilAnggaran` int,`idTahunAjaran` int) RETURNS decimal(14,0)
 BEGIN
 	DECLARE kuotaAnggaran DECIMAL; 
 	SELECT (
@@ -136,10 +154,29 @@ BEGIN
 		ath.tahunajaran = idTahunAjaran and
 		ath.detilanggaran = idDetilAnggaran;	
 	RETURN kuotaAnggaran ;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getOperatorDetRekening`(`idDetilRekening` int,`jenisRekening` char)
- RETURNS char(1)
+/*getNamaAnggaran*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getNamaAnggaran`(`idAnggaranTahunan` int) RETURNS varchar(250)
+BEGIN
+	DECLARE nama VARCHAR(250); 
+		SELECT
+			CONCAT(da.detilanggaran," (",ka.kategorianggaran,")") INTO nama
+		FROM
+			keu_anggarantahunan ath
+			JOIN keu_detilanggaran da ON da.replid = ath.detilanggaran
+			JOIN keu_kategorianggaran ka ON ka.replid = da.kategorianggaran
+		WHERE
+			ath.replid = idAnggaranTahunan;
+	RETURN nama;
+END $$
+DELIMITER ;
+
+/*getOperatorDetRekening*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getOperatorDetRekening`(`idDetilRekening` int,`jenisRekening` char) RETURNS char(1)
 BEGIN
 	DECLARE operator char(1);
 	SELECT 
@@ -165,10 +202,24 @@ BEGIN
 		t.iddetilrekening= idDetilRekening AND
 		t.jenis=jenisRekening;
 	RETURN operator;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getSaldoRekening`(`idDetilRekening` int,`idTahunAjaran` int)
- RETURNS decimal(14,0)
+/*getSaldoAwalRekening*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getSaldoAwalRekening`(`idDetilRekening` int,`idTahunAjaran` int) RETURNS decimal(14,0)
+BEGIN
+	DECLARE saldoRekening decimal(14);
+	SELECT nominal INTO saldoRekening
+	from keu_saldorekening 
+	WHERE detilrekening = idDetilRekening and tahunajaran = idTahunAjaran;
+	RETURN saldoRekening;
+END $$
+DELIMITER ;
+
+/*getSaldoRekening*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getSaldoRekening`(`idDetilRekening` int,`idTahunAjaran` int) RETURNS decimal(14,0)
 BEGIN
 	DECLARE saldoRekening DECIMAL; 
 		SELECT sr.nominal into saldoRekening
@@ -177,59 +228,59 @@ BEGIN
 			sr.detilrekening = idDetilRekening and 
 			sr.tahunajaran = idTahunAjaran;
 	RETURN saldoRekening ;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getSaldoRekeningByTgl`(`idDetilRekening` int,`tgl1` date,`tgl2` date)
- RETURNS decimal(14,0)
+/*getSaldoRekeningByTgl*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getSaldoRekeningByTgl`(`idDetRek` int,`tgl1` date,`tgl2` date) RETURNS decimal(14,0)
 BEGIN
-	DECLARE saldoRekening decimal(14);
-	SELECT 
-		sum(concat(t.operator,t.nominal)) INTO saldoRekening
-	from (
-		SELECT
-			dr.replid,
-			CONCAT(dr.kode," - ",dr.nama)detilrekening,
-			j.nominal nominal,
-			t.tanggal,
-			j.jenisrekening,
-			dr.kategorirekening,
-			getOperatorDetRekening(j.detilrekening,j.jenisrekening)operator
-		FROM
-			keu_jurnal j 
-			JOIN keu_transaksi t on t.replid = j.transaksi
-			JOIN keu_detilrekening dr on dr.replid = j.detilrekening
+	DECLARE saldoRekening DECIMAL(14);
+		SELECT IFNULL(sum(concat(operator,nominal)),0) into saldoRekening
+		FROM vw_transaksi
 		WHERE 
-			t.tanggal BETWEEN tgl1 
-			AND tgl2
-		ORDER BY 
-			j.detilrekening asc,
-			j.jenisrekening asc
-	)t
-	WHERE t.replid = idDetilRekening ;
+			(tanggal BETWEEN  tgl1 and tgl2 )
+			and iddetilrekening = idDetRek
+		ORDER BY tanggal ASC;
 	RETURN saldoRekening;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `getStatusBayar`(`idsiswabiaya` INT) RETURNS varchar(25) CHARSET latin1
+/*getSaldoRekeningSkrg*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getSaldoRekeningSkrg`(`idDetilRekening` int) RETURNS decimal(14,0)
+BEGIN
+	declare saldoRekening DECIMAL (14);
+	SELECT (
+		getSaldoAwalRekening(idDetilRekening,getTahunAjaran(CURDATE()))+
+		getSaldoRekeningByTgl(idDetilRekening,getTglMulaiTahunAjaran(getTahunAjaran(CURDATE())),getTglSelesaiTahunAjaran(getTahunAjaran(CURDATE())))
+	)INTO saldoRekening;
+	RETURN saldoRekening;
+END $$
+DELIMITER ;
+
+/*getStatusBayar*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getStatusBayar`(`idsiswabiaya` INT) RETURNS varchar(25)
 BEGIN
 	DECLARE s varchar(25);
-    declare terbayar  decimal default getBiayaTerbayar(idsiswabiaya);
-    declare tagihan decimal default getBiayaNett(idsiswabiaya);
-	
-    IF terbayar = tagihan THEN SET s = 'lunas';
-	ELSEIF terbayar =0 THEN SET s = 'belum';
-	ELSE SET s = 'kurang';
-	END IF;
-
+	    declare terbayar  decimal default getBiayaTerbayar(idsiswabiaya);
+	    declare tagihan decimal default getBiayaNett(idsiswabiaya);
+		
+	    IF terbayar = tagihan THEN SET s = 'lunas';
+		ELSEIF terbayar =0 THEN SET s = 'belum';
+		ELSE SET s = 'kurang';
+		END IF;
 	RETURN s;
-END;
+END $$
+DELIMITER ;
 
-CREATE DEFINER = `root`@`localhost` FUNCTION `getTahunAjaran`(`tgl` date)
- RETURNS int(11)
+/*getTgSelesaiTahunAjaran*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getTgSelesaiTahunAjaran`(idThn INT) RETURNS varchar(10)
 BEGIN
-	DECLARE idTahunAjaran INT;
-	SELECT tahunajaran into idTahunAjaran
-	FROM aka_semester 
-	WHERE tgl BETWEEN tglMulai and tglSelesai;
-	RETURN idTahunAjaran;
-END;
-
+	DECLARE tgl VARCHAR(10);
+		SELECT MAX(tglMulai) INTO tgl FROM aka_semester WHERE tahunajaran = idThn;
+	RETURN tgl;
+END $$
+DELIMITER ;

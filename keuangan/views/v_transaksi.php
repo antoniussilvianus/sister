@@ -71,14 +71,15 @@
                 <li><a href="#nsTAB">Neraca Saldo</a></li>
                 <li><a href="#lnTAB">Laporan Neraca</a></li>
                 <li><a href="#lrTAB">Laporan Laba/Rugi</a></li>
-                <li><a href="#nlTAB">Neraca Lajur</a></li>
+                <!-- <li><a href="#nlTAB">Neraca Lajur</a></li> -->
                 <li><a href="#pkbTAB">Posisi Kas dan Bank</a></li>
                 <!-- <li><a href="#btTAB">Buku Tambahan</a></li> -->
                 <li><a href="#liTAB">Penerimaan & Pengeluaran</a></li>
                 <li><a href="#lsTAB">Laporan Sarpras </a></li>
             </ul>
 
-            <div style="background-color:#dddddd;"  class="frames">
+            <!-- <div style="background-color:#dddddd;"  class="frames"> -->
+            <div class="frames bg-white">
                 <!-- jurnal umum -->
                 <div class="frame" id="juTAB">    
 <!--                     <button class="bg-blue fg-white" id="juBC" data-hint="Pencarian" data-hint-position="top">
@@ -174,7 +175,7 @@
                 </div>
 
                 <!-- neraca lajur-->
-                <div class="frame" id="nlTAB">
+<!--                 <div class="frame" id="nlTAB">
                     <button  class="bg-blue fg-white" id="nl_cetakBC" data-hint="Pencarian" data-hint-position="top">
                         <i class="icon-printer" ></i>
                     </button>
@@ -200,7 +201,7 @@
                         <tfoot></tfoot>
                     </table>                 
                 </div>
-
+ -->
                 <!-- laba / rugi-->
                 <div class="frame" id="lrTAB">
                     <button  class="bg-blue fg-white" id="lr_cetakBC" data-hint="cetak" data-hint-position="top">
