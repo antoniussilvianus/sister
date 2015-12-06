@@ -14,15 +14,47 @@
 			$sord       = $_GET['sord']; // get the direction
 			$searchTerm = $_GET['searchTerm'];
 
-			if(!$sidx) 
-				$sidx =1;
+			if(!$sidx) $sidx =1;
 
-			$ss='SELECT *
-				FROM '.$tb.' 
-				WHERE 
-					kode LIKE "%'.$searchTerm.'%" OR
-					nama LIKE "%'.$searchTerm.'%"';
-			// print_r($ss);exit();
+			if($_GET['subaksi']=='siswa'){ // data siswa
+				$ss='SELECT
+						idsiswa,
+						namasiswa,
+						nisn,
+						nis,
+						concat(tingkat,"-",subtingkat," ",kelas)kelas
+					FROM
+						vw_siswa_kelas
+					WHERE
+						iddepartemen = '.$_GET['iddepartemen'].' AND
+						idtingkat = '.$_GET['idtingkat'].' AND
+						idtahunajaran = '.$_GET['idtahunajaran'].' AND	
+						idsubtingkat = '.$_GET['idsubtingkat'].' AND (
+							nis LIKE "%'.$searchTerm.'%" OR 
+							namasiswa LIKE "%'.$searchTerm.'%"
+						) and idsiswa NOT IN (
+							SELECT p.siswa 
+							FROM keu_pemutihanpenerimaansiswa p 
+								JOIN keu_subpemutihanpenerimaansiswa s on s.pemutihanpenerimaansiswa = p.replid
+								JOIN psb_siswabiaya sb on sb.replid = s.siswabiaya
+								JOIN psb_detailbiaya db ON db.replid = sb.detailbiaya
+								JOIN psb_detailgelombang dg on dg.replid = db.detailgelombang 
+							WHERE
+								dg.tahunajaran = '.$_GET['idtahunajaran'].'
+						)';
+			}else{ // biaya 
+				$ss='SELECT
+						idsiswabiaya,
+						biaya,
+						getBiayaNett(idsiswabiaya)biayaNett,
+						(getBiayaNett(idsiswabiaya)-getBiayaTerbayar(idsiswabiaya))biayaKurang
+					FROM vw_siswa_biaya
+					WHERE 	
+						idsiswa = '.$_GET['idsiswa'].'
+						AND idtahunajaran ='.$_GET['idtahunajaran'].'	
+						and biaya LIKE "%'.$searchTerm.'%"';
+			}
+// pr($ss);
 			$result = mysql_query($ss) or die(mysql_error());
 			$row    = mysql_fetch_array($result,MYSQL_ASSOC);
 			$count  = mysql_num_rows($result);
@@ -43,11 +75,22 @@
 			$result = mysql_query($ss) or die("Couldn t execute query.".mysql_error());
 			$rows 	= array();
 			while($row = mysql_fetch_assoc($result)) {
-				$rows[]= array(
-					'replid' =>$row['replid'], 
-					'nama'   =>$row['nama'], 
-					'kode'   =>$row['kode']
-				);
+				if($_GET['subaksi']=='siswa'){
+					$rows[]= array(
+						'idsiswa'   =>$row['idsiswa'], 
+						'namasiswa' =>$row['namasiswa'], 
+						'nis'       =>$row['nis'], 
+						'nisn'      =>$row['nisn'], 
+						'kelas'     =>$row['kelas']
+					);
+				}else{ // biaya 
+					$rows[]= array(
+						'idsiswabiaya' =>$row['idsiswabiaya'], 
+						'biaya'        =>$row['biaya'], 
+						'biayaNett'    =>setuang($row['biayaNett']), 
+						'biayaKurang'  =>setuang($row['biayaKurang']), 
+					);
+				}
 			}$response=array(
 				'page'    =>$page,
 				'total'   =>$total_pages,

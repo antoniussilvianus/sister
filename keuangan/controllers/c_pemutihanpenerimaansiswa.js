@@ -1,5 +1,15 @@
 var mnu  = 'pemutihanpenerimaansiswa';
+var mnu2 = 'departemen';
+var mnu3 = 'tingkat';
+var mnu4 = 'tahunajaran';
+var mnu5 = 'subtingkat';
+
 var dir  = 'models/m_'+mnu+'.php';
+var dir2 = '../akademik/models/m_'+mnu2+'.php';
+var dir3 = '../akademik/models/m_'+mnu3+'.php';
+var dir4 = '../akademik/models/m_'+mnu4+'.php';
+var dir5 = '../akademik/models/m_'+mnu5+'.php';
+
 var contentFR = '';
 
 // main function ---
@@ -7,41 +17,50 @@ var contentFR = '';
         contentFR += '<form style="overflow:scroll;height:500px;" autocomplete="off" id="dokumenFR" onsubmit="simpan();return false;" >' 
                         +'<input name="idformH" id="idformH" type="hidden">' 
 
-                        // siswa 
-                        +'<label>Siswa </label>'
-                        +'<input name="siswaH" id="siswaH" type="text">' 
-                        +'<input onfocus="autoSuggest(\'siswa\');" data-transform="input-control"  required placeholder="cari nis/nama siswa" name="siswaTB" id="siswaTB">'
-
-                        +'<table class="table">'
+                        +'<table width="100%" class="table">'
                             +'<tr>'
-                                +'<td>Departemen</td>'
-                                +'<td id="departemenTD"></td>'
-                            +'</tr>'
-                            +'<tr>'
-                                +'<td>Tahun Ajaran</td>'
-                                +'<td id="tahunajaranTD"></td>'
+                                +'<td width="20%" >Departemen</td>'
+                                +'<td>'
+                                    +'<select onchange="cmbtingkat($(this).val(),\'\');" required data-transform="input-control" name="departemenTB"  id="departemenTB"></select>'
+                                +'</td>'
                             +'</tr>'
                             +'<tr>'
                                 +'<td>Tingkat</td>'
-                                +'<td id="tingkatTD"></td>'
+                                +'<td><select onchange="cmbtahunajaran(\'\');" data-transform="input-control" name="tingkatTB"  id="tingkatTB"><option value="">-Pilih Departemen Dahulu-</option></select></td>'
+                            +'</tr>'
+                            +'<tr>'
+                                +'<td>Tahun Ajaran</td>'
+                                +'<td><select onchange="cmbsubtingkat($(\'#tingkatTB\').val(),\'\')" data-transform="input-control" name="tahunajaranTB"  id="tahunajaranTB"><option value="">-Pilih Tingkat Dahulu-</option></select></td>'
                             +'</tr>'
                             +'<tr>'
                                 +'<td>Sub Tingkat</td>'
-                                +'<td id="subtingkatTD"></td>'
+                                +'<td><select data-transform="input-control" name="subtingkatTB"  id="subtingkatTB"><option value="">-Pilih Tahun Ajaran Dahulu-</option></select></td>'
                             +'</tr>'
                             +'<tr>'
                                 +'<td>NIS</td>'
-                                +'<td id="nisTD"></td>'
+                                +'<td id="nisTD">-</td>'
                             +'</tr>'
                         +'</table>'
 
+                        // siswa 
+                        +'<label>Siswa </label>'
+                        +'<input name="siswaH" id="siswaH" type="hidden">' 
+                        +'<input onfocus="autoSuggest(\'siswa\',\'siswa\');" data-transform="input-control"  required placeholder="cari nis/nama siswa" name="siswaTB" id="siswaTB">'
+
+                        // biaya 
+                        +'<label>Biaya </label>'
+                        +'<input onfocus="autoSuggest(\'biaya\',\'siswabiaya\');" data-transform="input-control"  required placeholder="cari biaya yg pilih" name="siswabiayaTB" id="siswabiayaTB">'
+
                         // tabel biaya
                         +'<table class="table bordered">'
-                            +'<tr class="bg-blue fg-white">'
-                                +'<th>Biaya</th>'
-                                +'<th>Nominal</th>'
-                                +'<th><a class="<bg-blue></bg-blue>" href="#" onclick="biayaDel();"><i class="fg-white icon-cancel-2"></i></a></th>'
-                            +'</tr>'
+                            +'<thead>'
+                                +'<tr class="bg-blue fg-white">'
+                                    +'<th>Biaya</th>'
+                                    +'<th>Nominal</th>'
+                                    +'<th><a class="<bg-blue></bg-blue>" href="#" onclick="biayaDel();"><i class="fg-white icon-cancel-2"></i></a></th>'
+                                +'</tr>'
+                            +'</thead>'
+                            +'<tbody id="biayaTBL"></tbody>'
                         +'</table>'
 
                         // tgl 
@@ -141,7 +160,6 @@ var contentFR = '';
         });
     }
 
-
 // form ---
     function viewFR(idsiswa){
         $.Dialog({
@@ -164,6 +182,8 @@ var contentFR = '';
                             $('#keteranganTB').val(dt.keterangan);
                         }
                     });
+                }else{ //add
+                    cmbdepartemen('');
                 }$.Dialog.title(titlex+' '+mnu);
                 $.Dialog.content(contentFR);
             }
@@ -380,9 +400,10 @@ var contentFR = '';
 
 
   // autosuggest
-    function autoSuggest(el){
-        var urlx= '?aksi=autocomp';
-        var col = [{
+    function autoSuggest(typ,el){
+        if(typ=='siswa'){
+            var urlx= '?aksi=autocomp&subaksi=siswa&iddepartemen='+$('#departemenTB').val()+'&idtingkat='+$('#tingkatTB').val()+'&idtahunajaran='+$('#tahunajaranTB').val()+'&idsubtingkat='+$('#subtingkatTB').val();
+            var col = [{
                 'align':'left',
                 'columnName':'nis',
                 'hide':true,
@@ -391,24 +412,33 @@ var contentFR = '';
             },{   
                 'align':'left',
                 'columnName':'namasiswa',
-                'width':'90',
-                'label':'NAMA'
+                'width':'30',
+                'label':'Nama'
             },{   
                 'align':'left',
                 'columnName':'kelas',
-                'width':'90',
-                'label':'KELAS'
-            },{   
+                'width':'20',
+                'label':'Kelas'
+            }];
+        }else{
+            var urlx= '?aksi=autocomp&subaksi=biaya&idsiswa='+$('#siswaH').val()+'&idtahunajaran='+$('#tahunajaranTB').val();
+            var col=[{   
                 'align':'left',
-                'columnName':'tahunajaran',
-                'width':'90',
-                'label':'Th. Ajaran'
+                'columnName':'biaya',
+                'width':'25',
+                'label':'Biaya'
             },{   
-                'align':'left',
-                'columnName':'departemen',
-                'width':'90',
-                'label':'DEPT.'
-        }];
+                'align':'right',
+                'columnName':'biayaNett',
+                'width':'25',
+                'label':'Tagihan'
+            },{   
+                'align':'right',
+                'columnName':'biayaKurang',
+                'width':'25',
+                'label':'Kurang'
+            }];
+        }
 
         urly = dir+urlx;
         $('#'+el+'TB').combogrid({
@@ -417,15 +447,12 @@ var contentFR = '';
             colModel: col ,
             url: urly,
             select: function( event, ui ) { // event setelah data terpilih 
-                $('#'+el+'H').val(ui.item.replid);
-                $('#'+el+'TB').val(ui.item.nama);
-                $('#nisTB').val(ui.item.nis);
-                $('#departemenTB').val(ui.item.departemen);
-                $('#tahunajaranTB').val(ui.item.tahunajaran);
-                $('#tingkatTB').val(ui.item.tingkat);
-                $('#subtingkatTB').val(ui.item.subtingkat);
+                if(typ=='siswa'){
+                    $('#'+el+'H').val(ui.item.idsiswa);
+                    $('#'+el+'TB').val(ui.item.namasiswa);
+                    $('#nisTD').html(ui.item.nis);
 
-                // validasi input (tidak sesuai data dr server)
+                    // validasi input (tidak sesuai data dr server)
                     $('#'+el+'TB').on('keyup', function(e){
                         var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
                         var keyCode = $.ui.keyCode;
@@ -442,7 +469,93 @@ var contentFR = '';
                             $('#'+el+'TB').val(''); // :: all 
                         }
                     });
+                }else{ // biaya 
+                    biayaAdd(idsiswabiaya,biaya,biayaKurang);
+                }
                 return false;
             }
         });
     }
+
+// combo departemen  ---
+    function cmbdepartemen(dep){
+        var u = dir2;
+        var d = 'aksi=cmb'+mnu2;
+        ajax(u,d).done(function (dt){
+            var out='';
+            if(dt.status!='sukses'){
+                out+='<option value="">'+dt.status+'</option>';
+            }else{
+                $.each(dt.departemen, function (id,item){
+                    out+='<option '+(item.replid==dep?'selected':'')+' value="'+item.replid+'">'+item.nama+'</option>';
+                });
+            }$('#departemenTB').html('<option value="">-Pilih Departemen-</option>'+out);
+        });
+    }
+
+// combo tingkat  ---
+    function cmbtingkat(dep,ting){
+        var u = dir3;
+        var d = 'aksi=cmb'+mnu3+'&departemen='+dep;
+        ajax(u,d).done(function (dt){
+            var out='';
+            if(dt.status!='sukses'){
+                out+='<option value="">'+dt.status+'</option>';
+            }else{
+                $.each(dt.tingkat, function (id,item){
+                    out+='<option '+(item.replid==ting?'selected':'')+' value="'+item.replid+'">'+item.tingkat+'</option>';
+                });
+            }$('#tingkatTB').html('<option value="">-Pilih tingkat-</option>'+out);
+        });
+    }
+
+// tahun ajaran  ---
+    function cmbtahunajaran(thn){
+        var u = dir4;
+        var d = 'aksi=cmb'+mnu4;
+        ajax(u,d).done(function (dt){
+            var out='';
+            if(dt.status!='sukses'){
+                out+='<option value="">'+dt.status+'</option>';
+            }else{
+                $.each(dt.tahunajaran, function (id,item){
+                    out+='<option '+(item.replid==thn?'selected':'')+' value="'+item.replid+'">'+item.tahunajaran+' - '+(parseInt(item.tahunajaran)+1)+'</option>';
+                });
+            }$('#tahunajaranTB').html('<option value="">-Pilih Tahun Ajaran-</option>'+out);
+        });
+    }
+// sutingkat   ---
+    function cmbsubtingkat(ting,subt){
+        var u = dir5;
+        var d = 'aksi=cmb'+mnu5+'&tingkat='+ting;
+        ajax(u,d).done(function (dt){
+            var out='';
+            if(dt.status!='sukses'){
+                out+='<option value="">'+dt.status+'</option>';
+            }else{
+                $.each(dt.subtingkat, function (id,item){
+                    out+='<option '+(item.replid==subt?'selected':'')+' value="'+item.replid+'">'+item.subtingkat+'</option>';
+                });
+            }$('#subtingkatTB').html('<option value="">-Pilih Sub Tingkat-</option>'+out);
+        });
+    }
+
+    function biayaDel(id){
+        $('#biayaTR_'+id).fadeOut('slow',function(){
+            $('#biayaTR_'+id).remove();
+            collectArr();
+            console.log('arr terpilih in biayaDel=>'+pinjamArr);
+        });
+    }
+
+// pilih barang yg akan dipinjam ---
+    function biayaAdd (id,biaya,biayaKurang) {
+        var tr ='<tr val="'+id+'" class="biayaTR" id="biayaTR_'+id+'">'
+                    +'<td>'+biaya+'</td>'
+                    +'<td>'+biayaKurang+'</td>'
+                    +'<td><button onclick="biayaDel('+id+');"><i class="icon-remove"></button></i></td>'
+                +'</tr>';
+        $('#biayaTBL').prepend(tr); 
+        $('#judulTB').combogrid( "option", "url", dir+'?aksi=autocomp&subaksi=pinjam&lokasi='+$('#lokasiTB').val()+'&pinjamArr='+collectArr('pinjam').toString() );
+    }        
+
