@@ -8,11 +8,12 @@
 
 	if(!isset($_POST['aksi'])){
 		if(isset($_GET['aksi']) && $_GET['aksi']=='autocomp'){
-			$page       = $_GET['page']; // get the requested page
-			$limit      = $_GET['rows']; // get how many rows we want to have into the grid
-			$sidx       = $_GET['sidx']; // get index row - i.e. user click to sort
-			$sord       = $_GET['sord']; // get the direction
-			$searchTerm = $_GET['searchTerm'];
+			$page        = $_GET['page']; // get the requested page
+			$limit       = $_GET['rows']; // get how many rows we want to have into the grid
+			$sidx        = $_GET['sidx']; // get index row - i.e. user click to sort
+			$sord        = $_GET['sord']; // get the direction
+			$searchTerm  = $_GET['searchTerm'];
+			$terpilihArr = (isset($_GET['terpilihArr']) AND $_GET['terpilihArr']!='')?' AND idsiswabiaya NOT IN ('.$_GET['terpilihArr'].')':''; 
 
 			if(!$sidx) $sidx =1;
 
@@ -50,6 +51,7 @@
 						(getBiayaNett(idsiswabiaya)-getBiayaTerbayar(idsiswabiaya))biayaKurang
 					FROM vw_siswa_biaya
 					WHERE 	
+						'.$terpilihArr.'
 						idsiswa = '.$_GET['idsiswa'].'
 						AND idtahunajaran ='.$_GET['idtahunajaran'].'	
 						and biaya LIKE "%'.$searchTerm.'%"';

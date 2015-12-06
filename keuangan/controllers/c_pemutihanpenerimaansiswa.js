@@ -11,7 +11,7 @@ var dir4 = '../akademik/models/m_'+mnu4+'.php';
 var dir5 = '../akademik/models/m_'+mnu5+'.php';
 
 var contentFR = '';
-
+var biayaArr=[];
 // main function ---
     $(document).ready(function(){
         contentFR += '<form style="overflow:scroll;height:500px;" autocomplete="off" id="dokumenFR" onsubmit="simpan();return false;" >' 
@@ -52,7 +52,7 @@ var contentFR = '';
                         +'<input onfocus="autoSuggest(\'biaya\',\'siswabiaya\');" data-transform="input-control"  required placeholder="cari biaya yg pilih" name="siswabiayaTB" id="siswabiayaTB">'
 
                         // tabel biaya
-                        +'<table class="table bordered">'
+                        +'<table class="table striped bordered">'
                             +'<thead>'
                                 +'<tr class="bg-blue fg-white">'
                                     +'<th>Biaya</th>'
@@ -354,7 +354,6 @@ var contentFR = '';
     }
 //end of aktifkan process ---
 
-
     function ajax (u,d) {
         return $.ajax({
             url:u,
@@ -398,8 +397,7 @@ var contentFR = '';
     }
 //end of combo satuanjumlah ---
 
-
-  // autosuggest
+// autosuggest
     function autoSuggest(typ,el){
         if(typ=='siswa'){
             var urlx= '?aksi=autocomp&subaksi=siswa&iddepartemen='+$('#departemenTB').val()+'&idtingkat='+$('#tingkatTB').val()+'&idtahunajaran='+$('#tahunajaranTB').val()+'&idsubtingkat='+$('#subtingkatTB').val();
@@ -421,7 +419,12 @@ var contentFR = '';
                 'label':'Kelas'
             }];
         }else{
-            var urlx= '?aksi=autocomp&subaksi=biaya&idsiswa='+$('#siswaH').val()+'&idtahunajaran='+$('#tahunajaranTB').val();
+            var t= terpilihx = '';
+            if(biayaArr!='' || biayaArr!=null){
+                t         = biayaArr.filter(function(item) { return item !== ''; });
+                terpilihx = '&rekArr='+t.toString();
+            }
+            var urlx= '?aksi=autocomp&subaksi=biaya&idsiswa='+$('#siswaH').val()+'&idtahunajaran='+$('#tahunajaranTB').val()+'&terpilihArr='+terpilihx;
             var col=[{   
                 'align':'left',
                 'columnName':'biaya',
@@ -446,8 +449,8 @@ var contentFR = '';
             width:'700px',
             colModel: col ,
             url: urly,
-            select: function( event, ui ) { // event setelah data terpilih 
-                if(typ=='siswa'){
+            select: function(event,ui) { // event setelah data terpilih 
+                if(typ=='siswa'){ // 
                     $('#'+el+'H').val(ui.item.idsiswa);
                     $('#'+el+'TB').val(ui.item.namasiswa);
                     $('#nisTD').html(ui.item.nis);
@@ -469,10 +472,12 @@ var contentFR = '';
                             $('#'+el+'TB').val(''); // :: all 
                         }
                     });
+                    return false;
                 }else{ // biaya 
-                    biayaAdd(idsiswabiaya,biaya,biayaKurang);
+                    biayaAdd(ui.item.idsiswabiaya,ui.item.biaya,ui.item.biayaKurang);
+
+                    // return false;
                 }
-                return false;
             }
         });
     }
@@ -524,6 +529,7 @@ var contentFR = '';
             }$('#tahunajaranTB').html('<option value="">-Pilih Tahun Ajaran-</option>'+out);
         });
     }
+
 // sutingkat   ---
     function cmbsubtingkat(ting,subt){
         var u = dir5;
@@ -540,6 +546,7 @@ var contentFR = '';
         });
     }
 
+// hapus biaya ---
     function biayaDel(id){
         $('#biayaTR_'+id).fadeOut('slow',function(){
             $('#biayaTR_'+id).remove();
@@ -549,13 +556,20 @@ var contentFR = '';
     }
 
 // pilih barang yg akan dipinjam ---
-    function biayaAdd (id,biaya,biayaKurang) {
+    function biayaAdd(id,biaya,biayaKurang){
         var tr ='<tr val="'+id+'" class="biayaTR" id="biayaTR_'+id+'">'
-                    +'<td>'+biaya+'</td>'
-                    +'<td>'+biayaKurang+'</td>'
-                    +'<td><button onclick="biayaDel('+id+');"><i class="icon-remove"></button></i></td>'
-                +'</tr>';
+            +'<td>'+biaya+'</td>'
+            +'<td align="right">'+biayaKurang+'</td>'
+            +'<td align="center"><a  class="button fg-white bg-red" href="#" onclick="biayaDel('+id+');"><i class="icon-cancel-2"></a></i></td>'
+        +'</tr>';
         $('#biayaTBL').prepend(tr); 
-        $('#judulTB').combogrid( "option", "url", dir+'?aksi=autocomp&subaksi=pinjam&lokasi='+$('#lokasiTB').val()+'&pinjamArr='+collectArr('pinjam').toString() );
-    }        
+        collectArr();
+    }
 
+    //himpun array rekening terpilih
+    function collectArr(){
+        biayaArr=[];
+        $('.biayaTR').each(function(id,item){
+            biayaArr.push($(this).val());
+        });return biayaArr;
+    }

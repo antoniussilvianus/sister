@@ -392,7 +392,6 @@ var pinjamArr= kembaliArr =[];
                 // $.Dialog.content(contentFR);
                 // $.Dialog.title('<i class="fg-white icon-'+(id!=''?'pencil':'plus-2')+'"></i> '+titl); 
                 // },100);  
-
             }
         });
     }
@@ -427,7 +426,6 @@ var pinjamArr= kembaliArr =[];
                     'width':'40',
                     'label':'Judul'
             }];
-
         }else if(subaksi=='pilihan'){
             if(tipe==1){
                 var urlx= '?aksi=autocomp&subaksi=pilihan&tipe=1&lokasi'+opsi;
@@ -442,24 +440,7 @@ var pinjamArr= kembaliArr =[];
                         'columnName':'nama',
                         'width':'40',
                         'label':'Nama'
-                    }
-                    // {   
-                    //     'align':'left',
-                    //     'columnName':'departemen',
-                    //     'width':'25',
-                    //     'label':'Departemen'
-                    // },{   
-                    //     'align':'left',
-                    //     'columnName':'tingkat',
-                    //     'width':'20',
-                    //     'label':'Tingkat'
-                    // },{   
-                    //     'align':'left',
-                    //     'columnName':'kelas',
-                    //     'width':'10',
-                    //     'label':'Kelas'
-                    // }
-                    ];
+                    }];
             }else if (tipe==2) {
                 var urlx= '?aksi=autocomp&subaksi=pilihan&tipe=2&lokasi'+opsi;
                 var col = [{
@@ -468,12 +449,12 @@ var pinjamArr= kembaliArr =[];
                         'hide':true,
                         'width':'35',
                         'label':'Nip'
-                    },{   
+                    },{
                         'align':'left',
                         'columnName':'nama',
                         'width':'40',
                         'label':'Nama'
-                }];
+                    }];
             }else if (tipe==3) {
                 var urlx= '?aksi=autocomp&subaksi=pilihan&tipe=3&lokasi'+opsi;
                 var col = [{
@@ -521,7 +502,7 @@ var pinjamArr= kembaliArr =[];
                     // $('#'+el+'TB').val(ui.item.barkode);
                     // $('#'+el+'TB').val(ui.item.judul);
                 }else if (subaksi=='kembali'){
-                    //untuk multi kalau untuk siswa tanpa add
+                    //untuk multi kalau untuk siswa tanpa add 
                     kembaliAdd (ui.item.replid,ui.item.barkode,ui.item.judul);
                     // $('#'+el+'TB').val(ui.item.judul);
                 }else if (subaksi=='pilihan') {
