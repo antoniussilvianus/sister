@@ -2,18 +2,19 @@
 	session_start();
 	require_once '../../lib/dbcon.php';
 	require_once '../../lib/func.php';
+	require_once '../../lib/tglindo.php';
 	require_once '../../lib/pagination_class.php';
 	$mnu = 'pemutihanpenerimaansiswa';
 	$tb  = 'keu_'.$mnu;
 
 	if(!isset($_POST['aksi'])){
 		if(isset($_GET['aksi']) && $_GET['aksi']=='autocomp'){
-			$page        = $_GET['page']; // get the requested page
-			$limit       = $_GET['rows']; // get how many rows we want to have into the grid
-			$sidx        = $_GET['sidx']; // get index row - i.e. user click to sort
-			$sord        = $_GET['sord']; // get the direction
-			$searchTerm  = $_GET['searchTerm'];
-			$terpilihArr = (isset($_GET['terpilihArr']) AND $_GET['terpilihArr']!='')?' AND idsiswabiaya NOT IN ('.$_GET['terpilihArr'].')':''; 
+			$page       = $_GET['page']; // get the requested page
+			$limit      = $_GET['rows']; // get how many rows we want to have into the grid
+			$sidx       = $_GET['sidx']; // get index row - i.e. user click to sort
+			$sord       = $_GET['sord']; // get the direction
+			$searchTerm = $_GET['searchTerm'];
+			$biayaArr   = (isset($_GET['biayaArr']) AND $_GET['biayaArr']!='')?' idsiswabiaya NOT IN ('.$_GET['biayaArr'].') AND ':''; 
 
 			if(!$sidx) $sidx =1;
 
@@ -51,10 +52,11 @@
 						(getBiayaNett(idsiswabiaya)-getBiayaTerbayar(idsiswabiaya))biayaKurang
 					FROM vw_siswa_biaya
 					WHERE 	
-						'.$terpilihArr.'
+						'.$biayaArr.'
 						idsiswa = '.$_GET['idsiswa'].'
 						AND idtahunajaran ='.$_GET['idtahunajaran'].'	
-						and biaya LIKE "%'.$searchTerm.'%"';
+						and biaya LIKE "%'.$searchTerm.'%" 
+						AND getBiayaTerbayar(idsiswabiaya)!=getBiayaNett(idsiswabiaya)';
 			}
 // pr($ss);
 			$result = mysql_query($ss) or die(mysql_error());
@@ -104,27 +106,36 @@
 		switch ($_POST['aksi']) {
 			// view -----------------------------------------------------------------
 			case 'tampil':
-				$karyawan = (isset($_POST['karyawanS']) and trim($_POST['karyawanS'])!='')?filter($_POST['karyawanS']):'';
-				$siswa    = (isset($_POST['siswaS']) and trim($_POST['siswaS'])!='')?filter($_POST['siswaS']):'';
-				$tgl      = (isset($_POST['tglS']) and trim($_POST['tglS'])!='')?filter($_POST['tglS']):'';
-				$nomom    = (isset($_POST['nomomS']) and trim($_POST['nomomS'])!='')?filter($_POST['nomomS']):'';
-				$tglmom   = (isset($_POST['tglmomS']) and trim($_POST['tglmomS'])!='')?filter($_POST['tglmomS']):'';
-				$total    = (isset($_POST['totalS']) and trim($_POST['totalS'])!='')?filter($_POST['totalS']):'';
-				$sql  = 'SELECT 
+				$departemen = (isset($_POST['departemenS']) and filter($_POST['departemenS'])!='')?' v.iddepartemen='.filter($_POST['departemenS']).' AND ':'';
+				$tingkat    = (isset($_POST['tingkatS']) and filter($_POST['tingkatS'])!='')?' v.idtingkat='.filter($_POST['tingkatS']).' AND  ':'';
+				$tahunajaran = (isset($_POST['tahunajaranS']) and filter($_POST['tahunajaranS'])!='')?' v.idtahunajaran='.filter($_POST['tahunajaranS']).' AND ':'';
+				$subtingkat = (isset($_POST['subtingkatS']) and filter($_POST['subtingkatS'])!='')?'  v.idsubtingkat='.filter($_POST['subtingkatS']).' AND ':'';
+
+				$nis       = (isset($_POST['nisS']) and filter($_POST['nisS'])!='')?filter($_POST['nisS']):'';
+				$namasiswa = (isset($_POST['siswaS']) and filter($_POST['siswaS'])!='')?filter($_POST['siswaS']):'';
+				$nomom     = (isset($_POST['nomomS']) and filter($_POST['nomomS'])!='')?filter($_POST['nomomS']):'';
+				$sql  = 'SELECT
 							p.replid,
 							p.tgl,
 							p.tglmom,
 							p.nomom,
-							k.nama karyawan,
-							s.namasiswa siswa
-						FROM '.$tb.' p
-							LEFT JOIN keu_subpemutihanpenerimaansiswa pp on pp.pemutihanpenerimaansiswa = p.replid
-							JOIN psb_siswa s on s.replid = p.siswa
-							JOIN hrd_karyawan k on k.id = p.karyawan
-						WHERE 
-							s.namasiswa like "%'.$siswa.'%" AND 
-							p.nomom like "%'.$nomom.'%" AND 
-							k.nama  like "%'.$karyawan.'%"';
+							s.siswabiaya,
+							sum(v.biayaKurang)biayaKurangTot,
+							v.namasiswa,
+							v.nis
+						FROM
+							keu_pemutihanpenerimaansiswa p
+							JOIN keu_subpemutihanpenerimaansiswa s ON s.pemutihanpenerimaansiswa = p.replid
+							JOIN vw_siswa_biaya v on v.idsiswabiaya = s.siswabiaya
+						WHERE	
+							'.$departemen.$tingkat.$tahunajaran.$subtingkat.' 
+							p.nomom LIKE "%'.$nomom.'%" AND
+							v.nis LIKE "%'.$nis.'%" AND
+							v.namasiswa LIKE "%'.$namasiswa.'%" 
+						GROUP BY
+							p.replid
+						ORDER BY 	
+							tglmom desc';
 						// pr($sql);	
 				if(isset($_POST['starting'])){ //nilai awal halaman
 					$starting=$_POST['starting'];
@@ -142,20 +153,23 @@
 				if($jum!=0){	
 					$nox =$starting+1;
 					while($res = mysql_fetch_assoc($result)){	
-						$btn ='<td align="center">
-									<button '.(isAksi($mnu,'u')?'onclick="viewFR('.$res['replid'].');"':'disabled').' data-hint="ubah"  >
-										<i class="icon-pencil"></i>
-									</button>
+						// 			<button '.(isAksi($mnu,'u')?'onclick="viewFR('.$res['replid'].');"':'disabled').' data-hint="ubah"  >
+						// 				<i class="icon-pencil"></i>
+						// 			</button>
+						$btn ='
+						<td align="center">
 									<button '.(isAksi($mnu,'d')?'onclick="del('.$res['replid'].');"':'disabled').' data-hint="hapus" >
 										<i class="icon-remove"></i>
 									</button>
 								 </td>';
 						$out.= '<tr>
-									<td>'.$res['tgl'].'</td>
-									<td>'.$res['siswa'].'</td>
-									<td>'.$res['karyawan'].'</td>
+									<td>'.tgl_indo5($res['tgl']).'</td>
+									<td>'.$res['nis'].'</td>
+									<td>'.$res['namasiswa'].'</td>
+									<td>-</td>
 									<td>'.$res['nomom'].'</td>
-									<td>'.$res['tglmom'].'</td>
+									<td>'.tgl_indo5($res['tglmom']).'</td>
+									<td align="right">'.setuang($res['biayaKurangTot']).'</td>
 									'.$btn.'
 								</tr>';
 									// <td>'.getTotalPemutihan($res['replid']).'</td>
@@ -174,23 +188,36 @@
 
 			// add / edit -----------------------------------------------------------------
 			case 'simpan':
-				$s = $tb.' set 	viabayar   = "'.filter($_POST['viabayarTB']).'",
-								keterangan = "'.filter($_POST['keteranganTB']).'"';
-				$s2	= isset($_POST['replid'])?'UPDATE '.$s.' WHERE replid='.$_POST['replid']:'INSERT INTO '.$s;
-				// pr($s2);
-				$e2 = mysql_query($s2);
-				$stat = !$e2?'gagal menyimpan':'sukses';
-				$out  = json_encode(array('status'=>$stat));
+				$s = $tb.' set 	
+						siswa    = "'.filter($_POST['siswaH']).'",
+						tgl      = curdate(),
+						karyawan ='.$_SESSION['id_loginS'].',
+						nomom    = "'.filter($_POST['nomomTB']).'",
+						tglmom   = "'.tgl_indo6(filter($_POST['tglmomTB'])).'"';
+				$s1 = isset($_POST['replid'])?'UPDATE '.$s.' WHERE replid='.$_POST['replid']:'INSERT INTO '.$s;
+				$e1 = mysql_query($s1);
+				$id = (isset($_POST['replid']) &&  $_POST['replid']=='')?$_POST['replid']:mysql_insert_id();
+				if(!$e1){
+					$stat='gagal_simpan_pemutihan';
+				}else{
+					$stat2=true;
+					foreach ($_POST['biaya'] as $i => $v) {
+						$ss ='INSERT INTO keu_subpemutihanpenerimaansiswa SET 
+								pemutihanpenerimaansiswa ='.$id.',
+								siswabiaya               ='.$v;
+						$e2    = mysql_query($ss);
+						$stat2 = !$e2?false:true;
+					}$stat=!$stat2?'gagal_simpan_sub':'sukses';
+				}$out = json_encode(array('status'=>$stat));
 			break;
 			// add / edit -----------------------------------------------------------------
 			
 			// delete -----------------------------------------------------------------
 			case 'hapus':
-				$d    = mysql_fetch_assoc(mysql_query('SELECT * from '.$tb.' where replid ='.$_POST['replid']));
 				$s    = 'DELETE from '.$tb.' WHERE replid ='.$_POST['replid'];
 				$e    = mysql_query($s);
 				$stat = ($e)?'sukses':'gagal';
-				$out  = json_encode(array('status'=>$stat,'terhapus'=>$d[$mnu]));
+				$out  = json_encode(array('status'=>$stat,'terhapus'=>getField('namasiswa','psb_siswa','replid',$_POST['replid'])));
 			break;
 			// delete -----------------------------------------------------------------
 

@@ -1445,66 +1445,8 @@ var detilanggaranArr=rekArr=[];
         }
     }
 
-//end of combo tingkat ----
-
-    // function cmbthn(thn){
-    //     // console.log('t cmthn dr thn ajaran ='+thn);
-    //     u = dir4;
-    //     d ='aksi=cmb'+mnu4+(thn!=''?'&replid='+thn:'');
-    //     ajax(u,d).done(function(dt){
-    //         if(dt.status!='sukses'){
-    //             notif(dt.status,'red');
-    //         }else{
-    //             var opt='';
-    //             th1 = parseInt(dt.tahunajaran[0].tglmulai.substr(0,4));
-    //             th2 = parseInt(dt.tahunajaran[0].tglakhir.substr(0,4));
-    //             if(thn!=''){ // tahu ajaran terpilih 
-    //                 opt+='<option value="">-Full-</option>'
-    //                     +'<option value="'+th1+'">'+th1+'</option>'
-    //                     +'<option value="'+th2+'">'+th2+'</option>';
-    //             }else{// tahun ajaran kosong
-    //                 opt+='<option value="">-Full-</option>';
-    //             }$('#li_tahunS').html(opt);
-    //             cmbbln(thn,'');
-    //         }
-    //     });
-    // }
-
-    // function cmbbln(t,thn){ // t = tahun ajaran , thn = tahun (semester)
-    //     // console.log('t = '+t);
-    //     u = dir4;
-    //     d ='aksi=cmb'+mnu4+(t!=''?'&replid='+t:'');
-    //     ajax(u,d).done(function(dt){
-    //         var opt='';
-    //         if(dt.status!='sukses'){
-    //             notif(dt.status,'red');
-    //         }else{
-    //             if(t==''){ // tahun ajaran kosong
-    //                 opt+='<option value="">-Full-</option>';
-    //             }else{ // tahun ajaran terpilih
-    //                 if(thn==''){ // tahun kosong
-    //                     opt+='<option value="">-Full-</option>';
-    //                 }else{ // tahun terpilih 
-    //                     var arr=new Array();
-    //                         arr=dt.tahunajaran[0];
-    //                         // console.log(dt.tahunajaran);
-    //                     var b1 =parseInt(arr.tglmulai.substr(5,2)); // bulan @tahun awal 
-    //                     var b2 =parseInt(arr.tglakhir.substr(5,2)); // bulan @tahun akhir
-    //                     var t1 =parseInt(arr.tglmulai.substr(0,4)); // tahun @tahun awal 
-    //                     var bln =['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-                        
-    //                     opt+='<option value="">-Full-</option>';
-    //                     $.each(bln, function(id,item){
-    //                         disx='';
-    //                         if(thn==t1){ // tahun awal ex : 2014
-    //                             if((id+1)<b1) disx = 'disabled'; // 1,2,3,4,5(disabled) | 6,7,8,9,10,11,12(enabled)
-    //                         }else{ //tahun akhir ex : 2015
-    //                             if((id+1)>b2) disx = 'disabled'; // 8,9,10,11,12(disabled) | 1,2,3,4,5,6,7(enabled)
-    //                         }opt+='<option '+disx+' value="'+(parseInt(id)+1)+'">'+item+'</option>';
-    //                     });
-    //                 }
-    //             }$('#li_bulanS').html(opt);
-    //             viewTB('li');
-    //         }
-    //     });
-    // }
+    function isClosedFR () {
+        if($('.window-overlay').length<=0) {
+            biayaArr=[];
+        }
+    }

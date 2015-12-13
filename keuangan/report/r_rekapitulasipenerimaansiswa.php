@@ -37,7 +37,7 @@
                     </tr>
                   </table><br />';
         
-        $out.='<table xstyle="background-color:red;" xclass="isi" width="100%">';
+        $out.='<table xclass="isi" width="100%">';
         $departemen  = getField('nama','departemen','replid',$_GET['departemenS']);
         $tahunajaran = getField('tahunajaran','aka_tahunajaran','replid',$_GET['tahunajaranS']);
         $biaya       = getField('biaya','psb_biaya','replid',$_GET['biayaS']);
@@ -86,10 +86,11 @@
               vk.urutan asc';
               // pr($s);
         $r=fetchField2($s);
+            // <table class="isi" width style="width:100%;background-color:grey">
         $out.='
         </tr><tr xstyle="background-color:green" >
-          <td colspan="3">
-            <table style="width:100%;background-color:grey">
+          <td width="100%" colspan="3">
+            <table class="isi" width="100%">
               <tr class="head" >
                 <td align="center" rowspan="2">Tingkat</td>
                 <td align="center" colspan="3">Biaya</td>

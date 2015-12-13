@@ -21,16 +21,16 @@ var biayaArr=[];
                             +'<tr>'
                                 +'<td width="20%" >Departemen</td>'
                                 +'<td>'
-                                    +'<select onchange="cmbtingkat($(this).val(),\'\');" required data-transform="input-control" name="departemenTB"  id="departemenTB"></select>'
+                                    +'<select onchange="cmbtingkat(\'form\',$(this).val(),\'\');" required data-transform="input-control" name="departemenTB"  id="departemenTB"></select>'
                                 +'</td>'
                             +'</tr>'
                             +'<tr>'
                                 +'<td>Tingkat</td>'
-                                +'<td><select onchange="cmbtahunajaran(\'\');" data-transform="input-control" name="tingkatTB"  id="tingkatTB"><option value="">-Pilih Departemen Dahulu-</option></select></td>'
+                                +'<td><select onchange="cmbtahunajaran(\'form\',\'\');" data-transform="input-control" name="tingkatTB"  id="tingkatTB"><option value="">-Pilih Departemen Dahulu-</option></select></td>'
                             +'</tr>'
                             +'<tr>'
                                 +'<td>Tahun Ajaran</td>'
-                                +'<td><select onchange="cmbsubtingkat($(\'#tingkatTB\').val(),\'\')" data-transform="input-control" name="tahunajaranTB"  id="tahunajaranTB"><option value="">-Pilih Tingkat Dahulu-</option></select></td>'
+                                +'<td><select onchange="cmbsubtingkat(\'form\',$(\'#tingkatTB\').val(),\'\')" data-transform="input-control" name="tahunajaranTB"  id="tahunajaranTB"><option value="">-Pilih Tingkat Dahulu-</option></select></td>'
                             +'</tr>'
                             +'<tr>'
                                 +'<td>Sub Tingkat</td>'
@@ -49,7 +49,7 @@ var biayaArr=[];
 
                         // biaya 
                         +'<label>Biaya </label>'
-                        +'<input onfocus="autoSuggest(\'biaya\',\'siswabiaya\');" data-transform="input-control"  required placeholder="cari biaya yg pilih" name="siswabiayaTB" id="siswabiayaTB">'
+                        +'<input onfocus="autoSuggest(\'biaya\',\'siswabiaya\');" onkeyup="autoSuggest(\'biaya\',\'siswabiaya\');" data-transform="input-control"  placeholder="cari biaya yg pilih" name="siswabiayaTB" id="siswabiayaTB">'
 
                         // tabel biaya
                         +'<table class="table striped bordered">'
@@ -61,6 +61,13 @@ var biayaArr=[];
                                 +'</tr>'
                             +'</thead>'
                             +'<tbody id="biayaTBL"></tbody>'
+                            +'<tfoot class="fg-white bg-blue">'
+                                +'<tr>'
+                                    +'<th>Total</th>'
+                                    +'<th align="right" id="totalTD">Rp.0</th>'
+                                    +'<th></th>'
+                                +'</tr>'
+                            +'</tfoot>'
                         +'</table>'
 
                         // tgl 
@@ -81,13 +88,26 @@ var biayaArr=[];
                             +'<button class="button primary">simpan</button>&nbsp;'
                         +'</div>'
                     +'</form>';
-        viewTB();
+
+        cmbdepartemen('filter','');
 
         //add form
         $("#tambahBC").on('click', function(){
             viewFR('dokumen','');
         });
 
+        $('#departemenS').on('change',function () {
+            cmbtingkat('filter',$(this).val(),'');
+        });
+        $('#tingkatS').on('change',function () {
+            cmbtahunajaran('filter','');
+        });
+        $('#tahunajaranS').on('change',function () {
+            cmbsubtingkat('filter',$('#tingkatS').val(),'');
+        });
+        $('#subtingkatS').on('change',function () {
+            viewTB();
+        });
         //search action
         $('.cari').keydown(function (e){
             if(e.keyCode == 13) viewTB();
@@ -104,8 +124,11 @@ var biayaArr=[];
 //save process ---
     function simpan(){
         var urlx ='&aksi=simpan';
-        if($('#idformH').val()!='') 
-           urlx += '&replid='+$('#idformH').val();
+        $.each(collectArr(),function (id,item){
+            urlx+='&biaya[]='+item;  
+        });
+
+        if($('#idformH').val()!='') urlx += '&replid='+$('#idformH').val();
 
         var u=dir;
         var d=$('form').serialize()+urlx;
@@ -170,6 +193,8 @@ var biayaArr=[];
             padding: 10,
             onShow: function(){
                 var titlex='<span class="icon-search"></span> Detail Aksi ';
+                $.Dialog.title(titlex+' '+mnu);
+                $.Dialog.content(contentFR);
                 if(idsiswa!='') { 
                     var u =dir;
                     var d ='aksi=ambiledit&replid='+idsiswa;
@@ -184,8 +209,9 @@ var biayaArr=[];
                     });
                 }else{ //add
                     cmbdepartemen('');
-                }$.Dialog.title(titlex+' '+mnu);
-                $.Dialog.content(contentFR);
+                    cmbtingkat('form','','');
+                    $('#tglmomTB').val(getToday());
+                }
             }
         });
     }
@@ -281,28 +307,24 @@ var biayaArr=[];
         });
     }
 //end of paging ---
+
 //del process ---
     function del(id){
         if(confirm('melanjutkan untuk menghapus data?'))
-        $.ajax({
-            url:dir,
-            type:'post',
-            data:'aksi=hapus&replid='+id,
-            dataType:'json',
-            success:function(dt){
-                var cont,clr;
-                if(dt.status!='sukses'){
-                    cont = '..Gagal Menghapus '+dt.terhapus+' ..';
-                    clr  ='red';
-                }else{
-                    cont = '..Berhasil Menghapus '+dt.terhapus+' ..';
-                    clr  ='green';
-                    viewTB();
-                }notif(cont,clr);
-            }
+        var u =dir;
+        var d ='aksi=hapus&replid='+id;
+        ajax(u,d).done(function (dt){
+            var cont,clr;
+            if(dt.status!='sukses'){
+                cont = '..Gagal Menghapus '+dt.terhapus+' ..';
+                clr  ='red';
+            }else{
+                cont = '..Berhasil Menghapus '+dt.terhapus+' ..';
+                clr  ='green';
+                viewTB();
+            }notif(cont,clr);
         });
     }
-//end of del process ---
     
 // notifikasi
     function notif(cont,clr) {
@@ -420,11 +442,15 @@ var biayaArr=[];
             }];
         }else{
             var t= terpilihx = '';
+            console.log('t1='+t);
+            console.log('terpilihx1='+terpilihx);
             if(biayaArr!='' || biayaArr!=null){
                 t         = biayaArr.filter(function(item) { return item !== ''; });
-                terpilihx = '&rekArr='+t.toString();
+                terpilihx = '&biayaArr='+t.toString();
+                console.log('terpilihx2='+terpilihx);
+                console.log('t2='+t);
             }
-            var urlx= '?aksi=autocomp&subaksi=biaya&idsiswa='+$('#siswaH').val()+'&idtahunajaran='+$('#tahunajaranTB').val()+'&terpilihArr='+terpilihx;
+            var urlx= '?aksi=autocomp&subaksi=biaya&idsiswa='+$('#siswaH').val()+'&idtahunajaran='+$('#tahunajaranTB').val()+terpilihx;
             var col=[{   
                 'align':'left',
                 'columnName':'biaya',
@@ -475,15 +501,13 @@ var biayaArr=[];
                     return false;
                 }else{ // biaya 
                     biayaAdd(ui.item.idsiswabiaya,ui.item.biaya,ui.item.biayaKurang);
-
-                    // return false;
                 }
             }
         });
     }
 
 // combo departemen  ---
-    function cmbdepartemen(dep){
+    function cmbdepartemen(typ,dep){
         var u = dir2;
         var d = 'aksi=cmb'+mnu2;
         ajax(u,d).done(function (dt){
@@ -494,12 +518,16 @@ var biayaArr=[];
                 $.each(dt.departemen, function (id,item){
                     out+='<option '+(item.replid==dep?'selected':'')+' value="'+item.replid+'">'+item.nama+'</option>';
                 });
-            }$('#departemenTB').html('<option value="">-Pilih Departemen-</option>'+out);
+            }
+            if(typ=='filter') {
+                $('#departemenS').html(out);
+                cmbtingkat('filter',dt.departemen[0].replid,'');
+            }else $('#departemenTB').html('<option value="">-Pilih Departemen-</option>'+out);
         });
     }
 
 // combo tingkat  ---
-    function cmbtingkat(dep,ting){
+    function cmbtingkat(typ,dep,ting){
         var u = dir3;
         var d = 'aksi=cmb'+mnu3+'&departemen='+dep;
         ajax(u,d).done(function (dt){
@@ -510,12 +538,17 @@ var biayaArr=[];
                 $.each(dt.tingkat, function (id,item){
                     out+='<option '+(item.replid==ting?'selected':'')+' value="'+item.replid+'">'+item.tingkat+'</option>';
                 });
-            }$('#tingkatTB').html('<option value="">-Pilih tingkat-</option>'+out);
+            }
+            if(typ=='form')$('#tingkatTB').html('<option value="">-Pilih tingkat-</option>'+out);
+            else {
+                $('#tingkatS').html(out);
+                cmbtahunajaran('filter','');
+            }
         });
     }
 
 // tahun ajaran  ---
-    function cmbtahunajaran(thn){
+    function cmbtahunajaran(typ,thn){
         var u = dir4;
         var d = 'aksi=cmb'+mnu4;
         ajax(u,d).done(function (dt){
@@ -526,12 +559,17 @@ var biayaArr=[];
                 $.each(dt.tahunajaran, function (id,item){
                     out+='<option '+(item.replid==thn?'selected':'')+' value="'+item.replid+'">'+item.tahunajaran+' - '+(parseInt(item.tahunajaran)+1)+'</option>';
                 });
-            }$('#tahunajaranTB').html('<option value="">-Pilih Tahun Ajaran-</option>'+out);
+            }
+            if(typ=='form')$('#tahunajaranTB').html('<option value="">-Pilih Tahun Ajaran-</option>'+out);
+            else {
+                $('#tahunajaranS').html(out);
+                cmbsubtingkat('filter',$('#tingkatS').val(),'');
+            } 
         });
     }
 
 // sutingkat   ---
-    function cmbsubtingkat(ting,subt){
+    function cmbsubtingkat(typ,ting,subt){
         var u = dir5;
         var d = 'aksi=cmb'+mnu5+'&tingkat='+ting;
         ajax(u,d).done(function (dt){
@@ -542,7 +580,12 @@ var biayaArr=[];
                 $.each(dt.subtingkat, function (id,item){
                     out+='<option '+(item.replid==subt?'selected':'')+' value="'+item.replid+'">'+item.subtingkat+'</option>';
                 });
-            }$('#subtingkatTB').html('<option value="">-Pilih Sub Tingkat-</option>'+out);
+            }
+            if(typ=='form') $('#subtingkatTB').html('<option value="">-Pilih Sub Tingkat-</option>'+out);
+            else {
+                $('#subtingkatS').html(out);
+                viewTB();
+            }
         });
     }
 
@@ -559,17 +602,93 @@ var biayaArr=[];
     function biayaAdd(id,biaya,biayaKurang){
         var tr ='<tr val="'+id+'" class="biayaTR" id="biayaTR_'+id+'">'
             +'<td>'+biaya+'</td>'
-            +'<td align="right">'+biayaKurang+'</td>'
+            +'<td id="biayaKurangTD_'+id+'" align="right">'+biayaKurang+'</td>'
             +'<td align="center"><a  class="button fg-white bg-red" href="#" onclick="biayaDel('+id+');"><i class="icon-cancel-2"></a></i></td>'
         +'</tr>';
         $('#biayaTBL').prepend(tr); 
         collectArr();
     }
 
-    //himpun array rekening terpilih
+//himpun array rekening terpilih
     function collectArr(){
         biayaArr=[];
-        $('.biayaTR').each(function(id,item){
-            biayaArr.push($(this).val());
-        });return biayaArr;
+        var tot=0;
+        $('.biayaTR').each(function (id,item){
+            var value=$(this).attr('val');
+            tot+=getCurr($('#biayaKurangTD_'+value).html());
+            biayaArr.push(value);
+        });
+        $('#totalTD').html('Rp. '+(parseInt(tot).setCurr()));
+        return biayaArr;
+    }
+
+    function monthFormat(mon){
+        switch(mon){
+            case 1:return 'Jan';break;
+            case 2:return 'Feb';break;
+            case 3:return 'Mar';break;
+            case 4:return 'Apr';break;
+            case 5:return 'May';break;
+            case 6:return 'Jun';break;
+            case 7:return 'Jul';break;
+            case 8:return 'Aug';break;
+            case 9:return 'Sep';break;
+            case 10:return 'Oct';break;
+            case 11:return 'Nov';break;
+            case 12:return 'Dec';break;
+        }
+    }
+        // var dob  ='2015-09-16';
+    function tgl_indo5(str){
+        var m = monthFormat(parseInt(str.substring(7,5)));
+        var d = str.substring(8);
+        var y = str.substring(0,4);
+        return d+' '+m+' '+y;
+    }
+    // console.log(tgl_indo5(dob));    }
+
+
+//date format -----------------
+    function dateFormatx(typ,d,m,y){
+        if(typ=='id') // 25 Dec 2014
+            return d+' '+m+' '+y;
+        else // 2014-12-25
+            return y+'-'+m+'-'+d;
+    }
+
+//global u/ tanggal --------
+    var now  = new Date();
+    var dd   = now.getDate();
+    var mm   = now.getMonth()+1;
+    var yyyy = now.getFullYear();
+
+//tanggal terakhir : dd
+    function lastDate(m,y){
+        return 32 - new Date(y, (m-1), 32).getDate();
+    }
+// tanggal hari ini : dd mm yyyy
+    function getToday() {
+        // function addLeadingZeros (n, length){
+        return dateFormatx('id',lpadZero(dd,2),monthFormat(mm),yyyy);
+    }
+
+// left pad (replace with 0)
+    function lpadZero (n, length){
+        var str = (n > 0 ? n : -n) + "";
+        var zeros = "";
+        for (var i = length - str.length; i > 0; i--)
+            zeros += "0";
+        zeros += str;
+        return n >= 0 ? zeros : "-" + zeros;
+    }
+
+
+    function getCurr(n){  
+        var x = Number(n.replace(/[^0-9\,]+/g,""));
+        return x;
+    }
+
+    // number to currency (ex : 500000 -> 500.000)  
+    Number.prototype.setCurr=function(){
+        return this.toFixed(0).replace(/(\d)(?=(\d{3})+\b)/g,'$1.');
     }

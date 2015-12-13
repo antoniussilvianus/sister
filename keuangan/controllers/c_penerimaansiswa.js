@@ -6,6 +6,7 @@ var mnu7 ='tingkat';
 var mnu8 ='subtingkat'; 
 var mnu9 ='kelas'; 
 var mnu10 ='viabayar'; 
+var mnu11 ='semester'; 
 
 var dir  ='models/m_'+mnu+'.php';
 var dir2 ='../akademik/models/m_'+mnu2+'.php';
@@ -15,11 +16,12 @@ var dir7 ='../akademik/models/m_'+mnu7+'.php';
 var dir8 ='../akademik/models/m_'+mnu8+'.php';
 var dir9 ='../akademik/models/m_'+mnu9+'.php';
 var dir10 ='../keuangan/models/m_'+mnu10+'.php';
+var dir11 ='../akademik/models/m_'+mnu11+'.php';
 
 var contentFR = contentFR2 ='';
 // main function load first 
     $(document).ready(function(){
-        cmbdepartemen('filter');
+        cmbdepartemen();
         //form content
         contentFR2+= '<div  style="overflow:scroll;height:500px;">'
                         +'<table class="table">'
@@ -69,6 +71,10 @@ var contentFR = contentFR2 ='';
                                 +'<td><b>Biaya</b> </td>'
                                 +'<td id="biayaTD"></td>'
                             +'</tr>'
+                            // +'<tr stlye="display:none;" id="semesterTR">'
+                                // +'<td><b>Semester</b> <input type="hidden" id="semesterH" name="semesterH" /><input type="text" id="bulanH" name="bulanH" /></td>'
+                                // +'<td id="semesterTD"></td>'
+                            // +'</tr>'
                             +'<tr id="tanggalTR">'
                                 +'<td><b>Tanggal</b> </td>'
                                 +'<td>'
@@ -234,7 +240,6 @@ var contentFR = contentFR2 ='';
                         +'<div class="form-actions">' 
                             +'<button id="simpanBC" class="button primary">Bayar <span class="icon-floppy"></span></button>&nbsp;'
                         +'</div>'
-
                     +'</form>';
 
         $('#nisS,#namasiswaS,#nisnS,#nopendaftaranS').on('keydown',function (e){ // kode grup
@@ -243,7 +248,7 @@ var contentFR = contentFR2 ='';
         $('#statusS').change(function (){
             viewTB('penerimaansiswa');
         });
-    }); 
+    });
 
 //paging ---
     function pagination(page,aksix,subaksi){ 
@@ -422,6 +427,15 @@ var contentFR = contentFR2 ='';
                         $('#kelasTD').html(': '+dt.datax.kelas);
                         $('#nisTD').html(': '+dt.datax.nis);
                         $('#biayaTD').html(': '+dt.datax.biaya);
+                        if(dt.datax.ditagih=='2' || dt.datax.ditagih=='12'){
+                            $('#semesterTR').removeAttr('style');
+                            $('#semesterTD').html(': '+dt.datax.semester);
+                            $('#semesterH').val(dt.datax.idsemester);
+                            if(dt.datax.ditagih=='12') $('#bulanH').val(dt.datax.idsemester);
+                        }else{
+                            $('#semesterTR').attr('style','display:none;');
+                            $('#semesterH').val('');
+                        }
                     // harus bayar 
                         var biayaNett = parseInt(getUang(dt.datax.biayaNett));
                         $('#biayaAwalTD').html(dt.datax.biayaAwal);
@@ -486,8 +500,7 @@ var contentFR = contentFR2 ='';
                         $('#belumBayarNominalTotTD').html('Rp. '+(belumBayarNominalTot.setCurr()));
                         $('#belumBayarAngsurankeTD').html(dt.datax.belumBayarAngsuranke+' x');
                     }
-                });
-                $.Dialog.title('Pembayaran Siswa'); 
+                });$.Dialog.title('Pembayaran Siswa'); 
                 $.Dialog.content(contentFR);
             }
         });
@@ -525,7 +538,7 @@ var contentFR = contentFR2 ='';
         var par='',tok='',p=v='';
         $('.'+mn+'_cari').each(function(){
             p=$(this).attr('id');
-            v=$(this).val();
+            v=$(this).val()==null?'':$(this).val();
             par+='&'+p+'='+v;
             tok+=v;
         });
@@ -542,7 +555,7 @@ var contentFR = contentFR2 ='';
     }
 
 // combo departemen ---
-    function cmbdepartemen(typ){
+    function cmbdepartemen(){
         var u = dir2;
         var d = 'aksi=cmb'+mnu2;
         ajax(u,d).done(function (dt){
@@ -553,17 +566,14 @@ var contentFR = contentFR2 ='';
                 $.each(dt.departemen, function(id,item){
                     out+='<option value="'+item.replid+'"> '+item.nama+'</option>';
                 });
-            }
-            if(typ=='filter') {
-                $('#departemenS').html(out);
-                cmbtahunajaran('filter');
-            }else $('#departemenTB').html(out);
+            }$('#departemenS').html(out);
+            cmbtahunajaran();
         });
     }
 //end of combo departemen---
         
 // combo tingkat  ---
-    function cmbtingkat(typ){
+    function cmbtingkat(){
         var u = dir7;
         var d = 'aksi=cmb'+mnu7+'&departemen='+$('#departemenS').val();
         ajax(u,d).done(function (dt){
@@ -573,20 +583,15 @@ var contentFR = contentFR2 ='';
             }else{
                 $.each(dt.tingkat, function(id,item){
                     out+='<option value="'+item.replid+'">'+item.tingkat+'</option>';
-                });
-                if(typ=='filter'){
-                    $('#tingkatS').html(out);
-                    cmbsubtingkat('filter');
-                }else{
-                    $('#subtingkatTB').html(out);
-                }
+                });$('#tingkatS').html(out);
+                cmbsubtingkat('filter');
             }
         });
     }
 //end of combo tingkat---
 
 // combo subtingkat  ---
-    function cmbsubtingkat(typ,tkt){
+    function cmbsubtingkat(tkt){
         var u = dir8;
         var d = 'aksi=cmb'+mnu8+'&tingkat='+$('#tingkatS').val();
         ajax(u,d).done(function (dt){
@@ -596,19 +601,14 @@ var contentFR = contentFR2 ='';
             }else{
                 $.each(dt.subtingkat, function(id,item){
                     out+='<option value="'+item.replid+'">'+item.subtingkat+'</option>';
-                });
-                if(typ=='filter'){
-                    $('#subtingkatS').html(out);
-                    cmbbiaya('filter');
-                }else{
-                    $('#subtingkatTB').html(out);
-                }
+                });$('#subtingkatS').html(out);
+                cmbbiaya('filter');
             }
         });
     }
 
 // combo biaya  ---
-    function cmbbiaya(typ){
+    function cmbbiaya(){
         var u = dir3;
         var d = 'aksi=cmb'+mnu3;
         ajax(u,d).done(function (dt){
@@ -616,22 +616,89 @@ var contentFR = contentFR2 ='';
             if(dt.status!='sukses'){
                 out+='<option value="">'+dt.status+'</option>';
             }else{
-                $.each(dt.biaya, function(id,item){
+                $.each(dt.biaya, function (id,item){
                     out+='<option value="'+item.replid+'">'+item.biaya+'</option>';
                 });
-                if(typ=='filter'){
-                    $('#biayaS').html(out);
-                    viewTB('penerimaansiswa');
+                $('#biayaS').html(out);
+                // if(dt.biaya[0].ditagih=='2' || dt.biaya[0].ditagih=='12'){
+                //     $('#semesterDV').removeAttr('style'); // @semester OR @bulan
+                //     $('#bulanDV').removeAttr('style'); // @semester OR @bulan
+                // }else{
+                //     $('#semesterDV').attr('style','display:none;'); // 1x, @thn 
+                //     $('#bulanDV').attr('style','display:none;'); // 1x, @thn 
+                // } 
+                viewTB('penerimaansiswa');
+                // cmbsemester($('#tahunajaranS').val());
+            }
+        });
+    }
+
+// combo semester  ---
+    function cmbsemester(bia){
+        var u = dir11;
+        var d = 'aksi=cmb'+mnu11+'&tahunajaran='+$('#tahunajaranS').val()+(bia!=''?'&biaya='+bia:'');
+        ajax(u,d).done(function (dt){
+            var out='';
+            if(dt.status!='sukses'){
+                out+='<option value="">'+dt.status+'</option>';
+            }else{
+                // if(dt.ditagih=='2' || dt.ditagih=='12'){ // filtering 
+                    // $('#semesterDV').removeAttr('style');
+                    $.each(dt.semester, function (id,item){
+                        out+='<option value="'+item.replid+'">'+item.semester+'</option>';
+                    });$('#semesterS').html(out);
+
+                    // if(dt.ditagih=='12'){ // bulanan 
+                    //     $('#bulanDV').removeAttr('style');
+                    //     cmbbulan(dt.semester[0].replid);
+                    // }else{ // semesteran
+                    //     $('#bulanDV').attr('style','display:none;');
+                    //     viewTB('penerimaansiswa');
+                    // }
+                // }else{
+                //     $('#semesterS').html('');
+                //     $('#bulanS').html('');
+                //     $('#bulanDV').attr('style','display:none;');
+                //     $('#semesterDV').attr('style','display:none;');
+                //     viewTB('penerimaansiswa');
+                // }
+            }
+        });
+    }
+//end of combo tahun ajaran---
+
+    function cmbbulan(sem){
+        var u = dir11; 
+        var d = 'aksi=cmb'+mnu11+'&replid='+sem; 
+        ajax(u,d).done(function (dt){
+            var out='';
+            if(dt.status!='sukses'){ // gagal
+                out+='<option value="">'+dt.status+'</option>';
+            }else{ //sukses
+                if(dt.semester.length==0){
+                    out+='<option value="">kosong</option>';
                 }else{
-                    $('#biayaTB').html(out);
-                }
+                    var t1 = dt.semester[0].tglMulai;
+                    var t2 = dt.semester[0].tglSelesai;
+                        var y1 = parseInt(t1.substr(0,4));
+                        var y2 = parseInt(t2.substr(0,4));
+                        var m1 = parseInt(t1.substr(5,2));
+                        var m2 = parseInt(t2.substr(5,2)); 
+
+                    if(y1==y2){
+                        for (var i=m1; i<=m2; i++) out+='<option value="'+i+'">'+monthFormat(i)+' '+y1+'</option>';
+                    }else{
+                        for (var i=m1; i<=12; i++) out+='<option value="'+i+'">'+monthFormat(i)+' '+y1+'</option>';
+                        for (var i=1; i<=m2; i++) out+='<option value="'+i+'">'+monthFormat(i)+' '+y2+'</option>';
+                    }
+                }$('#bulanS').html(out);
+                viewTB('penerimaansiswa');
             }
         });
     }
 
 // combo tahun ajaran  ---
-    function cmbtahunajaran(typ){
-        console.log('masuk tahu ajaran ');
+    function cmbtahunajaran(){
         var u= dir6;
         var d = 'aksi=cmb'+mnu6;
         ajax(u,d).done(function (dt){
@@ -642,13 +709,8 @@ var contentFR = contentFR2 ='';
                 $.each(dt.tahunajaran, function(id,item){
                     var ta = item.tahunajaran+' - '+(parseInt(item.tahunajaran)+1);
                     out+='<option '+(item.aktif=='1'?'selected':'')+' value="'+item.replid+'">'+ta+'</option>';
-                });
-                if(typ=='filter'){
-                    $('#tahunajaranS').html(out);
-                    cmbtingkat('filter',dt.tahunajaran[0].replid);
-                }else{
-                    $('#tahunajaranTB').html(out);
-                }
+                });$('#tahunajaranS').html(out);
+                cmbtingkat(dt.tahunajaran[0].replid);
             }
         });
     }

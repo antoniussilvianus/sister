@@ -281,13 +281,19 @@
 							$w=' where sb.siswa ='.$_POST['siswa'];
 							$g=' GROUP BY b.replid';
 						}else {
-							$f='';$j='';$w='';$g=''; // add 
+							$f=$j=$w=$g=''; // add 
 						}
 
 						// biaya ----------------
 						$s='SELECT 	
 								b.replid, 
 								b.biaya, 
+								case b.ditagih
+									WHEN "0" THEN "Sekali" 
+									WHEN "1" THEN "Tahun" 
+									WHEN "2" THEN "Semester"
+									else "Bulan" 
+								end as ditagih, 
 								b.kode, 
 								b.isAngsur,
 								b.isDiskon
@@ -315,6 +321,7 @@
 									'replid'          =>$r['replid'],
 									'kode'            =>$r['kode'],
 									'biaya'           =>$r['biaya'],
+									'ditagih'           =>$r['ditagih'],
 									'idsiswabiaya'    =>(isset($_POST['siswa']) && $_POST['siswa']!=''?$r['idsiswabiaya']:''),
 									'angsuran'        =>(isset($_POST['siswa']) && $_POST['siswa']!=''?$r['angsuran']:''),
 									'diskonkhusus'    =>(isset($_POST['siswa']) && $_POST['siswa']!=''?setuang($r['diskonkhusus']):''),

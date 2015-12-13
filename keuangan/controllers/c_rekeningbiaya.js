@@ -35,7 +35,7 @@ var contentFR = '';
 
                         // rekening
                         +'<a class="button fg-white bg-blue" href="#" onclick="DetilRekeningFC(1,\'\');"><i class="icon-plus-2"></i></a>'
-                        +'<table class="table striped">'
+                        +'<table class="table hover bordered striped">'
                             +'<thead>'
                                 +'<tr class="fg-white bg-blue">'
                                     +'<th>Rekening</th>'
@@ -330,9 +330,15 @@ function notif(cont,clr) {
             },{   
                 'align':'left',
                 'columnName':'detilRekening',
-                'width':'40',
+                'width':'50',
                 'label':'Rekening'
-        }];
+            },{   
+                'align':'right',
+                'columnName':'saldoRekening',
+                'width':'20',
+                'label':'Saldo'
+            }
+        ];
 
         urly = dir+urlx;
         $('#'+el+idx+'TB').combogrid({

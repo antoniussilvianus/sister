@@ -29,6 +29,13 @@
     </div><div class="input-control select span2">
         <label class="fg-white">Biaya   </label>
         <select onchange="viewTB('penerimaansiswa');" class="penerimaansiswa_cari" data-hint="biaya" name="biayaS" id="biayaS"></select>
+        <!-- <select onchange="cmbsemester($(this).val());" class="penerimaansiswa_cari" data-hint="biaya" name="biayaS" id="biayaS"></select> -->
+    </div><div style="display:none;" id="semesterDV" class="input-control select span2">
+        <label class="fg-white">Semester   </label>
+        <select onchange="cmbbulan($(this).val());" class="penerimaansiswa_cari" data-hint="penerimaansiswa" name="semesterS" id="semesterS"></select>
+    </div><div style="display:none;" id="bulanDV" class="input-control select span2">
+        <label class="fg-white">Bulan   </label>
+        <select onchange="viewTB('penerimaansiswa');" class="penerimaansiswa_cari" data-hint="penerimaansiswa" name="bulanS" id="bulanS"></select>
     </div>
     <button id="cetakBC" onclick="printPDF('penerimaansiswa','');" data-hint="Cetak" data-hint-position="top"><i class="icon-printer" ></i></button>
     <table class="table hovered bordered striped">

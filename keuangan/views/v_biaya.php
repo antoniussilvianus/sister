@@ -17,7 +17,7 @@
             <th class="text-center">Biaya</th>
             <th class="text-center">Angsuran</th>
             <th class="text-center">Diskon</th>
-            <!-- <th class="text-center">Ditagih</th> -->
+            <th class="text-center">Ditagih</th>
             <th class="text-center">Keterangan</th>
             <th class="text-center">Aksi</th>
         </tr>
@@ -40,9 +40,15 @@
                         <option value="3">Diskon Reguler & Khusus</option>
                     </select>
             </div></th>
-            <!-- <th><div class="input-control select">
-                    <select  class="cari" data-hint="Ditagih Per" name="jenistagihanS" id="jenistagihanS"></select>
-            </div></th> -->
+            <th><div class="input-control select">
+                <select  class="cari" data-hint="Ditagih Per" name="ditagihS" id="ditagihS">
+                    <option value="">-SEMUA-</option>
+                    <option value="">-Sekali-</option>
+                    <option value="">Tiap Tahun</option>
+                    <option value="">Tiap Semester</option>
+                    <option value="">Tiap Bulan</option>
+                </select>
+            </div></th>
             <th class="text-center"><div class="input-control text"><input class="cari" placeholder="cari..." id="keteranganS"></div></th>
             <th></th>
         </tr>

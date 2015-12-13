@@ -11,10 +11,24 @@
 
 <h4 style="color:white;">Pemutihan Penerimaan Siswa</h4>
 <button <?php echo isAksi('pemutihanpenerimaansiswa','c')?'onclick="viewFR(\'\')"':'disabled'; ?> data-hint="Tambah Data" xclass="large" id="tambahBC"><span class="icon-plus-2"></span> </button>
+<div class="input-control select span3">
+    <select class="cari" data-hint="Departemen" name="departemenS" id="departemenS"></select>
+</div>
+<div class="input-control select span3">
+    <select  class="cari" data-hint="tingkat" name="tingkatS" id="tingkatS"></select>
+</div>
+<div class="input-control select span3">
+    <select  class="cari" data-hint="tahunajaran" name="tahunajaranS" id="tahunajaranS"></select>
+</div>
+<div class="input-control select span3">
+    <select  class="cari" data-hint="subtingkat" name="subtingkatS" id="subtingkatS"></select>
+</div>
+
 <table class="table hovered bordered striped">
     <thead>
         <tr style="color:white;"class="info">
-            <th class="text-center">Tanggal</th>
+            <th class="text-center">Tgl. Input</th>
+            <th class="text-center">NIS</th>
             <th class="text-center">Siswa</th>
             <th class="text-center">Oleh</th>
             <th class="text-center">No. MOM</th>
@@ -23,13 +37,16 @@
             <th class="text-center">Aksi</th>
         </tr>
         <tr xstyle="display:none;" id="cariTR" class="selected">
-            <th class="text-center"><input data-transform="input-control" class="cari" placeholder="cari..." id="tglS"></div></th>
-            <th class="text-center"><input data-transform="input-control" class="cari" placeholder="cari..." id="namasiswaS"></div></th>
-            <th class="text-center"><input data-transform="input-control" class="cari" placeholder="cari..." id="petugasS"></div></th>
-            <th class="text-center"><input data-transform="input-control" class="cari" placeholder="cari..." id="nomomS"></div></th>
-            <th class="text-center"><input data-transform="input-control" class="cari" placeholder="cari..." id="tglmomS"></div></th>
-            <th class="text-center"><input data-transform="input-control" class="cari" placeholder="cari..." id="totalS"></div></th>
-            <th class="text-center"></th>
+            <th></th>
+            <th class="text-center"><input class="cari" data-transform="input-control" class="cari" placeholder="cari..." id="nisS"></div></th>
+            <th class="text-center"><input class="cari" data-transform="input-control" class="cari" placeholder="cari..." id="siswaS"></div></th>
+            <th class="text-center">
+            <!-- <input class="cari" data-transform="input-control" class="cari" placeholder="cari..." id="karyawanS"></div> -->
+            </th>
+            <th class="text-center"><input class="cari" data-transform="input-control" class="cari" placeholder="cari..." id="nomomS"></div></th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
 

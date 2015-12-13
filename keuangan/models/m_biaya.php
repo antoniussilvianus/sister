@@ -32,7 +32,12 @@
 								when 2 then "Diskon Khusus"
 								else "Diskon Reguler & Khusus Khusus"
 							end as isDiskon,
-							/*t.jenistagihan,*/
+							case b.ditagih
+								when "0" then "Sekali"
+								when "1" then "Tiap Tahun"
+								when "2" then "Tiap Semester"
+								else "Tiap Bulan"
+							END as ditagih,
 							b.keterangan
 						FROM
 							psb_biaya b
@@ -72,6 +77,7 @@
 									<td align="center">'.$res['biaya'].'</td>
 									<td align="center">'.$res['isAngsur'].'</td>
 									<td align="center">'.$res['isDiskon'].'</td>
+									<td align="justify">'.$res['ditagih'].'</td>
 									<td align="justify">'.$res['keterangan'].'</td>
 									'.$btn.'
 								</tr>';
@@ -91,13 +97,12 @@
 
 			// add / edit -----------------------------------------------------------------
 			case 'simpan':
-								// jenistagihan = '.filter($_POST['jenistagihanTB']).',
-				$s = $tb.' set 	biaya        = "'.filter($_POST['biayaTB']).'",
-								isAngsur     = '.filter($_POST['isAngsurTB']).',
-								isDiskon     = '.filter($_POST['isDiskonTB']).',
-								keterangan   = "'.filter($_POST['keteranganTB']).'"';
+				$s = $tb.' set 	biaya      = "'.filter($_POST['biayaTB']).'",
+								isAngsur   = '.filter($_POST['isAngsurTB']).',
+								isDiskon   = '.filter($_POST['isDiskonTB']).',
+								ditagih    = "'.filter($_POST['ditagihTB']).'",
+								keterangan = "'.filter($_POST['keteranganTB']).'"';
 				$s2	= isset($_POST['replid'])?'UPDATE '.$s.' WHERE replid='.$_POST['replid']:'INSERT INTO '.$s;
-				// pr($s2);
 				$e2 = mysql_query($s2);
 				$stat = !$e2?'gagal menyimpan':'sukses';
 				$out  = json_encode(array('status'=>$stat));
@@ -116,12 +121,12 @@
 
 			// ambiledit -----------------------------------------------------------------
 			case 'ambiledit':
-							// jenistagihan,
 				$s = 'SELECT
 							replid,
 							biaya,
 							isAngsur,
 							isDiskon,
+							ditagih,
 							keterangan
 						FROM
 							psb_biaya
@@ -131,13 +136,13 @@
 				$r 		= mysql_fetch_assoc($e);
 				$stat 	= ($e)?'sukses':'gagal';
 				$out 	= json_encode(array(
-							'status'       =>$stat,
-							'biaya'        =>$r['biaya'],
-							'isAngsur'     =>$r['isAngsur'],
-							'isDiskon'     =>$r['isDiskon'],
-							'keterangan'     =>$r['keterangan'],
+							'status'     =>$stat,
+							'biaya'      =>$r['biaya'],
+							'isAngsur'   =>$r['isAngsur'],
+							'ditagih'    =>$r['ditagih'],
+							'isDiskon'   =>$r['isDiskon'],
+							'keterangan' =>$r['keterangan'],
 						));
-							// 'jenistagihan' =>$r['jenistagihan'],
 			break;
 			// ambiledit -----------------------------------------------------------------
 

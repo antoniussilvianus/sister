@@ -36,12 +36,18 @@ var contentFR = '';
                                 +'<option value="3">Diskon Reguler & Khusus</option>'
                             +'</select>'
                         +'</div>'
+
                         // jenistagihan
-                        // +'<label>Jenis Tagihan</label>'
-                        // +'<div class="input-control select">'
-                        //     +'<select required id="jenistagihanTB" name="jenistagihanTB">'
-                        //     +'</select>'
-                        // +'</div>'
+                        +'<label>Ditagih</label>'
+                        +'<div class="input-control select">'
+                            +'<select required id="ditagihTB" name="ditagihTB">'
+                                +'<option value="">-Pilih-</option>'
+                                +'<option value="0">Sekali</option>'
+                                +'<option value="1">Tiap Tahun</option>'
+                                +'<option value="2">Tiap Semester</option>'
+                                +'<option value="12">Tiap bulan</option>'
+                            +'</select>'
+                        +'</div>'
                         // keterngan
                         +'<label>Keterangan</label>'
                         +'<div class="input-control textarea">'
@@ -53,8 +59,8 @@ var contentFR = '';
                         +'</div>'
                     +'</form>';
 
-        cmbjenistagihan('filter','');
-
+        // cmbjenistagihan('filter','');
+        viewTB();
         //add form
         $("#tambahBC").on('click', function(){
             viewFR('');
@@ -214,6 +220,7 @@ var contentFR = '';
                         $('#keteranganTB').val(r.keterangan);
                         $('#isAngsurTB').val(r.isAngsur);
                         $('#isDiskonTB').val(r.isDiskon);
+                        $('#ditagihTB').val(r.ditagih);
                         // cmbjenistagihan('form',r.jenistagihan);
                     });
                 }else{ // form mode : add  

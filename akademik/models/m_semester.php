@@ -135,6 +135,7 @@
 						'.$w.'		
 						ORDER  BY semester asc';
 // var_dump($s);exit();
+				$ditagih=(isset($_POST['biaya']) && $_POST['biaya']!='')?getField('ditagih','psb_biaya','replid',$_POST['biaya']):'';	
 				$e  = mysql_query($s);
 				$n  = mysql_num_rows($e);
 				$ar =$dt=array();
@@ -145,22 +146,13 @@
 					if($n=0){ // kosong 
 						$ar = array('status'=>'kosong');
 					}else{ // ada data
-						if(!isset($_POST['replid'])){
-							while ($r=mysql_fetch_assoc($e)) {
-								$dt[]=$r;
-							}
-						}else{
-							$dt[]=mysql_fetch_assoc($e);
-						}
-						$ar = array('status'=>'sukses','semester'=>$dt);
+						if(!isset($_POST['replid'])) while ($r=mysql_fetch_assoc($e)) $dt[]=$r;
+						else $dt[]=mysql_fetch_assoc($e);
+						$ar = array('status'=>'sukses','semester'=>$dt,'ditagih'=>$ditagih);
 					}
 				}$out=json_encode($ar);
 			break;
 			// cmbsemester -----------------------------------------------------------------
 		}
 	}echo $out;
-
-	// ---------------------- //
-	// -- created by epiii -- //
-	// ---------------------- //
 ?>

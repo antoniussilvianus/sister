@@ -1558,6 +1558,13 @@ function notif(cont,clr) {
                                     +'<td>'
                                         +'<select data-transform="input-control" name="viabayar'+item.replid+'TB" id="viabayar'+item.replid+'TB"></select>'
                                     +'</td>'
+                                    +'<td></td>'
+                                +'</tr>';
+
+                                out+='<tr>'
+                                    +'<td>Ditagih Per</td>'
+                                    +'<td>'+item.ditagih+'</td>'
+                                    +'<td></td>'
                                 +'</tr>';
  
                                 out+='</tbody>'

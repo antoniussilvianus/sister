@@ -23,14 +23,15 @@
 
 <table class="table hovered bordered striped">
     <thead>
-        <tr style="color:white;"class="info">
+        <tr class="bg-blue fg-white">
             <th class="text-center">Biaya</th>
-            <th class="text-center">Rekening (COA)</th>
+            <th class="text-center" colspan="2">Rekening (COA)</th>
             <th class="text-center">Aksi</th>
         </tr>
-        <tr id="cariTR" class="info">
+        <tr id="cariTR" class="bg-blue fg-white">
             <th><input type="text" data-transform="input-control" class="cari" placeholder="cari ..." id="biayaS"></th>
-            <th></th>
+            <th>Pembayarn</th>
+            <th>Pemutihan</th>
             <th></th>
         </tr>
     </thead>

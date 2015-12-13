@@ -24,7 +24,7 @@
 						dr.kode,
 						dr.nama detilRekening,
 						kr.nama kategoriRekening,
-						sr.nominal2 saldoRekening
+						getSaldoRekeningSkrg(dr.replid)saldoRekening
 					FROM
 						keu_detilrekening dr 
 						JOIN keu_kategorirekening kr on kr.replid = dr.kategorirekening 
@@ -121,6 +121,7 @@
 						$out.= '<tr>
 									<td>'.$res['biaya'].'</td>
 									<td>'.getAllRekeningBiaya($res['idbiaya'],$departemen,$tahunajaran).'</td>
+									<td>'.getAllRekeningBiaya($res['idbiaya'],$departemen,$tahunajaran).'</td>
 									'.$btn.'
 								</tr>';
 					}
@@ -182,7 +183,7 @@
 							drb.replid idDetilRekeningBiaya,
 							dr.replid idDetilRekening,
 							CONCAT("[",dr.kode,"] ",dr.nama)detilRekening,
-							sr.nominal2 saldoRekening,
+							getSaldoRekeningSkrg(dr.replid)saldoRekening,
 							kr.nama  kategoriRekening,
 							drb.jenisrekening jenisRekening
 						FROM
