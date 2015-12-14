@@ -240,3 +240,18 @@ FROM
 	keu_transaksi t
 	JOIN keu_jurnal j on j.transaksi = t.replid ;
 
+
+/*getSaldoRekeningByTgl*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getSaldoRekeningByTgl`(`idDetRek` int,`tgl1` date,`tgl2` date) RETURNS decimal(14,0)
+BEGIN
+	DECLARE saldoRekening DECIMAL(14);
+		SELECT IFNULL(sum(concat(operator,nominal)),0) into saldoRekening
+		FROM vw_transaksi
+		WHERE 
+			(tanggal BETWEEN  tgl1 and tgl2 )
+			and iddetilrekening = idDetRek
+		ORDER BY tanggal ASC;
+	RETURN saldoRekening;
+END $$
+DELIMITER ;

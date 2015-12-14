@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-12-13 19:50:44
+Date: 2015-12-14 15:42:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1037,7 +1037,7 @@ CREATE TABLE `keu_jurnal` (
   KEY `detilrekening` (`detilrekening`) USING BTREE,
   CONSTRAINT `detilrekeningFK2` FOREIGN KEY (`detilrekening`) REFERENCES `keu_detilrekening` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `transaksiFK` FOREIGN KEY (`transaksi`) REFERENCES `keu_transaksi` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=348 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=354 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_jurnal
@@ -1070,6 +1070,8 @@ INSERT INTO `keu_jurnal` VALUES ('344', '209', '203', '600000', 'k', '2015-12-11
 INSERT INTO `keu_jurnal` VALUES ('345', '209', '2', '600000', 'd', '2015-12-11 03:21:38');
 INSERT INTO `keu_jurnal` VALUES ('346', '210', '194', '3501875', 'k', '2015-12-13 19:46:45');
 INSERT INTO `keu_jurnal` VALUES ('347', '210', '1', '3501875', 'd', '2015-12-13 19:46:46');
+INSERT INTO `keu_jurnal` VALUES ('352', '213', '194', '16500000', 'k', '2015-12-13 22:00:51');
+INSERT INTO `keu_jurnal` VALUES ('353', '213', '1', '16500000', 'd', '2015-12-13 22:00:51');
 
 -- ----------------------------
 -- Table structure for keu_kategorianggaran
@@ -1674,13 +1676,13 @@ CREATE TABLE `keu_pemutihanpenerimaansiswa` (
   KEY `siswa` (`siswa`) USING BTREE,
   KEY `karyawan` (`karyawan`) USING BTREE,
   CONSTRAINT `siswaFK3` FOREIGN KEY (`siswa`) REFERENCES `psb_siswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_pemutihanpenerimaansiswa
 -- ----------------------------
 INSERT INTO `keu_pemutihanpenerimaansiswa` VALUES ('16', '2015-12-08', '200', '17', 'PS02', '2015-12-08');
-INSERT INTO `keu_pemutihanpenerimaansiswa` VALUES ('19', '2015-12-09', '194', '17', 'abc99', '2015-12-09');
+INSERT INTO `keu_pemutihanpenerimaansiswa` VALUES ('22', '2015-12-13', '205', '17', 'JF001', '2015-12-13');
 
 -- ----------------------------
 -- Table structure for keu_penerimaan
@@ -1744,13 +1746,14 @@ CREATE TABLE `keu_penerimaansiswa` (
   KEY `viabayar2` (`viabayar2`) USING BTREE,
   CONSTRAINT `siswabiayaFK2` FOREIGN KEY (`siswabiaya`) REFERENCES `psb_siswabiaya` (`replid`) ON UPDATE CASCADE,
   CONSTRAINT `viabayarFK3` FOREIGN KEY (`viabayar2`) REFERENCES `keu_viabayar` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_penerimaansiswa
 -- ----------------------------
 INSERT INTO `keu_penerimaansiswa` VALUES ('17', '657', '600000', '2', '2015-12-11', '1', '', '5', '9', '0000-00-00 00:00:00');
 INSERT INTO `keu_penerimaansiswa` VALUES ('18', '654', '3501875', '3', '2015-12-13', '2', '', null, null, '0000-00-00 00:00:00');
+INSERT INTO `keu_penerimaansiswa` VALUES ('21', '702', '16500000', '2', '2015-12-13', '3', '', null, null, '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for keu_rekening
@@ -3272,16 +3275,14 @@ CREATE TABLE `keu_subpemutihanpenerimaansiswa` (
   KEY `siswabiaya` (`siswabiaya`) USING BTREE,
   CONSTRAINT `pemutihanpenerimaansiswaFK` FOREIGN KEY (`pemutihanpenerimaansiswa`) REFERENCES `keu_pemutihanpenerimaansiswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `siswabiayaFK3` FOREIGN KEY (`siswabiaya`) REFERENCES `psb_siswabiaya` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_subpemutihanpenerimaansiswa
 -- ----------------------------
 INSERT INTO `keu_subpemutihanpenerimaansiswa` VALUES ('23', '16', '683');
 INSERT INTO `keu_subpemutihanpenerimaansiswa` VALUES ('24', '16', '682');
-INSERT INTO `keu_subpemutihanpenerimaansiswa` VALUES ('31', '19', '660');
-INSERT INTO `keu_subpemutihanpenerimaansiswa` VALUES ('32', '19', '659');
-INSERT INTO `keu_subpemutihanpenerimaansiswa` VALUES ('33', '19', '658');
+INSERT INTO `keu_subpemutihanpenerimaansiswa` VALUES ('36', '22', '704');
 
 -- ----------------------------
 -- Table structure for keu_tahunbuku
@@ -3324,7 +3325,7 @@ CREATE TABLE `keu_transaksi` (
   PRIMARY KEY (`replid`),
   KEY `detjenistransaksi` (`detjenistransaksi`) USING BTREE,
   CONSTRAINT `detjenistransaksiFK` FOREIGN KEY (`detjenistransaksi`) REFERENCES `keu_detjenistransaksi` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of keu_transaksi
@@ -3343,6 +3344,7 @@ INSERT INTO `keu_transaksi` VALUES ('192', '27', '', '2015-12-05', 'PT. XYZ baya
 INSERT INTO `keu_transaksi` VALUES ('193', '28', 'INV1606150001', '2015-12-05', 'Bahan material (semen, pasir dll)', '46', '4', '0', 'sar', '1', '1');
 INSERT INTO `keu_transaksi` VALUES ('209', '29', '', '2015-12-11', 'Pembayaran SPP siswa <br> Nama : Cindy Frederricka<br> Kelas :Toddler - 1A', '0', '1', '17', null, null, null);
 INSERT INTO `keu_transaksi` VALUES ('210', '30', '', '2015-12-13', 'Pembayaran DPP siswa <br> Nama : Cindy Frederricka<br> Kelas :Toddler - 1A', '0', '1', '18', null, null, null);
+INSERT INTO `keu_transaksi` VALUES ('213', '31', '', '2015-12-13', 'Pembayaran DPP siswa <br> Nama : vincenzo christopher wen<br> Kelas :Playgroup - 11', '0', '1', '21', null, '1', '2');
 
 -- ----------------------------
 -- Table structure for keu_viabayar

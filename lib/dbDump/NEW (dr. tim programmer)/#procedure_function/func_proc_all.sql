@@ -115,7 +115,21 @@ BEGIN
 END $$
 DELIMITER ;
 
-getKuotaAnggaran2
+/*getBiayaAwal*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getBiayaAwal`(`idsiswabiaya` INT) RETURNS decimal(11,0)
+BEGIN
+	DECLARE hasil int;
+		SELECT
+			db.nominal INTO hasil
+		FROM  psb_siswabiaya sb 
+			JOIN psb_detailbiaya db on db.replid = sb.detailbiaya
+		WHERE 
+			sb.replid = idsiswabiaya;
+	RETURN hasil;
+END $$
+DELIMITER ;
+
 
 /*getBiayaAfterDiskonReg*/
 DELIMITER $$
@@ -146,21 +160,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-
-/*getBiayaAwal*/
-DELIMITER $$
-CREATE DEFINER = `root`@`localhost` FUNCTION `getBiayaAwal`(`idsiswabiaya` INT) RETURNS decimal(11,0)
-BEGIN
-	DECLARE hasil int;
-		SELECT
-			db.nominal INTO hasil
-		FROM  psb_siswabiaya sb 
-			JOIN psb_detailbiaya db on db.replid = sb.detailbiaya
-		WHERE 
-			sb.replid = idsiswabiaya;
-	RETURN hasil;
-END $$
-DELIMITER ;
 
 /*getbiayaNett*/
 DELIMITER $$
@@ -297,21 +296,6 @@ BEGIN
 			sr.detilrekening = idDetilRekening and 
 			sr.tahunajaran = idTahunAjaran;
 	RETURN saldoRekening ;
-END $$
-DELIMITER ;
-
-/*getSaldoRekeningByTgl*/
-DELIMITER $$
-CREATE DEFINER = `root`@`localhost` FUNCTION `getSaldoRekeningByTgl`(`idDetRek` int,`tgl1` date,`tgl2` date) RETURNS decimal(14,0)
-BEGIN
-	DECLARE saldoRekening DECIMAL(14);
-		SELECT IFNULL(sum(concat(operator,nominal)),0) into saldoRekening
-		FROM vw_transaksi
-		WHERE 
-			(tanggal BETWEEN  tgl1 and tgl2 )
-			and iddetilrekening = idDetRek
-		ORDER BY tanggal ASC;
-	RETURN saldoRekening;
 END $$
 DELIMITER ;
 

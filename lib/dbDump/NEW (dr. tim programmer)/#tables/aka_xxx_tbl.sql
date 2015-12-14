@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-12-13 19:51:18
+Date: 2015-12-14 15:41:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4763,40 +4763,13 @@ CREATE TABLE `aka_siswakelas` (
   KEY `detailkelas` (`detailkelas`) USING BTREE,
   CONSTRAINT `detailkelas` FOREIGN KEY (`detailkelas`) REFERENCES `aka_detailkelas` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `siswa` FOREIGN KEY (`siswa`) REFERENCES `psb_siswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of aka_siswakelas
 -- ----------------------------
-INSERT INTO `aka_siswakelas` VALUES ('15', '180', '22');
-INSERT INTO `aka_siswakelas` VALUES ('16', '183', '22');
-INSERT INTO `aka_siswakelas` VALUES ('17', '184', '22');
-INSERT INTO `aka_siswakelas` VALUES ('18', '185', '22');
-INSERT INTO `aka_siswakelas` VALUES ('19', '186', '22');
-INSERT INTO `aka_siswakelas` VALUES ('20', '187', '22');
-INSERT INTO `aka_siswakelas` VALUES ('21', '188', '22');
-INSERT INTO `aka_siswakelas` VALUES ('22', '189', '22');
-INSERT INTO `aka_siswakelas` VALUES ('23', '190', '22');
-INSERT INTO `aka_siswakelas` VALUES ('24', '191', '22');
-INSERT INTO `aka_siswakelas` VALUES ('31', '190', '170');
-INSERT INTO `aka_siswakelas` VALUES ('32', '181', '170');
-INSERT INTO `aka_siswakelas` VALUES ('33', '182', '170');
-INSERT INTO `aka_siswakelas` VALUES ('35', '183', '170');
-INSERT INTO `aka_siswakelas` VALUES ('36', '184', '170');
-INSERT INTO `aka_siswakelas` VALUES ('37', '185', '170');
-INSERT INTO `aka_siswakelas` VALUES ('38', '186', '170');
-INSERT INTO `aka_siswakelas` VALUES ('39', '187', '170');
-INSERT INTO `aka_siswakelas` VALUES ('40', '188', '170');
-INSERT INTO `aka_siswakelas` VALUES ('41', '189', '170');
-INSERT INTO `aka_siswakelas` VALUES ('42', '191', '170');
-INSERT INTO `aka_siswakelas` VALUES ('44', '180', '170');
 INSERT INTO `aka_siswakelas` VALUES ('45', '193', '157');
-INSERT INTO `aka_siswakelas` VALUES ('46', '194', '157');
-INSERT INTO `aka_siswakelas` VALUES ('48', '196', '157');
-INSERT INTO `aka_siswakelas` VALUES ('49', '197', '157');
-INSERT INTO `aka_siswakelas` VALUES ('51', '199', '161');
-INSERT INTO `aka_siswakelas` VALUES ('52', '200', '2');
-INSERT INTO `aka_siswakelas` VALUES ('53', '201', '22');
+INSERT INTO `aka_siswakelas` VALUES ('54', '205', '159');
 
 -- ----------------------------
 -- Table structure for aka_sks

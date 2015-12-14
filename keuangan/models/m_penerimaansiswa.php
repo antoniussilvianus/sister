@@ -220,8 +220,12 @@
 				// biaya
 					$biaya  = getField('(SELECT biaya FROM psb_biaya WHERE replid=idbiaya)','vw_siswa_biaya','idsiswabiaya',$_POST['idsiswabiayaTB']);
 					$uraian = 'Pembayaran '.$biaya.' siswa <br> Nama : '.$namasiswa.'<br> Kelas :'.$rk['kelas'];
+					$iddepartemen =getField('iddepartemen','vw_siswa_biaya','idsiswabiaya',$_POST['idsiswabiayaTB']);
+					$idtingkat    =getField('idtingkat','vw_siswa_biaya','idsiswabiaya',$_POST['idsiswabiayaTB']);
 
 					$s2 = 'INSERT INTO keu_transaksi SET 	
+							departemen        ='.$iddepartemen.',
+							tingkat           ='.$idtingkat.',
 							idref             ='.$idPenerimaanSiswa.',
 							idkwitansi        ='.getIdKwitansi().',
 							tanggal           ="'.tgl_indo6($_POST['tanggalTB']).'",

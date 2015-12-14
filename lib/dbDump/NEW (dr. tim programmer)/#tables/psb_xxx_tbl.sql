@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-12-13 19:51:09
+Date: 2015-12-14 15:42:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1738,14 +1738,14 @@ INSERT INTO `psb_detailbiaya` VALUES ('6462', '3', '0', '4', '2', '148', '0');
 INSERT INTO `psb_detailbiaya` VALUES ('6463', '8', '0', '4', '2', '148', '0');
 INSERT INTO `psb_detailbiaya` VALUES ('6464', '4', '0', '4', '2', '148', '0');
 INSERT INTO `psb_detailbiaya` VALUES ('6465', '7', '0', '4', '2', '148', '0');
-INSERT INTO `psb_detailbiaya` VALUES ('6466', '3', '0', '5', '2', '148', '0');
-INSERT INTO `psb_detailbiaya` VALUES ('6467', '8', '0', '5', '2', '148', '0');
-INSERT INTO `psb_detailbiaya` VALUES ('6468', '4', '0', '5', '2', '148', '0');
-INSERT INTO `psb_detailbiaya` VALUES ('6469', '7', '0', '5', '2', '148', '0');
-INSERT INTO `psb_detailbiaya` VALUES ('6470', '3', '0', '6', '2', '148', '0');
-INSERT INTO `psb_detailbiaya` VALUES ('6471', '8', '0', '6', '2', '148', '0');
-INSERT INTO `psb_detailbiaya` VALUES ('6472', '4', '0', '6', '2', '148', '0');
-INSERT INTO `psb_detailbiaya` VALUES ('6473', '7', '0', '6', '2', '148', '0');
+INSERT INTO `psb_detailbiaya` VALUES ('6466', '3', '350000', '5', '2', '148', '0');
+INSERT INTO `psb_detailbiaya` VALUES ('6467', '8', '2000000', '5', '2', '148', '0');
+INSERT INTO `psb_detailbiaya` VALUES ('6468', '4', '16500000', '5', '2', '148', '0');
+INSERT INTO `psb_detailbiaya` VALUES ('6469', '7', '1200000', '5', '2', '148', '0');
+INSERT INTO `psb_detailbiaya` VALUES ('6470', '3', '350000', '6', '2', '148', '0');
+INSERT INTO `psb_detailbiaya` VALUES ('6471', '8', '2000000', '6', '2', '148', '0');
+INSERT INTO `psb_detailbiaya` VALUES ('6472', '4', '9000000', '6', '2', '148', '0');
+INSERT INTO `psb_detailbiaya` VALUES ('6473', '7', '1350000', '6', '2', '148', '0');
 INSERT INTO `psb_detailbiaya` VALUES ('6474', '3', '0', '7', '2', '148', '0');
 INSERT INTO `psb_detailbiaya` VALUES ('6475', '8', '0', '7', '2', '148', '0');
 INSERT INTO `psb_detailbiaya` VALUES ('6476', '4', '0', '7', '2', '148', '0');
@@ -1882,86 +1882,371 @@ CREATE TABLE `psb_detaildiskon` (
   KEY `diskon` (`diskon`) USING BTREE,
   CONSTRAINT `diskonFK` FOREIGN KEY (`diskon`) REFERENCES `psb_diskon` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tahunajaranFK` FOREIGN KEY (`tahunajaran`) REFERENCES `aka_tahunajaran` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=433 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_detaildiskon
 -- ----------------------------
-INSERT INTO `psb_detaildiskon` VALUES ('1', '32', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('2', '32', '10', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('3', '33', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('4', '33', '0', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('5', '34', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('6', '34', '0', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('7', '35', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('8', '35', '5', '5', '0');
 INSERT INTO `psb_detaildiskon` VALUES ('9', '36', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('10', '36', '0', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('11', '37', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('12', '37', '100', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('15', '39', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('16', '39', '0', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('19', '41', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('20', '41', '0', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('21', '42', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('22', '42', '50', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('23', '43', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('24', '43', '0', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('27', '45', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('28', '45', '0', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('29', '46', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('30', '46', '40', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('31', '47', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('32', '47', '0', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('33', '48', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('34', '48', '20', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('34', '48', '1', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('35', '49', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('36', '49', '10', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('36', '49', '1', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('37', '50', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('38', '50', '25', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('39', '51', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('40', '51', '20', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('41', '52', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('42', '52', '60', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('43', '53', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('44', '53', '0', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('45', '54', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('46', '54', '0', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('47', '55', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('48', '55', '0', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('49', '56', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('50', '56', '0', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('51', '57', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('52', '57', '0', '5', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('53', '58', '0', '3', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('54', '58', '0', '5', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('55', '32', '5', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('56', '33', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('57', '34', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('58', '35', '40', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('59', '36', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('60', '37', '25', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('61', '39', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('62', '41', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('63', '42', '10', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('64', '43', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('65', '45', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('56', '33', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('57', '34', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('59', '36', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('61', '39', '5', '12', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('66', '46', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('67', '47', '0', '12', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('68', '48', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('69', '49', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('70', '50', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('69', '49', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('70', '50', '25', '12', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('71', '51', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('72', '52', '20', '12', '0');
-INSERT INTO `psb_detaildiskon` VALUES ('73', '56', '0', '12', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('74', '58', '0', '12', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('75', '53', '0', '12', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('76', '54', '0', '12', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('77', '55', '0', '12', '1');
 INSERT INTO `psb_detaildiskon` VALUES ('78', '57', '0', '12', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('79', '59', '0', '3', '1');
-INSERT INTO `psb_detaildiskon` VALUES ('80', '59', '0', '5', '0');
-INSERT INTO `psb_detaildiskon` VALUES ('81', '59', '90', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('82', '60', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('83', '60', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('84', '60', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('85', '61', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('86', '61', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('87', '61', '100', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('88', '62', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('89', '62', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('90', '62', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('91', '63', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('92', '63', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('93', '63', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('94', '64', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('95', '64', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('96', '64', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('97', '65', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('98', '65', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('99', '65', '75', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('100', '66', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('101', '66', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('102', '66', '30', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('109', '69', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('110', '69', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('111', '69', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('112', '70', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('113', '70', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('114', '70', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('115', '71', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('116', '71', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('117', '71', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('118', '72', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('119', '72', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('120', '72', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('121', '73', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('122', '73', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('123', '73', '15', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('124', '74', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('125', '74', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('126', '74', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('127', '75', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('128', '75', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('129', '75', '15', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('130', '76', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('131', '76', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('132', '76', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('133', '77', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('134', '77', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('135', '77', '100', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('136', '78', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('137', '78', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('138', '78', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('139', '79', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('140', '79', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('141', '79', '80', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('145', '81', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('146', '81', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('147', '81', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('148', '82', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('149', '82', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('150', '82', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('151', '83', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('152', '83', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('153', '83', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('154', '84', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('155', '84', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('156', '84', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('157', '85', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('158', '85', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('159', '85', '30', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('160', '86', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('161', '86', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('162', '86', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('163', '87', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('164', '87', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('165', '87', '15', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('166', '88', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('167', '88', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('168', '88', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('169', '89', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('170', '89', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('171', '89', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('172', '90', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('173', '90', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('174', '90', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('175', '91', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('176', '91', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('177', '91', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('178', '92', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('179', '92', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('180', '92', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('184', '94', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('185', '94', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('186', '94', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('190', '96', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('191', '96', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('192', '96', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('193', '97', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('194', '97', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('195', '97', '30', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('196', '98', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('197', '98', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('198', '98', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('199', '99', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('200', '99', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('201', '99', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('202', '100', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('203', '100', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('204', '100', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('205', '101', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('206', '101', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('207', '101', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('208', '102', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('209', '102', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('210', '102', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('211', '103', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('212', '103', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('213', '103', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('214', '104', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('215', '104', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('216', '104', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('220', '106', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('221', '106', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('222', '106', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('223', '107', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('224', '107', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('225', '107', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('226', '108', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('227', '108', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('228', '108', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('229', '109', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('230', '109', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('231', '109', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('232', '110', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('233', '110', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('234', '110', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('238', '112', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('239', '112', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('240', '112', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('241', '113', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('242', '113', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('243', '113', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('244', '114', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('245', '114', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('246', '114', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('247', '115', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('248', '115', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('249', '115', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('250', '116', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('251', '116', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('252', '116', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('253', '117', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('254', '117', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('255', '117', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('256', '118', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('257', '118', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('258', '118', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('259', '119', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('260', '119', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('261', '119', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('262', '120', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('263', '120', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('264', '120', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('265', '121', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('266', '121', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('267', '121', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('268', '122', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('269', '122', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('270', '122', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('271', '123', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('272', '123', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('273', '123', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('274', '124', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('275', '124', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('276', '124', '8', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('277', '125', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('278', '125', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('279', '125', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('280', '126', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('281', '126', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('282', '126', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('283', '127', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('284', '127', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('285', '127', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('286', '128', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('287', '128', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('288', '128', '80', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('292', '130', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('293', '130', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('294', '130', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('295', '131', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('296', '131', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('297', '131', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('298', '132', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('299', '132', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('300', '132', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('301', '133', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('302', '133', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('303', '133', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('307', '135', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('308', '135', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('309', '135', '30', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('313', '137', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('314', '137', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('315', '137', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('316', '138', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('317', '138', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('318', '138', '15', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('319', '139', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('320', '139', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('321', '139', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('322', '140', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('323', '140', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('324', '140', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('325', '141', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('326', '141', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('327', '141', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('328', '142', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('329', '142', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('330', '142', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('331', '143', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('332', '143', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('333', '143', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('334', '144', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('335', '144', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('336', '144', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('337', '145', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('338', '145', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('339', '145', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('340', '146', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('341', '146', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('342', '146', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('343', '147', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('344', '147', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('345', '147', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('346', '148', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('347', '148', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('348', '148', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('349', '149', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('350', '149', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('351', '149', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('352', '150', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('353', '150', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('354', '150', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('355', '151', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('356', '151', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('357', '151', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('358', '152', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('359', '152', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('360', '152', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('361', '153', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('362', '153', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('363', '153', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('364', '154', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('365', '154', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('366', '154', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('367', '155', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('368', '155', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('369', '155', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('370', '156', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('371', '156', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('372', '156', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('373', '157', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('374', '157', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('375', '157', '0', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('376', '158', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('377', '158', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('378', '158', '8', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('379', '159', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('380', '159', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('381', '159', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('382', '160', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('383', '160', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('384', '160', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('385', '161', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('386', '161', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('387', '161', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('388', '162', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('389', '162', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('390', '162', '80', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('391', '163', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('392', '163', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('393', '163', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('394', '164', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('395', '164', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('396', '164', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('397', '165', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('398', '165', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('399', '165', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('400', '166', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('401', '166', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('402', '166', '40', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('403', '167', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('404', '167', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('405', '167', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('406', '168', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('407', '168', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('408', '168', '50', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('409', '169', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('410', '169', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('411', '169', '30', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('412', '170', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('413', '170', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('414', '170', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('415', '171', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('416', '171', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('417', '171', '15', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('418', '172', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('419', '172', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('420', '172', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('421', '173', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('422', '173', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('423', '173', '5', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('424', '174', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('425', '174', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('426', '174', '10', '12', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('430', '176', '0', '3', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('431', '176', '0', '5', '1');
+INSERT INTO `psb_detaildiskon` VALUES ('432', '176', '50', '12', '1');
 
 -- ----------------------------
 -- Table structure for psb_detailgelombang
@@ -2023,36 +2308,131 @@ CREATE TABLE `psb_diskon` (
   KEY `biaya` (`biaya`) USING BTREE,
   CONSTRAINT `biayaFK4` FOREIGN KEY (`biaya`) REFERENCES `psb_biaya` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `departemenFK3` FOREIGN KEY (`departemen`) REFERENCES `departemen` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=177 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_diskon
 -- ----------------------------
-INSERT INTO `psb_diskon` VALUES ('32', '1', '4', 'Hamba Tuhan non GKA', 'Aktif (pengajuan)');
-INSERT INTO `psb_diskon` VALUES ('33', '1', '7', 'anak ke-3', 'untuk anak ke 3 berdasarkan urutan kelahiran');
-INSERT INTO `psb_diskon` VALUES ('34', '1', '7', 'jemaat GKA Elyon', '- anak ke 3 berdasarkan urutan kelahiran \r\n- ortu jemaat aktif GKA Elyon \r\n- anak sekolah minggu aktif GKA Elyon');
-INSERT INTO `psb_diskon` VALUES ('35', '1', '4', 'Anak ke-2', 'Anak ke 2 berdasarkan urutan kelahiran dan selanjutnya ');
-INSERT INTO `psb_diskon` VALUES ('36', '1', '7', 'anak ke-2', 'untuk urutan kelahiran anak ke-2 dst');
-INSERT INTO `psb_diskon` VALUES ('37', '1', '4', 'Hamba Tuhan/Pengurus/Karyawan Tetap Elyon', 'Aktif ');
-INSERT INTO `psb_diskon` VALUES ('39', '1', '7', 'anak ke-4', '- anak ke 4 sesuai urutan kelahiran\r\n- High School 2 th ajaran\r\n- secondary suko 1 th ajaran');
-INSERT INTO `psb_diskon` VALUES ('41', '1', '7', 'first intake naik tingkat', 'first intake naik tingkat');
-INSERT INTO `psb_diskon` VALUES ('42', '1', '4', 'Hamba Tuhan GKA', 'Sinode Abdiel');
-INSERT INTO `psb_diskon` VALUES ('43', '1', '7', 'jarpres', 'siswa jalur prestasi');
-INSERT INTO `psb_diskon` VALUES ('45', '1', '7', 'pengurus', 'pengurus PPK Elyon, Hamba Tuhan GKA Elyon, Guru Full Timer, Staff, Kepsek');
-INSERT INTO `psb_diskon` VALUES ('46', '1', '4', 'Japres', 'Luar dan Dalam (Nilai Rapor &amp; UAS)');
-INSERT INTO `psb_diskon` VALUES ('47', '1', '7', 'diskon xxx', '- ortu jemaat \r\n- anak sekolah minggu ELYON\r\n- secondary rungkut 2 th ajaran \r\n- Permohonan khusus melalui disposisi untuk siswa baru yg memiliki sibling');
-INSERT INTO `psb_diskon` VALUES ('48', '1', '8', 'anak ke-2', 'ok');
-INSERT INTO `psb_diskon` VALUES ('49', '1', '8', 'anak ke-4', 'sip');
-INSERT INTO `psb_diskon` VALUES ('50', '1', '4', 'Naik Jenjang', 'Semua level (Juli-Des)');
-INSERT INTO `psb_diskon` VALUES ('51', '1', '4', 'Naik Jenjang ', 'Semua level (Jan-Juni)');
-INSERT INTO `psb_diskon` VALUES ('52', '1', '4', 'Anak ke-2', 'Anak ke-2 berdasarkan urutan kelahiran dan selanjutnya');
-INSERT INTO `psb_diskon` VALUES ('53', '2', '4', 'Anak ke-2', 'Anak ke-2 berdasarkan urutan kelahiran dan selanjutnya');
-INSERT INTO `psb_diskon` VALUES ('54', '2', '4', 'Hamba Tuhan non GKA', 'Aktif (pengajuan)');
-INSERT INTO `psb_diskon` VALUES ('55', '2', '4', 'Naik Jenjang', 'Semua level (Juli-Des)');
-INSERT INTO `psb_diskon` VALUES ('56', '1', '4', 'Naik Jenjang', 'Semua level (Jan-Juni)');
-INSERT INTO `psb_diskon` VALUES ('57', '2', '4', 'Naik Jenjang', 'Semua level (Jan-Juni)');
-INSERT INTO `psb_diskon` VALUES ('58', '1', '4', 'Japres', 'Luar dan dalam (Nilai rapor &amp; UAS)');
-INSERT INTO `psb_diskon` VALUES ('59', '1', '4', 'woke', 'sip');
+INSERT INTO `psb_diskon` VALUES ('33', '1', '7', 'anak ke-3', 'Anak ke 3');
+INSERT INTO `psb_diskon` VALUES ('34', '1', '7', 'jemaat', 'Jemaat  GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('36', '1', '7', 'anak ke-2', 'Anak ke 2');
+INSERT INTO `psb_diskon` VALUES ('39', '1', '7', 'anak ke-4', 'anak ke-4');
+INSERT INTO `psb_diskon` VALUES ('46', '2', '4', 'Japres Akademik', 'Japres Akademik');
+INSERT INTO `psb_diskon` VALUES ('48', '1', '8', 'Joining Fee 1', 'Diskon Joining Fee Rp.250000,-');
+INSERT INTO `psb_diskon` VALUES ('49', '1', '8', 'Joining Fee 2', 'Joining Fee 50%');
+INSERT INTO `psb_diskon` VALUES ('50', '1', '4', 'Naik Jenjang 1', 'Naik Jenjang Gelombang 1 ( Juli - Dec )');
+INSERT INTO `psb_diskon` VALUES ('51', '1', '4', 'Naik Jenjang 2', 'Naik Jenjang Gelombang 2 ( Jan - Juni )');
+INSERT INTO `psb_diskon` VALUES ('53', '2', '4', 'Cucu Pengurus', 'Cucu Pengurus');
+INSERT INTO `psb_diskon` VALUES ('54', '2', '4', 'Elyon', 'Anak Guru,Staff,Pengurus,Hamba Tuhan GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('55', '2', '4', 'Hamba Tuhan Sinode GKA', 'Anak Hamba Tuhan Sinode GKA');
+INSERT INTO `psb_diskon` VALUES ('57', '2', '4', 'Japres 1', 'Japres Golongan 1');
+INSERT INTO `psb_diskon` VALUES ('58', '2', '4', 'Japres 2', 'Japres Golongan 2');
+INSERT INTO `psb_diskon` VALUES ('60', '1', '4', 'Cucu Pengurus', 'Cucu Pengurus');
+INSERT INTO `psb_diskon` VALUES ('61', '1', '4', 'Elyon', 'Anak Guru,Staff,Pengurus,Hamba Tuhan GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('62', '1', '4', 'Hamba Tuhan Sinode GKA', 'Anak Hamba Tuhan Sinode GKA');
+INSERT INTO `psb_diskon` VALUES ('63', '1', '4', 'Japres 1', 'Japres Golongan 1');
+INSERT INTO `psb_diskon` VALUES ('64', '2', '4', 'Japres HS Gol 2', 'Japres High School Golongan 2');
+INSERT INTO `psb_diskon` VALUES ('65', '1', '4', 'Japres HS Gol 1', 'Japres High School Golongan 1');
+INSERT INTO `psb_diskon` VALUES ('66', '1', '4', 'Japres Non Akademik', 'Japres Non Akademik Nasional (Min Level Propinsi)');
+INSERT INTO `psb_diskon` VALUES ('69', '1', '4', 'Kontrak', 'Anak Guru &amp; Staff kontrak');
+INSERT INTO `psb_diskon` VALUES ('70', '1', '4', 'Multiple', 'Daftar lebih dari 1 anak');
+INSERT INTO `psb_diskon` VALUES ('71', '1', '4', 'Paket 2 Jenjang', 'Paket 2 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('72', '1', '4', 'Paket 3 Jenjang', 'Paket 3 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('73', '1', '4', 'Paket 4 Jenjang', 'Paket 4 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('74', '1', '4', 'Pameran', 'Pameran');
+INSERT INTO `psb_diskon` VALUES ('75', '1', '4', 'Umum 1', 'Umum Gelombang 1 ( Jul - Dec )');
+INSERT INTO `psb_diskon` VALUES ('76', '1', '4', 'Umum 2', 'Umum Gelombang 2 ( Jan - Jul )');
+INSERT INTO `psb_diskon` VALUES ('77', '1', '8', 'Joining Fee Japres', 'Joining Fee Japres');
+INSERT INTO `psb_diskon` VALUES ('78', '1', '7', '12 Gratis 1', 'Bayar 12 Bulan Gratis 1');
+INSERT INTO `psb_diskon` VALUES ('79', '1', '7', 'Internal', 'Anak guru,staff,pengurus &amp; hamba Tuhan GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('81', '1', '7', 'Japres Akademik Nasional', 'Japres Akademik Nasional');
+INSERT INTO `psb_diskon` VALUES ('82', '1', '7', 'Japres Non Akademik Internasional', 'Japres Non Akademik Internasional');
+INSERT INTO `psb_diskon` VALUES ('83', '1', '7', 'Japres Non Akademik Nasional', 'Japres Non Akademik Nasional');
+INSERT INTO `psb_diskon` VALUES ('84', '1', '7', 'Kontrak', 'Anak Guru,Staff kontrak');
+INSERT INTO `psb_diskon` VALUES ('85', '1', '7', 'Mutasi', 'Mutasi SMA Suko Dari Rungkut');
+INSERT INTO `psb_diskon` VALUES ('86', '1', '7', 'SM', 'Sekolah Minggu');
+INSERT INTO `psb_diskon` VALUES ('87', '1', '7', 'Umum 1', 'Umum Angkatan 1');
+INSERT INTO `psb_diskon` VALUES ('88', '1', '7', 'Umum 2', 'Umum Angkatan 1');
+INSERT INTO `psb_diskon` VALUES ('89', '1', '7', 'Umum 3', 'Umum Angkatan 3');
+INSERT INTO `psb_diskon` VALUES ('90', '1', '7', 'Japres Akademik Internasional', 'Japres Akademik Internasional');
+INSERT INTO `psb_diskon` VALUES ('91', '1', '4', 'Japres 2', 'Japres Golongan 2');
+INSERT INTO `psb_diskon` VALUES ('92', '1', '4', 'Japres Akademik', 'Japres Akademik');
+INSERT INTO `psb_diskon` VALUES ('94', '1', '4', 'Japres HS Gol 2', 'Japres High School Golongan 2\r\n	\r\n');
+INSERT INTO `psb_diskon` VALUES ('96', '1', '4', 'Japres Non Akademik Internasional', 'Japres Non Akademik Internasional');
+INSERT INTO `psb_diskon` VALUES ('97', '1', '4', 'Japres non akademik nasional ', 'Minimal level provinsi');
+INSERT INTO `psb_diskon` VALUES ('98', '3', '4', 'Cucu Pengurus', 'Cucu Pengurus');
+INSERT INTO `psb_diskon` VALUES ('99', '3', '4', 'Elyon', 'Anak Guru,Staff,Pengurus,Hamba Tuhan GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('100', '3', '4', 'Hamba Tuhan Sinode GKA', 'Anak Hamba Tuhan Sinode GKA');
+INSERT INTO `psb_diskon` VALUES ('101', '3', '4', 'Japres 1', 'Japres Golongan 1');
+INSERT INTO `psb_diskon` VALUES ('102', '3', '4', 'Japres 2', 'Japres Golongan 2');
+INSERT INTO `psb_diskon` VALUES ('103', '3', '4', 'Japres Akademik', 'Japres Akademik');
+INSERT INTO `psb_diskon` VALUES ('104', '3', '4', 'Japres HS Gol 1', 'Japres High School Golongan 1');
+INSERT INTO `psb_diskon` VALUES ('106', '3', '4', 'Japres Non Akademik', 'Japres Non Akademik Nasional ( Min Level Propinsi )');
+INSERT INTO `psb_diskon` VALUES ('107', '3', '4', 'Japres Non Akademik Internasional', 'Japres Non Akademik Internasional');
+INSERT INTO `psb_diskon` VALUES ('108', '3', '4', 'Japres non akademik nasional ', 'Minimal level provinsi');
+INSERT INTO `psb_diskon` VALUES ('109', '3', '4', 'Kontrak', 'Anak Guru &amp; Staff kontrak');
+INSERT INTO `psb_diskon` VALUES ('110', '3', '4', 'Multiple', 'Daftar lebih dari 1 anak');
+INSERT INTO `psb_diskon` VALUES ('112', '3', '4', 'Naik Jenjang 2', 'Naik Jenjang Gelombang 2 ( Jan - Juni )');
+INSERT INTO `psb_diskon` VALUES ('113', '3', '4', 'Paket 2 Jenjang', 'Paket 2 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('114', '3', '4', 'Paket 3 Jenjang', 'Paket 3 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('115', '3', '4', 'Paket 4 Jenjang', 'Paket 4 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('116', '3', '4', 'Pameran', 'Pameran');
+INSERT INTO `psb_diskon` VALUES ('117', '3', '4', 'Umum 1', 'Umum Gelombang 1 ( Jul - Dec )');
+INSERT INTO `psb_diskon` VALUES ('118', '3', '4', 'Umum 2', 'Umum Gelombang 2 ( Jan - Jul )');
+INSERT INTO `psb_diskon` VALUES ('119', '3', '4', 'Japres HS Gol 2', 'Japres High School Golongan 2');
+INSERT INTO `psb_diskon` VALUES ('120', '3', '4', 'Naik Jenjang 1', 'Naik Jenjang Gelombang 1 ( Juli - Dec )');
+INSERT INTO `psb_diskon` VALUES ('121', '3', '8', 'Joining Fee 1', 'Diskon Joining Fee Rp.250000,-');
+INSERT INTO `psb_diskon` VALUES ('122', '3', '8', 'Joining Fee 2', 'Joining Fee 50%');
+INSERT INTO `psb_diskon` VALUES ('123', '3', '8', 'Joining Fee Japres', 'Joining Fee Japres');
+INSERT INTO `psb_diskon` VALUES ('124', '3', '7', '12 Gratis 1', 'Bayar 12 Bulan Gratis 1');
+INSERT INTO `psb_diskon` VALUES ('125', '3', '7', 'Anak Ke 2', 'Anak Ke 2');
+INSERT INTO `psb_diskon` VALUES ('126', '3', '7', 'Anak Ke 3', 'Anak Ke 3');
+INSERT INTO `psb_diskon` VALUES ('127', '3', '7', 'Anak Ke 4', 'Anak Ke 4');
+INSERT INTO `psb_diskon` VALUES ('128', '3', '7', 'Internal', 'Anak guru,staff,pengurus &amp;amp; hamba Tuhan GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('130', '3', '7', 'Japres Akademik Nasional', 'Japres Akademik Nasional');
+INSERT INTO `psb_diskon` VALUES ('131', '3', '7', 'Japres Non Akademik Internasional', 'Japres Non Akademik Internasional');
+INSERT INTO `psb_diskon` VALUES ('132', '3', '7', 'Japres Non Akademik Nasional', 'Japres Non Akademik Nasional');
+INSERT INTO `psb_diskon` VALUES ('133', '3', '7', 'Jemaat', 'Jemaat GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('135', '3', '7', 'Mutasi', 'Mutasi SMA Suko Dari Rungkut');
+INSERT INTO `psb_diskon` VALUES ('137', '3', '7', 'Umum 2', 'Umum Angkatan 2');
+INSERT INTO `psb_diskon` VALUES ('138', '3', '7', 'Umum 1', 'Umum Angkatan 1');
+INSERT INTO `psb_diskon` VALUES ('139', '3', '7', 'Umum 3', 'Umum Angkatan 3');
+INSERT INTO `psb_diskon` VALUES ('140', '3', '7', 'Kontrak', 'Anak Guru,Staff kontrak');
+INSERT INTO `psb_diskon` VALUES ('141', '2', '4', 'Japres HS Gol 1', 'Japres High School Golongan 1');
+INSERT INTO `psb_diskon` VALUES ('142', '2', '4', 'Japres Non Akademik', 'Japres Non Akademik Nasional ( Min Level Propinsi )');
+INSERT INTO `psb_diskon` VALUES ('143', '2', '4', 'Japres Non Akademik Internasional', 'Japres Non Akademik Internasional');
+INSERT INTO `psb_diskon` VALUES ('144', '2', '4', 'Japres non akademik nasional', 'Minimal level provinsi');
+INSERT INTO `psb_diskon` VALUES ('145', '2', '4', 'Kontrak', 'Anak Guru &amp; Staff kontrak');
+INSERT INTO `psb_diskon` VALUES ('146', '2', '4', 'Multiple', 'Daftar lebih dari 1 anak');
+INSERT INTO `psb_diskon` VALUES ('147', '2', '4', 'Naik Jenjang 1', 'Naik Jenjang Gelombang 1 ( Juli - Dec ');
+INSERT INTO `psb_diskon` VALUES ('148', '2', '4', 'Naik Jenjang 2', 'Naik Jenjang Gelombang 2 ( Jan - Juni )');
+INSERT INTO `psb_diskon` VALUES ('149', '2', '4', 'Paket 2 Jenjang', 'Paket 2 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('150', '2', '4', 'Paket 3 Jenjang', 'Paket 3 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('151', '2', '4', 'Paket 4 Jenjang', 'Paket 4 Jenjang');
+INSERT INTO `psb_diskon` VALUES ('152', '2', '4', 'Pameran', 'Pameran');
+INSERT INTO `psb_diskon` VALUES ('153', '2', '4', 'Umum 1', 'Umum Gelombang 1 ( Jul - Dec )');
+INSERT INTO `psb_diskon` VALUES ('154', '2', '4', 'Umum 2', 'Umum Gelombang 2 ( Jan - Jul )');
+INSERT INTO `psb_diskon` VALUES ('155', '2', '8', 'Joining Fee 1', 'Diskon Joining Fee Rp.250000,-');
+INSERT INTO `psb_diskon` VALUES ('156', '2', '8', 'Joining Fee 2', 'Joining Fee 50%');
+INSERT INTO `psb_diskon` VALUES ('157', '2', '8', 'Joining Fee Japres', 'Joining Fee Japres');
+INSERT INTO `psb_diskon` VALUES ('158', '2', '7', '12 Gratis 1', 'Bayar 12 Bulan Gratis 1');
+INSERT INTO `psb_diskon` VALUES ('159', '2', '7', 'Anak Ke 2', 'Anak Ke 2');
+INSERT INTO `psb_diskon` VALUES ('160', '2', '7', 'Anak Ke 3', 'Anak Ke 3');
+INSERT INTO `psb_diskon` VALUES ('161', '2', '7', 'Anak Ke 4', 'Anak Ke 4');
+INSERT INTO `psb_diskon` VALUES ('162', '2', '7', 'Internal', 'Anak guru,staff,pengurus &amp;amp; hamba Tuhan GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('163', '2', '7', 'Japres Akademik Internasional', 'Japres Akademik Internasional');
+INSERT INTO `psb_diskon` VALUES ('164', '2', '7', 'Japres Akademik Nasional', 'Japres Akademik Nasional');
+INSERT INTO `psb_diskon` VALUES ('165', '2', '7', 'Japres Non Akademik Internasional', 'Japres Non Akademik Internasional');
+INSERT INTO `psb_diskon` VALUES ('166', '2', '7', 'Japres Non Akademik Nasional', 'Japres Non Akademik Nasional');
+INSERT INTO `psb_diskon` VALUES ('167', '2', '7', 'Jemaat', 'Jemaat GKA Elyon');
+INSERT INTO `psb_diskon` VALUES ('168', '2', '7', 'Kontrak', 'Anak Guru,Staff kontrak');
+INSERT INTO `psb_diskon` VALUES ('169', '2', '7', 'Mutasi', 'Mutasi SMA Suko Dari Rungkut');
+INSERT INTO `psb_diskon` VALUES ('170', '3', '7', 'SM', 'Sekolah Minggu');
+INSERT INTO `psb_diskon` VALUES ('171', '2', '7', 'Umum 1', 'Umum Angkatan 1');
+INSERT INTO `psb_diskon` VALUES ('172', '2', '7', 'Umum 2', 'Umum Angkatan 2');
+INSERT INTO `psb_diskon` VALUES ('173', '2', '7', 'Umum 3', 'Umum Angkatan 3');
+INSERT INTO `psb_diskon` VALUES ('174', '2', '7', 'SM', 'Sekolah Minggu');
+INSERT INTO `psb_diskon` VALUES ('176', '3', '7', 'Japres Akademik Internasional', 'Japres Akademik Internasional');
 
 -- ----------------------------
 -- Table structure for psb_dokumen
@@ -2289,31 +2669,40 @@ CREATE TABLE `psb_siswa` (
   `diasuh` enum('1','2','3','4') NOT NULL DEFAULT '1' COMMENT '1=ayah+ibu, 2=ayah, 3=ibu, 4=wali',
   PRIMARY KEY (`replid`),
   KEY `FK_calonsiswa_agama` (`agamasiswa`)
-) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of psb_siswa
 -- ----------------------------
-INSERT INTO `psb_siswa` VALUES ('180', '1', null, 'Charly (lama)', '20', '', '', '1', '', '0', '0', '1', 'L', 'surabaya', '0000-00-00', '', '0', '0.0', '0.0', '', '11_5f69c38b55.jpeg', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('181', '2', null, 'Eryca (baru)', '212', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '11_e78bbfa163.jpeg', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('182', '3', null, 'Jackie Chan (baru)', '11', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('183', '4', null, 'Houdini (lama)', '66', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('184', '5', null, 'Sisca', '23', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('185', '6', null, 'Ibrahimovic', '11', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('186', '7', null, 'mia', '13', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('187', '8', null, 'Andrew', '15', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('188', '9', null, ' joshua', '22', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('189', '10', null, 'robert', '24', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('190', '11', null, ' carla', '12', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('191', '12', null, 'suzzan', '14', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('192', '13', null, 'nana', '', '', '', '1', '', '0', '0', '0', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
 INSERT INTO `psb_siswa` VALUES ('193', '14', null, 'Cindy Frederricka', '1299', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '13_fc0095bb80.jpeg', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('194', '15', null, 'Jhony English', '124', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '13_8be84376be.jpeg', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('196', '17', null, 'Marry Jane Riana', '126', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('197', '18', null, 'Sheryl Cecillia', '127', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('199', '20', null, 'beckham', '222', '', '', '1', '', '0', '0', '1', 'P', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
 INSERT INTO `psb_siswa` VALUES ('200', '21', null, 'jacklyn anastasha', '225', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
-INSERT INTO `psb_siswa` VALUES ('201', '22', null, 'messi', '10', '', '', '1', '', '0', '0', '1', 'L', '', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('202', '23', null, 'Quinncy Angeline Gunawan', '', '', 'Quinn', '1', 'Baby Smile School', '0', '0', '0', 'P', 'surabaya', '2012-03-09', 'indonesia', '0', '0.0', '0.0', '', '', 'Woodland WL 2/88 Citraland', '', '0317450572', '', '', '', '08155128883', '', 'surabaya', '', '', '', null, 'indonesia', 'english', '1');
+INSERT INTO `psb_siswa` VALUES ('203', '24', null, 'Rayna Felixia Tanujaya', '', '', 'rayna', '1', '', '0', '5', '0', 'P', 'surabaya', '2013-01-01', 'indonesia', '0', '0.0', '0.0', '', '', 'satelit indah 9 / GN - 18', '', '', '', 'dto31@yahoo.com', '', '085100109151', '', 'surabaya', '', '', '', null, 'indonesia', 'english', '1');
+INSERT INTO `psb_siswa` VALUES ('204', '25', null, 'naysa ronauly emmelee sidabutar 	', '', '', 'naysa', '1', '', '0', '5', '0', 'P', 'surabaya', '2013-01-28', 'indonesia', '0', '0.0', '0.0', '', '', 'Manukan Peni A-4 / 12 ', '', '', '', '', '', '0811344037', '', 'surabaya', '', '', '', null, 'indonesia', '', '1');
+INSERT INTO `psb_siswa` VALUES ('205', '26', null, 'vincenzo christopher wen', '93', '', '', '1', '', '0', '0', '1', 'L', '', '2015-12-17', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('206', '27', null, 'Jocelyn Jayadi', '', '', 'Jocelyn', '1', 'fei siang preschool', '0', '4', '0', 'P', 'surabaya', '2012-06-11', 'indonesia', '0', '0.0', '0.0', '', '', 'sukomanunggal jaya elok E/22 RT/RW 005/003', '', '0317320208', '', '', '', '', '', 'sukomanunggal jaya elok E', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('207', '28', null, 'Sharon Layarta', '', '', 'Sharon', '1', 'Great Crystal', '0', '5', '0', 'P', 'Surabaya', '2010-05-21', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, 'Indonesia', 'Inggris', '1');
+INSERT INTO `psb_siswa` VALUES ('208', '29', null, 'Gabriela Patricia Lusida', '', '', 'Patricia', '1', 'Margie', '0', '4', '0', 'P', 'Surabaya', '2001-03-17', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('209', '30', null, 'Sharon Serafine', '', '', 'Sharon', '1', 'Great Crystal', '0', '5', '0', 'P', 'Surabaya', '2004-09-18', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('210', '31', null, 'Bryan Patrick Purnomo', '', '', 'Bryan', '1', 'IPH', '0', '4', '0', 'L', 'Surabaya', '2004-10-16', 'Idonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('211', '32', null, 'Jocelyn Jennifer Wen', '', '', 'Jocy', '1', 'Spins', '0', '5', '0', 'P', 'Surabaya', '2015-12-01', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '0811 341 3153', '', '', '', '0858 5339 4639', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('212', '33', null, 'Marilynn Eng Jia Yi', '', '', 'Marilynn', '1', 'Surabaya Cambridge School', '0', '0', '0', 'P', 'Singapore', '2004-02-02', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('213', '34', null, 'Osten Cristo Harianto', '', '', 'Osten', '1', 'Merlion', '0', '0', '0', 'L', 'Surabaya', '2010-01-26', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('214', '35', null, 'Averyne Stacya Denyanto', '', '', 'Averyne', '1', 'IVY School', '0', '0', '0', 'P', 'Surabaya', '2010-08-10', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('215', '36', null, 'Terrence Kiswanto', '', '', 'Terrence', '1', 'Great Crystal School', '0', '5', '0', 'L', 'Surabaya', '2011-01-04', '', '0', '0.0', '0.0', '', '', 'Jl. Jenggolo no 35-37', '', '031 896 1107', '', 'heni_olii@yahoo.com', '', '0815 1563 1615', '', 'Surabaya', 'Surabaya', 'Indonesia', '', null, 'Indonesa', '', '1');
+INSERT INTO `psb_siswa` VALUES ('216', '37', null, 'Henry Chandra', '', '', 'Henry', '1', 'Lollypop', '0', '1', '0', 'L', 'Surabaya', '2010-09-17', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, 'Mandarin', 'English', '1');
+INSERT INTO `psb_siswa` VALUES ('217', '38', null, 'Regina Mikaela Hidayat', '', '', 'Regina', '1', 'Merlion', '0', '0', '0', 'P', 'Singapore', '2009-12-12', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('218', '39', null, 'Irene Valensia', '', '', 'Valen', '1', 'Great Crystal', '0', '5', '0', 'P', 'Surabaya', '2011-02-03', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', 'Surabaya', 'Indonesia', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('219', '40', null, 'Joe Lukas Wili', '', '', 'Joe', '1', 'Lollypop', '0', '5', '0', 'L', 'Surabaya', '2010-02-05', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('220', '41', null, 'Natan Gunawan', '', '', 'Natan', '1', '', '0', '5', '0', 'L', 'Surabaya', '0000-00-00', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, 'English', '', '1');
+INSERT INTO `psb_siswa` VALUES ('221', '42', null, 'Hiro Hideaki Prasetya', '', '', 'Hiro', '1', 'Lollypop', '0', '4', '0', 'L', 'Surabaya', '2010-05-12', '', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('222', '43', null, 'Kenzie Edbert Widodo', '', '', 'Kenzie', '1', 'lollypop', '0', '0', '0', 'L', 'Surabaya', '2010-06-12', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('223', '44', null, 'Azelia Javelyn Kho', '', '', 'Javelyn', '1', 'Little Sun School', '0', '0', '0', 'P', 'Surabaya', '2010-07-03', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, 'Indonesia', 'English', '1');
+INSERT INTO `psb_siswa` VALUES ('224', '45', null, 'James Franklin Linarto', '', '', 'James', '1', 'Lollypop', '0', '0', '0', 'L', 'Surabaya', '0000-00-00', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('225', '46', null, 'Shannon vivan Liem', '', '', 'Vivan', '1', 'Merlion', '0', '0', '0', 'P', 'Surabaya', '2010-10-21', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('226', '47', null, 'Nicholas Andrison', '', '', 'Nick', '1', 'Ivy School', '0', '5', '0', 'L', 'Surabaya', '2010-09-28', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, 'English', 'indonesia', '1');
+INSERT INTO `psb_siswa` VALUES ('227', '48', null, 'Revin Liem', '', '', 'Revin', '1', 'Lollypop', '0', '5', '0', 'L', 'Surabaya', '2009-12-15', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
+INSERT INTO `psb_siswa` VALUES ('229', '49', null, 'Gisele Lovely Njoto', '', '', 'Pao Pao', '1', 'JAC School', '0', '0', '0', 'P', 'Surabaya', '2010-05-10', 'Indonesia', '0', '0.0', '0.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '1');
 
 -- ----------------------------
 -- Table structure for psb_siswa_copy
@@ -3306,31 +3695,40 @@ CREATE TABLE `psb_siswaayah` (
   PRIMARY KEY (`replid`),
   KEY `calonsiswa` (`siswa`) USING BTREE,
   CONSTRAINT `calonsiswaFk` FOREIGN KEY (`siswa`) REFERENCES `psb_siswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_siswaayah
 -- ----------------------------
-INSERT INTO `psb_siswaayah` VALUES ('33', '180', 'nidi', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('34', '181', 'sisi', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('35', '182', 'bambang', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('36', '183', 'armada', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('37', '184', 'andri', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('38', '185', 'abu bakar', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('39', '186', 'bono', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('40', '187', 'james', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('41', '188', 'suherma', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('42', '189', 'ronald', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('43', '190', ' ', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('44', '191', 'albert', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('45', '192', 'ani', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
 INSERT INTO `psb_siswaayah` VALUES ('46', '193', 'josh Farro', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('47', '194', 'Mc Gyver', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('49', '196', 'Bondan Hoek Toeng', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('50', '197', 'Doni Kurniawan', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('52', '199', 'henry', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
 INSERT INTO `psb_siswaayah` VALUES ('53', '200', 'fader moor', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaayah` VALUES ('54', '201', 'maradona', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('55', '202', 'Hendrik Gunawan', 'surabaya', '1978-05-28', '4', 'indonesia', '0', '', 's2', 'Creamer', 'swasta', '', '0', '', '', 'HENDRIKGUNAWAN@gmail.com', 'Woodland WL 2/88 Citraland', '081331076999', '', 'mojosari', '', '', 'St. Yakobus');
+INSERT INTO `psb_siswaayah` VALUES ('56', '203', 'denny tanujaya', 'surabaya', '1981-01-01', '5', 'indonesia', '0', 'surabaya', 'high school', 'material building', '', '', '0', '', '', 'dto31@yahoo.com', 'satelit indah 9 / GN - 18', '085100109151', '7312413', '', '', '', 'GKI Dasa');
+INSERT INTO `psb_siswaayah` VALUES ('57', '204', 'hamonangan sidabutar', 'siantar', '1973-04-28', '5', 'indonesia', '0', 'surabaya', 's1 ekonomi', 'property', 'karyawan swasta', 'director', '0', '', '', 'hamasiah2004@yahoo.com', 'Manukan Peni A-4 / 12 ', '0811378803', '', '', '0317512333', '', 'masehi advent hari ketujuh');
+INSERT INTO `psb_siswaayah` VALUES ('58', '205', 'herman saputra', '', '2015-12-10', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('59', '206', 'Adi Cipta Jayadi', 'surabaya', '1980-10-29', '4', 'indonesia', '0', '', 's2', '', 'businessman', '', '0', '', '', '', 'sukomanunggal jaya elok E/22 RT/RW 005/003', '081331933818', '', '', '', '', 'Algonz');
+INSERT INTO `psb_siswaayah` VALUES ('60', '207', 'George Layarta', 'Surabaya', '1979-06-16', '1', 'Indonesia', '0', 'Surabaya', 'S1', 'F \'n B', 'Enterpreneur', 'Owner', '0', '031 5743 11 11', '', 'georgelayarta@yahoo.co.id', 'North emerald Mansion TN 7/6', '0812 292 33 333', '', '', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('61', '208', 'Henricus Lusida', 'Surabaya', '1967-10-18', '4', 'Indonesia', '0', '', 'Bachelor Degree', 'Shrimp Farm', '', 'owner', '0', '', '', 'henri.lusida@gmail.com', '', '081 850 9589', '', 'Mutiara margomulyo permai C3/5', '0822 3133 7788', '', 'Redeemptor Mundi');
+INSERT INTO `psb_siswaayah` VALUES ('62', '209', 'Ferry Siswanto', 'Surabaya', '1974-07-01', '5', 'Indonesia', '0', '', 'Bachelor of echonomics', 'Trading', 'Owner', '', '0', '031 732 4606', '', '', 'Jl Darmo Indah Asri Blok AD / 25', '081 3406 40188', '', '', '', '', 'GPDI Sion Permai');
+INSERT INTO `psb_siswaayah` VALUES ('63', '210', 'Adi Purnomo', 'Surabaya', '1973-08-15', '0', 'Indonesia', '0', 'Surabaya', 'Master degree', 'food suplement', '', 'distributor', '0', '031 732 7067', '', 'adi_purnomo@yahoo.com', 'Graha Family CC 35 ', '082 245 306 399', '', '', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('64', '211', 'Herman Saputra', 'Surabaya', '0000-00-00', '5', 'Indonesia', '0', '', 'S1', 'food', '', 'Supervisor staff', '0', '', '', 'herman170707@lycos.com', '', '081 654 076 28', '', '', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('65', '212', 'Anthony eng', 'Singapore', '0000-00-00', '0', 'Singapore', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('66', '213', 'Johanes Reza Harianto', 'Surabaya', '1979-04-13', '5', '', '0', 'Surabaya', 'S1', 'Technical Tools Trading', '', 'General Manager', '0', '031 99 00 1174', '', 'jrharianto@hotmail.com', 'Ritzwood AE 2 no.31, Pakuwon Indah', '081 23 000 288', '', '', '031 848 4200', '', 'GPT Kristus Gembala');
+INSERT INTO `psb_siswaayah` VALUES ('67', '214', 'Samuel Denyanto', 'Surabaya', '1981-12-20', '5', 'Indonesia', '0', '', 'S1', '', 'Marketing', '', '0', '031 741 3085', '', 'sdenyanto@gmail.com', 'Jl. Kedungtarukan 148', '081 332 757 697', '', '', '', '', 'GKKA Arjuno');
+INSERT INTO `psb_siswaayah` VALUES ('68', '215', 'Tribudiono Kiswanto', 'Surabaya', '1968-06-06', '5', 'Indonesia', '0', '', 'S1', '', 'swasta', '', '0', '', '', 'anroodadunia@gmail.com', '', '0812 354 1700', '', '', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('69', '216', 'Rudy Wianto Chandra', 'Sidoarjo', '1974-10-24', '1', 'Indonesia', '0', 'Surabaya', '', 'Chemical', '', 'Marketing Director', '0', '0811 3520 712', '', 'rudy.wchandra@gmail.com', 'Graha Family P-18 ', '0811 3520 712', '', 'Jl. Ambengan no 1-X Surabaya', '031 531 1596', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('70', '217', 'Rheno Adrian', 'Surabaya', '1979-12-26', '4', 'Indonesia', '0', 'Surabaya', '', '', '', '', '0', '', '', 'rhenoadrian@yahoo.com', 'Pakis Argosari V Blok B-10', '081 131 0079', '', '', '', '', 'Redemptor Mundi');
+INSERT INTO `psb_siswaayah` VALUES ('71', '218', 'Didik Priantono', 'Surabaya', '1977-12-26', '5', 'Indonesia', '0', 'Surabaya', '', 'enterpreneur', '', 'owner', '0', '', '', 'di2kpriantono@gmail.com', 'Dukuh Kupang Utara I no 15', '081 2345 444 66', '', '', '', '', 'Mawar Sharon');
+INSERT INTO `psb_siswaayah` VALUES ('72', '219', 'Wiradinata', 'Surabaya', '1980-12-11', '5', 'Indonesia', '0', 'Surabaya', 'S1', 'Plastik', '', 'Owner', '0', '', '', 'wiradinata99@yahoo.com', ' Kencana Sari Barat K/1-B', '081 133 4874', '', '', '', '', 'Bethany');
+INSERT INTO `psb_siswaayah` VALUES ('73', '220', 'Nico Gunawan', 'Surabaya', '0000-00-00', '5', 'Indonesia', '0', 'Sidoarjo', 'Master Degree', 'Manufactur', '', 'Manager', '0', '', '', 'nicogunawanbest@yahoo.com', 'Pondok candra Indah Jl. Melon selatan II/21', '081 230 848 24', '', '', '031 843 9503', '', 'Mawar Sharon');
+INSERT INTO `psb_siswaayah` VALUES ('74', '221', 'Eka Budi Prasetya', 'Surabaya', '1977-05-01', '4', 'Indonesia', '0', '', 'S2', 'Steel', '', '', '0', '031 534 5134', '', 'prasek00@yahoo.com', 'Jl. Tulungagung 3 /39', '0878 5166 1260', '', 'Margomulyo no 6', '031 749 1719', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('75', '222', 'Aswin Pribadi Widodo', 'Makasar', '1970-12-24', '0', '', '0', '', '', '', '', '', '0', '031 7310 950', '', 'aswin_widodo@yahoo.com', '', '081 138 2882', '', 'Jl. Margomulyo permai AC 31', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('76', '223', 'Widjanarkoo Kho', 'Surabaya', '1980-04-20', '4', 'Indonesia', '0', 'Surabaya', '', 'Telecommunication', 'enterpreneur', 'Owner', '0', '031 382 00 36', '', 'kevin_widjanarko@yahoo.com', 'Lebak Indah Jaya I Kav 9', '081 62 99 999', '', '', '', '', 'St. Simon Chapel');
+INSERT INTO `psb_siswaayah` VALUES ('77', '224', 'Suwandojo Hartono', 'Madiun', '1969-01-10', '5', 'Indonesia', '0', 'Surabaya', 'S1', '', '', 'Branch Manager', '0', '031 752 2426', '', '', 'Vila Valensia CA 5/50', '081 832 6779', '', '', '031 828 0612', '', 'Sidang Jemaat Kristus');
+INSERT INTO `psb_siswaayah` VALUES ('78', '225', 'Harry Halim', 'Banjarmasin', '0000-00-00', '5', 'Indonesia', '0', 'Surabaya', 's1', 'Kimia', '', 'Direktur', '0', '', '', 'harrylin52hotmail.com', 'Puri Sentra Raya PS2 no 41', '081 137 2556', '', '', '', '', 'Mawar Sharon');
+INSERT INTO `psb_siswaayah` VALUES ('79', '226', 'Andri Prasetya', 'Banyuwangi', '1981-06-01', '5', 'Indonesia', '0', '', 'S1', 'Bicycle Store', 'Businessman', 'Owner', '0', '031 99000375', '', 't3k_wen@yhoo.com', '', '081 330 2800 86', '', '', '', '', '');
+INSERT INTO `psb_siswaayah` VALUES ('80', '227', 'Liem, Ronny Limanto', 'Surabaya', '0000-00-00', '5', 'Indonesia', '0', '', 'S1', 'Distributor', '', 'Manager', '0', '', '', 'ronnylimanto@gmail.com', '', '0857 731 238 88', '', '', '081 331 009 651', '', 'GKI Darmo Satelit');
+INSERT INTO `psb_siswaayah` VALUES ('82', '229', 'Handoyo Njoto Hartanto', 'Surabaya', '1978-08-13', '1', 'Indonesia', '0', 'Surabaya', '', 'Retails', '', 'owner', '0', '', '', 'jinghay@yahoo.com', 'Satelit Indah III/CN 18', '081 737 8008', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for psb_siswabiaya
@@ -3351,91 +3749,127 @@ CREATE TABLE `psb_siswabiaya` (
   KEY `biaya` (`detailbiaya`) USING BTREE,
   KEY `viabayar` (`viabayar`) USING BTREE,
   CONSTRAINT `siswaFK2` FOREIGN KEY (`siswa`) REFERENCES `psb_siswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=690 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=802 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_siswabiaya
 -- ----------------------------
-INSERT INTO `psb_siswabiaya` VALUES ('602', '180', '857', '3', '1', '4', 'disk khusus', '500000', '');
-INSERT INTO `psb_siswabiaya` VALUES ('603', '180', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('604', '180', '848', '2', '1', '2', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('605', '180', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('606', '181', '6356', '1', '1', '5', '', '275000', '');
-INSERT INTO `psb_siswabiaya` VALUES ('607', '181', '6354', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('608', '181', '6355', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('609', '181', '6357', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('610', '182', '6356', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('611', '182', '6354', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('612', '182', '6355', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('613', '182', '6357', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('614', '183', '857', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('615', '183', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('616', '183', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('617', '183', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('618', '184', '857', '2', '1', '6', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('619', '184', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('620', '184', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('621', '184', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('622', '185', '857', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('623', '185', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('624', '185', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('625', '185', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('626', '186', '857', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('627', '186', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('628', '186', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('629', '186', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('630', '187', '857', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('631', '187', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('632', '187', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('633', '187', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('634', '188', '857', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('635', '188', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('636', '188', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('637', '188', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('638', '189', '857', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('639', '189', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('640', '189', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('641', '189', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('642', '190', '857', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('643', '190', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('644', '190', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('645', '190', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('646', '191', '857', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('647', '191', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('648', '191', '848', '2', '1', '11', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('649', '191', '839', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('650', '192', '857', '2', '1', '6', 'khusus', '675000', '');
-INSERT INTO `psb_siswabiaya` VALUES ('651', '192', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('652', '192', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('653', '192', '839', '2', '0', '0', '', '0', '');
 INSERT INTO `psb_siswabiaya` VALUES ('654', '193', '6332', '3', '1', '4', 'disk khus', '100000', '');
 INSERT INTO `psb_siswabiaya` VALUES ('655', '193', '6330', '2', '0', '0', '', '0', '');
 INSERT INTO `psb_siswabiaya` VALUES ('656', '193', '6331', '3', '1', '5', '', '0', '');
 INSERT INTO `psb_siswabiaya` VALUES ('657', '193', '6333', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('658', '194', '6332', '5', '1', '5', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('659', '194', '6330', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('660', '194', '6331', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('661', '194', '6333', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('666', '196', '6332', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('667', '196', '6330', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('668', '196', '6331', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('669', '196', '6333', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('670', '197', '6332', '3', '1', '6', 'diskkon keluarga khusus', '450000', '');
-INSERT INTO `psb_siswabiaya` VALUES ('671', '197', '6330', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('672', '197', '6331', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('673', '197', '6333', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('678', '199', '6340', '1', '1', '3', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('679', '199', '6338', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('680', '199', '6339', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('681', '199', '6341', '2', '0', '0', '', '0', '');
 INSERT INTO `psb_siswabiaya` VALUES ('682', '200', '677', '2', '0', '0', '', '0', '');
 INSERT INTO `psb_siswabiaya` VALUES ('683', '200', '650', '2', '0', '0', '', '0', '');
 INSERT INTO `psb_siswabiaya` VALUES ('684', '200', '668', '2', '0', '0', '', '0', '');
 INSERT INTO `psb_siswabiaya` VALUES ('685', '200', '659', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('686', '201', '857', '2', '1', '2', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('687', '201', '830', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('688', '201', '848', '2', '0', '0', '', '0', '');
-INSERT INTO `psb_siswabiaya` VALUES ('689', '201', '839', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('690', '202', '6336', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('691', '202', '6334', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('692', '202', '6335', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('693', '202', '6337', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('694', '203', '6336', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('695', '203', '6334', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('696', '203', '6335', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('697', '203', '6337', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('698', '204', '6336', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('699', '204', '6334', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('700', '204', '6335', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('701', '204', '6337', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('702', '205', '6336', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('703', '205', '6334', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('704', '205', '6335', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('705', '205', '6337', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('706', '206', '6336', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('707', '206', '6334', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('708', '206', '6335', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('709', '206', '6337', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('710', '207', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('711', '207', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('712', '207', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('713', '207', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('714', '208', '6388', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('715', '208', '6386', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('716', '208', '6387', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('717', '208', '6389', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('718', '209', '6376', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('719', '209', '6374', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('720', '209', '6375', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('721', '209', '6377', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('722', '210', '6376', '2', '0', '0', ' ', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('723', '210', '6374', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('724', '210', '6375', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('725', '210', '6377', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('726', '211', '6376', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('727', '211', '6374', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('728', '211', '6375', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('729', '211', '6377', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('730', '212', '6376', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('731', '212', '6374', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('732', '212', '6375', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('733', '212', '6377', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('734', '213', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('735', '213', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('736', '213', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('737', '213', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('738', '214', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('739', '214', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('740', '214', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('741', '214', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('742', '215', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('743', '215', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('744', '215', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('745', '215', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('746', '216', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('747', '216', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('748', '216', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('749', '216', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('750', '217', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('751', '217', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('752', '217', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('753', '217', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('754', '218', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('755', '218', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('756', '218', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('757', '218', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('758', '219', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('759', '219', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('760', '219', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('761', '219', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('762', '220', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('763', '220', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('764', '220', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('765', '220', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('766', '221', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('767', '221', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('768', '221', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('769', '221', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('770', '222', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('771', '222', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('772', '222', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('773', '222', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('774', '223', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('775', '223', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('776', '223', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('777', '223', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('778', '224', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('779', '224', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('780', '224', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('781', '224', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('782', '225', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('783', '225', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('784', '225', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('785', '225', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('786', '226', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('787', '226', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('788', '226', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('789', '226', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('790', '227', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('791', '227', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('792', '227', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('793', '227', '6353', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('798', '229', '6352', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('799', '229', '6350', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('800', '229', '6351', '2', '0', '0', '', '0', '');
+INSERT INTO `psb_siswabiaya` VALUES ('801', '229', '6353', '2', '0', '0', '', '0', '');
 
 -- ----------------------------
 -- Table structure for psb_siswadiskon
@@ -3450,25 +3884,11 @@ CREATE TABLE `psb_siswadiskon` (
   KEY `detaildiskon` (`detaildiskon`) USING BTREE,
   CONSTRAINT `detaildiskonFK2` FOREIGN KEY (`detaildiskon`) REFERENCES `psb_detaildiskon` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `siswabiayaFK` FOREIGN KEY (`siswabiaya`) REFERENCES `psb_siswabiaya` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_siswadiskon
 -- ----------------------------
-INSERT INTO `psb_siswadiskon` VALUES ('3', '610', '55');
-INSERT INTO `psb_siswadiskon` VALUES ('5', '606', '63');
-INSERT INTO `psb_siswadiskon` VALUES ('6', '602', '2');
-INSERT INTO `psb_siswadiskon` VALUES ('7', '650', '2');
-INSERT INTO `psb_siswadiskon` VALUES ('8', '650', '22');
-INSERT INTO `psb_siswadiskon` VALUES ('9', '654', '55');
-INSERT INTO `psb_siswadiskon` VALUES ('10', '654', '63');
-INSERT INTO `psb_siswadiskon` VALUES ('11', '658', '63');
-INSERT INTO `psb_siswadiskon` VALUES ('12', '670', '63');
-INSERT INTO `psb_siswadiskon` VALUES ('13', '670', '72');
-INSERT INTO `psb_siswadiskon` VALUES ('14', '678', '55');
-INSERT INTO `psb_siswadiskon` VALUES ('15', '678', '63');
-INSERT INTO `psb_siswadiskon` VALUES ('16', '682', '2');
-INSERT INTO `psb_siswadiskon` VALUES ('17', '686', '2');
 
 -- ----------------------------
 -- Table structure for psb_siswadokumen
@@ -3484,13 +3904,11 @@ CREATE TABLE `psb_siswadokumen` (
   KEY `subdokumen` (`subdokumen`) USING BTREE,
   CONSTRAINT `siswaFK` FOREIGN KEY (`siswa`) REFERENCES `psb_siswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `subdokumenFK` FOREIGN KEY (`subdokumen`) REFERENCES `psb_subdokumen` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_siswadokumen
 -- ----------------------------
-INSERT INTO `psb_siswadokumen` VALUES ('3', '181', '42', 'dok181_42_c45cec09d8.pdf');
-INSERT INTO `psb_siswadokumen` VALUES ('4', '180', '49', 'dok180_49_671854a82a.pdf');
 
 -- ----------------------------
 -- Table structure for psb_siswaibu
@@ -3524,31 +3942,40 @@ CREATE TABLE `psb_siswaibu` (
   PRIMARY KEY (`replid`),
   KEY `calonsiswa` (`siswa`) USING BTREE,
   CONSTRAINT `psb_siswaibu_ibfk_1` FOREIGN KEY (`siswa`) REFERENCES `psb_siswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_siswaibu
 -- ----------------------------
-INSERT INTO `psb_siswaibu` VALUES ('33', '180', 'hyuga', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('34', '181', 'sasa', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('35', '182', 'siti', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('36', '183', 'ina', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('37', '184', 'nindira', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('38', '185', 'fatimah', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('39', '186', 'ani', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('40', '187', 'lynda', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('41', '188', 'nani', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('42', '189', 'marry', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('43', '190', 'ivy', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('44', '191', 'sussy', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('45', '192', 'nini', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
 INSERT INTO `psb_siswaibu` VALUES ('46', '193', 'jenna rice', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('47', '194', 'stella orange', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('49', '196', 'Nadia Pratiwi Chen', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('50', '197', 'Marina Soe Tik', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('52', '199', 'sinta', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
 INSERT INTO `psb_siswaibu` VALUES ('53', '200', 'mirna lyn', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `psb_siswaibu` VALUES ('54', '201', 'rosalinda', '', '0000-00-00', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('55', '202', 'Florencia Agnes Setiono', 'surabaya', '1980-12-11', '4', 'indonesia', '0', 'surabaya', 's1', 'furniture', 'swasta', '', '0', '', '', 'myfurnishop.floren@gmail.com', 'Woodland WL 2/88 Citraland', '08155128883', '', '', '', '', 'St. Yakobus');
+INSERT INTO `psb_siswaibu` VALUES ('56', '203', 'moona wintoro', 'surabaya', '1982-02-02', '5', 'indonesia', '0', 'surabaya', 'high school', 'konveksi', '', '', '0', '', '', 'mwo31@yahoo.com', 'satelit indah 9 / GN - 18', '085100109151', '7312413', '', '', '', 'GKI Dasa');
+INSERT INTO `psb_siswaibu` VALUES ('57', '204', 'selvy tobing', 'madiun', '1977-02-01', '5', 'indonesia', '0', 'surabaya', 's1 Ekonomi', '', 'ibu rt', '', '0', '', '', 'selvy.sid@gmail.com', 'Manukan Peni A-4 / 12 ', '0811344037', '', '', '', '', 'masehi advent hari ketujuh');
+INSERT INTO `psb_siswaibu` VALUES ('58', '205', 'grace lindra', '', '2015-12-03', '0', '', '0', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('59', '206', 'yuliana', 'palembang', '1980-07-27', '4', 'indonesia', '0', 'surabaya', 's1', '', 'housewife', '', '0', '7320208', '', '', 'sukomanunggal jaya elok E/22 RT/RW 005/003', '082132347893', '', '', '', '', 'Algonz');
+INSERT INTO `psb_siswaibu` VALUES ('60', '207', 'Ventalia', 'Banyuwangi', '1980-03-27', '1', 'Indonesia', '0', '', 'S1', '', '', '', '0', '', '', '', '', '0821 153 66 666', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('61', '208', 'Megawati Hong', 'Sidoarjo', '1967-10-04', '4', 'Indonesia', '0', '', 'Bachelor degree', 'Cigarette Company', '', 'Manager', '0', '', '', 'megawatihonglusida@gmail.com', '', '081 2351 7527', '', '', '0343 631 203', '', 'Redemptor Mundi');
+INSERT INTO `psb_siswaibu` VALUES ('62', '209', 'Virna Lucilla', 'Malang', '1975-01-17', '5', 'Indonesia', '0', '', '', '', '', '', '0', '', '', '', '', '081 6152 88 999', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('63', '210', 'Lim Karyana', 'Sampit', '1976-10-05', '4', 'Indonesia', '0', '', '', '', '', '', '0', '', '', '', '', '081 832 8526', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('64', '211', 'Grace Lindra', 'Surabaya', '0000-00-00', '5', 'Indonesia', '0', 'Surabaya', 'S1', '', '', '', '0', '', '', '', 'Prambanan Residence CB 8', '085 853 394 639', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('65', '212', 'Irene Tan Mui Hong Martowijoyo', 'Makasar', '1980-12-12', '5', 'Indonesia', '0', '', '', '', '', '', '0', '', '', 'dec_3180@yahoo.com', '', '081 143 2688', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('66', '213', 'Lesly Tanizar', 'Surabaya', '1979-01-06', '0', 'Indonesia', '0', '', 'S1', '', '', '', '0', '0851 005 09949', '', 'ltanizar@yahoo.com', '', '081 837 2591', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('67', '214', 'Evelin Laura Ansela Jayawiyanto', 'Semarang', '1983-06-07', '5', 'Indonesia', '0', '', '', '', '', '', '0', '', '', 'laura_jayawiyanto@yahoo.com', '', '0815 771 9725', '', '', '', '', 'GKKA Arjuno');
+INSERT INTO `psb_siswaibu` VALUES ('68', '215', 'Henisiniwati Olii', 'Surabaya', '1977-12-13', '5', 'Indonesia', '0', '', 's1', 'Ibu rumah Tangga', '', '', '0', '', '', 'heni_olii@yahoo. com', '', '0815 1563 1615', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('69', '216', 'Yang Ya Hui', 'China', '1973-05-19', '1', 'Indonesia', '0', '', 'Diploma', 'Education', '', 'Teacher', '0', '031 752 4704', '', 'yang.yahui79@gmail.com', '', '', '', 'Jl Raya Darmo Permai III, Bavarian Village Surabaya', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('70', '217', 'Erni', 'Surabaya', '1980-05-03', '4', 'Indonesia', '0', '', '', '', '', '', '0', '', '', 'emie_i@hotmail.com', '', '081 739 3704', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('71', '218', 'Catur Sari Handayani', 'Surabaya', '1979-05-25', '5', 'Indonesia', '0', '', '', '', '', '', '0', '', '', 'jhovallencia@gmail.com', '', '0821 424 90 779', '', '', '', '', 'Mawar Sharon');
+INSERT INTO `psb_siswaibu` VALUES ('72', '219', 'Lina Irawati', 'Kediri', '1980-11-23', '5', 'Indonesia', '0', '', 'S1', '', '', '', '0', '', '', 'lina99irawati@yahoo.com', '', '081 55 33 413 1', '', '', '', '', 'Bethany');
+INSERT INTO `psb_siswaibu` VALUES ('73', '220', 'Martina Pisca Tansel', 'Ambon', '0000-00-00', '5', 'Indonesia', '0', '', 'Master Degree', 'Cigarette Manufacturer', '', 'Engineer', '0', '', '', 'tansel_martina@yahoo.com', '', '081 330 337 284', '', 'Rungkut Industri Raya 18', '031 843 1699', '', 'Mawar Sharon');
+INSERT INTO `psb_siswaibu` VALUES ('74', '221', 'Laniana', 'Surabaya', '1979-08-07', '4', 'Indonesia', '0', '', '', '', '', '', '0', '031 534 5134', '', '', '', '081 733 5288', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('75', '222', 'Feby Angker', 'Dobo', '0000-00-00', '5', 'Indonesia', '0', '', '', '', '', '', '0', '081 33 33 378 00', '', 'feby_angker@yahoo.co.id', '', '031 7310 950', '', '', '', '', 'Mawar Sharon');
+INSERT INTO `psb_siswaibu` VALUES ('76', '223', 'Yuliana Salim', 'Surabaya', '0000-00-00', '4', 'Indonesia', '0', '', 'S1', 'Ibu Rumah Tangga', '', '', '0', '', '', 'meyling_salim@ymail.com', '', '0855 373 99 99', '', '', '', '', 'St. Simon Chapel');
+INSERT INTO `psb_siswaibu` VALUES ('77', '224', 'Vilan Oktafia', 'Dompu', '1978-01-28', '5', '', '0', '', 'S1', '', '', '', '0', '', '', 'vilanme@i@yahoo.com', '', '081 216 41818', '', '', '', '', 'Sidang Jemaat Allah');
+INSERT INTO `psb_siswaibu` VALUES ('78', '225', 'Sienny Ko', 'Surabaya', '1978-12-09', '5', '', '0', '', '', '', '', '', '0', '', '', 'siennyko@gmail.com', '', '0812 302 8171', '', '', '', '', 'Mawar Sharon');
+INSERT INTO `psb_siswaibu` VALUES ('79', '226', 'Djui Siang', 'Gresik', '1984-12-31', '5', 'Indonesia', '0', 'Surabaya', 'S1', 'House Wife', '', '', '0', '', '', 'djui_siang@yahoo.com', 'Royal residence B10/70', '081 230 890 19', '', '', '', '', 'GBT Kristus Hayat');
+INSERT INTO `psb_siswaibu` VALUES ('80', '227', 'San San', 'Blitar', '0000-00-00', '4', 'Indonesia', '0', 'Surabaya', '', '', '', '', '0', '', '', 'tiga_tiga82@hotmail.comS1', 'Sukomanunggal Jaya IX/9', '0856 338 1833', '', '', '', '', '');
+INSERT INTO `psb_siswaibu` VALUES ('82', '229', 'Veronica Kusuma', 'Situbondo', '1981-02-28', '4', 'Indonesia', '0', '', '', '', '', '', '0', '', '', 'veronicakusuma81@yahoo.com', '', '081 330 311 321', '', '', '', '', 'Aloysius Gonzaga');
 
 -- ----------------------------
 -- Table structure for psb_siswakontakdarurat
@@ -3564,11 +3991,32 @@ CREATE TABLE `psb_siswakontakdarurat` (
   PRIMARY KEY (`replid`),
   KEY `siswa` (`siswa`) USING BTREE,
   CONSTRAINT `siswaFK10` FOREIGN KEY (`siswa`) REFERENCES `psb_siswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_siswakontakdarurat
 -- ----------------------------
+INSERT INTO `psb_siswakontakdarurat` VALUES ('1', '207', 'Irene L', 'Aunty', '081 225 234 567', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('2', '207', 'Vandalia', 'Grand Ma', '081 2300 6398', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('3', '209', 'Yudi', 'Uncle', '081 231 553b75', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('4', '212', 'Bimo', 'Uncle', '081 143 0989', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('5', '213', 'Yolinda Hariato', 'Auntie', '081 333 888 653', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('6', '213', 'Jessie Tanizar', 'Auntie', '081 357 793 388', '031 753 2140');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('7', '213', 'Wensia Simardjo', 'Grand Ma', '081 858 1801', '031 99001174');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('8', '216', 'Tutik Winarni', 'Grand Ma', '081 134 2328', '031 752 4704');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('9', '216', 'Selvia Chadra', 'Aunty', '081 1377 398', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('10', '217', 'Christina Lanny', 'Gran Ma', '031 566 3340', '081 132 0805');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('11', '218', 'Elsye', 'Auntie', '031 7327454', '081 7036 71400');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('12', '220', 'Luki Indawati', 'Grand Ma', '031 734 9308', '081 751 86959');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('13', '220', 'Teddy Sutanto', 'Grand Pa', 'Grand Pa', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('14', '220', 'Ricky Sutanto', 'Uncle', '081 803 203 202', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('15', '221', 'Sienny', 'Auntie', '081 858 0870', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('16', '221', 'VITO', 'Uncle', '081 230 33258', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('17', '223', 'Sundoronarko', 'Uncle', '081 134 7976', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('18', '223', 'Vonita Asaleo', 'Grand Ma', '081 235 099 64', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('19', '226', 'Siau Fen', 'Aunty', '0821 153 66 666', '');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('20', '227', 'Liem Hong San', 'Grand Pa', '0851 038 900 36', '081 934 663 698');
+INSERT INTO `psb_siswakontakdarurat` VALUES ('21', '227', 'Ngo Kwie Khioen', 'Grand Ma', '031 731 1843', '081 332 387 332');
 
 -- ----------------------------
 -- Table structure for psb_siswasaudara
@@ -3586,15 +4034,31 @@ CREATE TABLE `psb_siswasaudara` (
   PRIMARY KEY (`replid`),
   KEY `siswa` (`siswa`) USING BTREE,
   CONSTRAINT `siswaFK9` FOREIGN KEY (`siswa`) REFERENCES `psb_siswa` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_siswasaudara
 -- ----------------------------
-INSERT INTO `psb_siswasaudara` VALUES ('1', '194', 'L', 'aku', 'ok', '2015-11-12', 'sdn abc', '99');
-INSERT INTO `psb_siswasaudara` VALUES ('2', '194', 'L', 'dia', 'okok', '0000-00-00', '', '');
-INSERT INTO `psb_siswasaudara` VALUES ('3', '194', 'L', 'dia', 'okok', '0000-00-00', '', '');
-INSERT INTO `psb_siswasaudara` VALUES ('4', '194', 'L', 'dia', 'okok', '2015-11-04', '', '');
+INSERT INTO `psb_siswasaudara` VALUES ('5', '207', 'P', 'Jennifer Layarta', 'Surabaya', '2013-12-17', '', '');
+INSERT INTO `psb_siswasaudara` VALUES ('6', '208', 'L', 'Stefanus Hugo Lusida', 'Surabaya', '1997-06-09', 'UPH Jakarta', 'smt I');
+INSERT INTO `psb_siswasaudara` VALUES ('7', '208', 'P', 'Elizabeth Angeline Lusida', 'Surabaya', '1994-11-15', 'UPH Jakarta', 'smt V');
+INSERT INTO `psb_siswasaudara` VALUES ('8', '210', 'P', 'Jennifer Laurencia Purnomo', 'Surabaya', '2003-08-23', 'IPH', '7');
+INSERT INTO `psb_siswasaudara` VALUES ('9', '211', 'P', 'Valerie Ivanna Wen', 'Surabaya', '2007-04-18', 'Spin', 'P3');
+INSERT INTO `psb_siswasaudara` VALUES ('10', '211', 'L', 'Vincenzo Christoper Wen', 'Surabaya', '2013-06-18', 'Spin', '');
+INSERT INTO `psb_siswasaudara` VALUES ('11', '213', 'L', 'Colin Cristo Harianto', 'Surabaya', '2008-01-19', 'Elyon', 'P2');
+INSERT INTO `psb_siswasaudara` VALUES ('12', '214', 'L', 'Axton Marc D', 'Surabaya', '2015-05-21', '', '');
+INSERT INTO `psb_siswasaudara` VALUES ('13', '214', 'P', 'Ashlyne Francia D', 'Surabaya', '2012-09-11', 'Ivy', 'KGB');
+INSERT INTO `psb_siswasaudara` VALUES ('14', '216', 'L', 'William Chandra', 'Surabaya', '2007-03-11', 'Elyon', 'P3');
+INSERT INTO `psb_siswasaudara` VALUES ('15', '217', 'L', 'Reiner Marcel Hidayat', 'Singapore', '2013-04-25', '', '');
+INSERT INTO `psb_siswasaudara` VALUES ('16', '217', 'L', 'Rayden Marcel Hidayat', 'Singapore', '2015-06-06', '', '');
+INSERT INTO `psb_siswasaudara` VALUES ('17', '219', 'P', 'Nia Gabriela Wili', 'Surabaya', '2011-10-09', 'lollypop', 'KG A');
+INSERT INTO `psb_siswasaudara` VALUES ('18', '222', 'L', 'Kinsey Filbert Widodo', 'Surabaya', '2012-07-11', 'Lollypop', 'nurse');
+INSERT INTO `psb_siswasaudara` VALUES ('19', '223', 'L', 'Arnold Jansen Kho', 'Surabaya', '2007-04-18', 'Elyon Christian School', 'P3');
+INSERT INTO `psb_siswasaudara` VALUES ('20', '223', 'L', 'Abner Jeston Kho', 'Surabaya', '2012-11-02', 'Lollipop', 'PG A');
+INSERT INTO `psb_siswasaudara` VALUES ('21', '224', 'L', 'Josh Franklin', 'Surabaya', '2007-05-27', 'Elyon', 'P3');
+INSERT INTO `psb_siswasaudara` VALUES ('22', '225', 'P', 'Gloria Valerie Lim', 'Surabaya', '2008-02-02', 'Elyon', 'P3');
+INSERT INTO `psb_siswasaudara` VALUES ('23', '226', 'L', 'Neilvin Andrison', 'Surabaya', '2013-04-10', 'Ivy', 'PG A');
+INSERT INTO `psb_siswasaudara` VALUES ('24', '227', 'L', 'Skyler Liem', 'Surabaya', '2015-01-29', '', '');
 
 -- ----------------------------
 -- Table structure for psb_siswawali
@@ -3650,7 +4114,7 @@ CREATE TABLE `psb_subdokumen` (
   KEY `tingkat` (`tingkat`) USING BTREE,
   CONSTRAINT `dokumenFK` FOREIGN KEY (`dokumen`) REFERENCES `psb_dokumen` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tingkatFK6` FOREIGN KEY (`tingkat`) REFERENCES `aka_tingkat` (`replid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of psb_subdokumen
@@ -3668,6 +4132,7 @@ INSERT INTO `psb_subdokumen` VALUES ('50', '11', '2', '3', '1');
 INSERT INTO `psb_subdokumen` VALUES ('51', '11', '3', '5', '1');
 INSERT INTO `psb_subdokumen` VALUES ('52', '12', '1', '2', '1');
 INSERT INTO `psb_subdokumen` VALUES ('53', '13', '1', '1', '1');
+INSERT INTO `psb_subdokumen` VALUES ('54', '11', '6', '1', '1');
 
 -- ----------------------------
 -- Table structure for psb_suku
