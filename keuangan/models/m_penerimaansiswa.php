@@ -141,7 +141,7 @@
 
 				$recpage = 10;
 				$aksi    ='tampil';
-				$subaksi = '';
+				$subaksi = 'penerimaansiswa';
 				$obj     = new pagination_class($sql,$starting,$recpage,$aksi,$subaksi);
 				$result  = $obj->result;
 

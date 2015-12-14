@@ -58,7 +58,15 @@ BEGIN
 END $$
 DELIMITER ;
 
-  /*------------------*/
+/*getTglSelesaiTahunAjaran*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getTglSelesaiTahunAjaran`  (idThn INT) RETURNS varchar(10)
+BEGIN
+	DECLARE tgl VARCHAR(10);
+	SELECT MAX(tglSelesai) INTO tgl FROM aka_semester WHERE tahunajaran = idThn;
+	RETURN tgl;
+END $$
+DELIMITER ;
 
 
 /*getAnggaranKuota*/

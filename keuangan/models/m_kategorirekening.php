@@ -49,11 +49,11 @@
 						$out.= '<tr align="center">
 									<td><b>'.$res['kode'].'</b> xxxx</td>
 									<td>'.$res['nama'].'</td>
-									<td>'.jenisRek2($res['jenis']).'</td>
 									<td>'.jenisRek2($res['jenistambah']).'</td>
 									<td>'.jenisRek2($res['jeniskurang']).'</td>
 									'.$btn.'
 								</tr>';
+									// <td>'.jenisRek2($res['jenis']).'</td>
 						$nox++;
 					}
 				}else{ #kosong
@@ -69,8 +69,8 @@
 
 			// add / edit -----------------------------------------------------------------
 			case 'simpan':
+								// jenis       = "'.$_POST['jenisTB'].'",
 				$s 	= $tb.' set kode        = "'.filter($_POST['kodeTB']).'",
-								jenis       = "'.$_POST['jenisTB'].'",
 								jenistambah = "'.$_POST['jenistambahTB'].'",
 								jeniskurang = "'.$_POST['jeniskurangTB'].'",
 								nama        = "'.filter($_POST['namaTB']).'"';
@@ -106,7 +106,7 @@
 							'status'      =>$stat,
 							'kode'        =>$r['kode'],
 							'nama'        =>$r['nama'],
-							'jenis'       =>$r['jenis'],
+							// 'jenis'       =>$r['jenis'],
 							'jenistambah' =>$r['jenistambah'],
 							'jeniskurang' =>$r['jeniskurang']
 						));

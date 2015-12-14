@@ -19,7 +19,7 @@
         <tr style="color:white;"class="info">
             <th class="text-center">Kode </th>
             <th class="text-center">Nama</th>
-            <th class="text-center">Jenis</th>
+            <!-- <th class="text-center">Jenis</th> -->
             <th class="text-center">Penambahan</th>
             <th class="text-center">Pengurangan</th>
             <th class="text-center">Aksi</th>

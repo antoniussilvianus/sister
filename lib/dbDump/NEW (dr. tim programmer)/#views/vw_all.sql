@@ -28,7 +28,7 @@ CREATE
 ALGORITHM=UNDEFINED 
 DEFINER=`root`@`localhost` 
 SQL SECURITY DEFINER 
-VIEW `vw_psb_kriteria` AS 
+VIEW `vw_psb_siswa_kriteria` AS 
 SELECT
 	`siswa`.`replid` AS `idsiswa`,
 	`siswa`.`nis` AS `nis`,
@@ -235,7 +235,7 @@ SELECT
 	j.detilrekening iddetilrekening,
 	j.jenisrekening,
 	j.nominal,
-	getOperatorDetRekening(j.replid,j.jenisrekening)operator
+	getOperatorDetRekening(j.detilrekening,j.jenisrekening)operator
 FROM
 	keu_transaksi t
 	JOIN keu_jurnal j on j.transaksi = t.replid ;
