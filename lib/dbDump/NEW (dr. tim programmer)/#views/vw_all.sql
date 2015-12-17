@@ -255,3 +255,16 @@ BEGIN
 	RETURN saldoRekening;
 END $$
 DELIMITER ;
+
+
+/*getAnggaranTerpakai*/
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` FUNCTION `getAnggaranTerpakai`(`idAnggaranTahunan` INT) RETURNS decimal(14,0)
+BEGIN
+	DECLARE nom DECIMAL;
+	SELECT sum(nominal) INTO nom
+	FROM vw_transaksi
+	WHERE idanggarantahunan = idAnggaranTahunan;
+	RETURN nom;
+END $$
+DELIMITER ;

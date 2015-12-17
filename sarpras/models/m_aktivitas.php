@@ -20,29 +20,29 @@
 				$sord       = $_GET['sord'];
 				$searchTerm = $_GET['searchTerm'];
 
-				$ss='SELECT
-						d.replid,
-						d.nama,
-						k.nama kategorianggaran,
-						concat(t.tingkat," (",t.keterangan,")") tingkat,
-						concat(r.nama," (",r.kode,") ")rekening,
-						r.replid idrekening
-					FROM
-						keu_detilanggaran d
-						LEFT JOIN keu_nominalanggaran n ON n.detilanggaran = d.replid
-						LEFT JOIN keu_kategorianggaran k ON k.replid = d.kategorianggaran
-						LEFT JOIN keu_detilrekening r ON r.replid = k.rekening
-						LEFT JOIN aka_tingkat t ON t.replid = k.tingkat
-					WHERE
-						d.nama LIKE "%'.$searchTerm.'%"
-						OR k.nama LIKE "%'.$searchTerm.'%"
-						OR r.nama LIKE "%'.$searchTerm.'%"
-						OR r.kode LIKE "%'.$searchTerm.'%" 
-					GROUP BY	
-						d.replid ';
+				$ss='	SELECT
+							a.replid,	
+							d.detilanggaran,	
+							getAnggaranKuota(a.replid) anggaranKuota,
+							getAnggaranTerpakai(a.replid) anggaranTerpakai,
+							(getAnggaranKuota(a.replid) - getAnggaranTerpakai(a.replid)) anggaranSisa,
+							k.kategorianggaran,
+							t.tingkat
+						FROM
+							keu_anggarantahunan a
+							JOIN keu_detilanggaran d on d.replid = a.detilanggaran
+							JOIN keu_kategorianggaran k on k.replid = d.kategorianggaran
+							JOIN aka_tingkat t on t.replid = k.tingkat
+						WHERE
+							a.tahunajaran = getTahunAjaran(CURDATE()) and (
+								d.detilanggaran LIKE "%'.$searchTerm.'%" OR
+								k.kategorianggaran LIKE "%'.$searchTerm.'%" 
+							)';
+						// ka.tingkat = '.$_GET['tingkat'].' and 
+						// ka.departemen = '.$_GET['departemen'].' AND 
 				if(!$sidx) 
 					$sidx =1;
-				// print_r($ss);exit();
+				// pr($ss);
 				$result = mysql_query($ss);
 				$row    = mysql_fetch_array($result,MYSQL_ASSOC);
 				$count  = mysql_num_rows($result);
@@ -62,23 +62,15 @@
 				$result = mysql_query($ss) or die("Couldn t execute query.".mysql_error());
 				$rows 	= array();
 				while($row = mysql_fetch_assoc($result)) {
-					$kuotaNum     = getDetAnggaran($row['replid'],'kuotaNum');
-					$terpakaiPerc = getDetAnggaran($row['replid'],'terpakaiPerc');
-					$terpakaiNum  = getDetAnggaran($row['replid'],'terpakaiNum');
-					$sisaNum      = getDetAnggaran($row['replid'],'sisaNum');
-					// print_r($sisaNum);exit();
 					$rows[]= array(
-							'replid'           =>$row['replid'],
-							'nama'             =>$row['nama'],
-							'kategorianggaran' =>$row['kategorianggaran'],
-							'tingkat'          =>$row['tingkat'],
-							'kuotaCur'         =>'Rp. '.number_format($kuotaNum),
-							'sisaCur'          =>'Rp. '.number_format($sisaNum),
-							'terpakaiNum'      =>'Rp. '.number_format($terpakaiNum),
-							'sisaNum'          => $sisaNum,
-							'idrekening'       => $row['idrekening'],
-							'rekening'         => $row['rekening'],
-						);
+						'replid'           =>$row['replid'],
+						'nama'             =>$row['detilanggaran'],
+						'kategorianggaran' =>$row['kategorianggaran'],
+						'tingkat'          =>$row['tingkat'],
+						'kuotaCur'         =>setuang($row['anggaranKuota']),
+						'terpakaiCur'      =>setuang($row['anggaranTerpakai']),
+						'sisaCur'          =>setuang($row['anggaranSisa']),
+					);
 				}$response=array(
 					'page'    =>$page,
 					'total'   =>$total_pages,
@@ -129,17 +121,11 @@
 				if($jum!=0){	
 					$nox 	= $starting+1;
 					while($res = mysql_fetch_assoc($result)){	
-					 	// if($res['biayaRealisasi']==0){
-							$hint = 'pending';
-							$bg   = 'amber';
-							$poBtn= '<a target="_blank" href="http://localhost/sister/purchaseorder/admin.php?pilih=po&mod=yes" data-hint="PO"  class="button"" >
-									<i class="icon-enter"></i>
-									</button>';
-						// }else{
-						// 	$hint = 'acc.';
-						// 	$bg   = 'lightTeal';
-						// 	$poBtn='';
-					 // 	}
+						$hint = 'pending';
+						$bg   = 'amber';
+						$poBtn= '<a target="_blank" href="http://localhost/sister/purchaseorder/admin.php?pilih=po&mod=yes" data-hint="PO"  class="button"" >
+								<i class="icon-enter"></i>
+								</button>';
 						$btn ='<td align="center">
 									<button data-hint="ubah"  class="button" onclick="viewFR('.$res['replid'].');">
 										<i class="icon-pencil on-left"></i>
@@ -151,11 +137,10 @@
 						$out.= '<tr>
 									<td class="text-center">'.tgl_indo5($res['tanggal1']).' - '.tgl_indo5($res['tanggal2']).'</td>
 									<td>'.$res['aktivitas'].'</td>
-									<td align="right">Rp. '.number_format($res['biaya']).'</td>
-									<td><pre>'.$res['keterangan'].'</pre></td>
+									<td align="right">'.setuang($res['biaya']).'</td>
+									<td valign="top"><pre>'.$res['keterangan'].'</pre></td>
 									'.$btn.'
 								</tr>';
-									// <td align="right">Rp. '.number_format($res['biayaRealisasi']).'</td>
 						$nox++;
 					}
 				}else{ #kosong
@@ -171,6 +156,7 @@
 
 			// add / edit -----------------------------------------------------------------
 			case 'simpan':
+			// pr($_POST);
 				// 1. simpan aktivitas
 				$totNominal = 0;
 				$c          = count($_POST['idTR']);
@@ -180,7 +166,7 @@
 								tgltagihan    ="'.tgl_indo6($_POST['tgltagihanTB']).'",
 								aktivitas     ="'.filter($_POST['aktivitasTB']).'",
 								lokasi        ='.$_POST['lokasiH'].',
-								detilanggaran ='.$_POST['detilanggaranH'].',
+								anggarantahunan ='.$_POST['detilanggaranH'].',
 								keterangan    ="'.filter($_POST['keteranganTB']).'"';
 				$s  = (isset($_POST['replid']) AND $_POST['replid']!='')?'UPDATE '.$s1.' WHERE replid='.$_POST['replid']:'INSERT INTO '.$s1;
 				$e  = mysql_query($s);
@@ -198,7 +184,7 @@
 					// 2.b simpan detail aktivitas (wajib)
 					$stat2 =$stat2 = true;
 					$nomDebit = $nomKredit = 0;
-					
+					$totNominal=0;
 					if(!$stat22) $stat='gagal_delete_detail_aktivitas'; // ada hapus detail aktivitas AND gagal 
 					else{ // tidak ada hapus detail aktivitas OR sukses hapus
 						$xx='';
@@ -211,18 +197,16 @@
 													'.$jumlah.'
 													'.$item.'
 													';
-							if($_POST['mode'.$v.'H']=='edit')//edit
-								$s2   = 'UPDATE '.$s.' WHERE replid='.$_POST['iditem_'.$v.'H'];
-							else // add
-								$s2   ='INSERT INTO '.$s;
-// var_dump($s2);exit();
+							if($_POST['mode'.$v.'H']=='edit') $s2   = 'UPDATE '.$s.' WHERE replid='.$_POST['iditem_'.$v.'H']; //edit
+							else $s2   ='INSERT INTO '.$s; // add 
+
 							$xx.=$s2;
 							$e2    = mysql_query($s2);
 							$stat2 =!$e2?false:true;
 						}
-						// var_dump($xx);exit();
+
 						if(!$stat2)  $stat = 'gagal_simpan_detail_aktivitas';
-						else $stat = 'sukses';
+						else  $stat = 'sukses';
 					}
 				}$out=json_encode(array('status'=>$stat));
 			break;
@@ -245,29 +229,29 @@
 
 			// ambiledit -----------------------------------------------------------------
 			case 'ambiledit':
-				$s 		= ' SELECT 
-								t.tanggal1,
-								t.tanggal2,
-								t.aktivitas,
-								t.keterangan,
-								t.tgltagihan,
-								l.nama as lokasi,
-								a.nama detilanggaran,
-								a.replid iddetilanggaran
-							from 
-								'.$tb.' t
-								LEFT JOIN sar_lokasi l ON t.lokasi= l.replid 
-								LEFT JOIN keu_detilanggaran a ON a.replid = t.detilanggaran
-							WHERE 
-								t.replid='.$_POST['replid'];
-				// var_dump($s);exit();
+				$s = ' SELECT
+							t.tanggal1,
+							t.tanggal2,
+							t.aktivitas,
+							t.keterangan,
+							t.tgltagihan,
+							l.nama AS lokasi,
+							d.detilanggaran,
+							a.replid iddetilanggaran,
+							getAnggaranKuota(a.replid)anggaranKuota,	
+							(getAnggaranKuota(a.replid)-getAnggaranTerpakai(a.replid))anggaranSisa
+						FROM
+							sar_aktivitas t
+							JOIN sar_lokasi l ON t.lokasi = l.replid
+							JOIN keu_anggarantahunan a ON a.replid = t.anggarantahunan
+							JOIN keu_detilanggaran d ON d.replid = a.detilanggaran
+						WHERE
+							t.replid ='.$_POST['replid'];
+				// pr($s);
 				$e       = mysql_query($s);
 				$r       = mysql_fetch_assoc($e);
 				$itemArr = array();
 				$biayaSatSum =$biayaTotSum=$biayaTotSum2=0;
-				// anggaran
-				$kuotaNum    = getDetAnggaran($r['iddetilanggaran'],'kuotaNum');
-				$sisaNum     = getDetAnggaran($r['iddetilanggaran'],'sisaNum');
 				if(!$e) $stat = ($e)?'sukses':'gagal_ambil_data_aktivitas';
 				else{
 					$s2 ='SELECT * FROM '.$tb3.' WHERE aktivitas ='.$_POST['replid'];
@@ -293,16 +277,12 @@
 							'aktivitas'       =>$r['aktivitas'],
 							'keterangan'      =>$r['keterangan'],
 							'iddetilanggaran' =>$r['iddetilanggaran'],
-							'detilanggaran'   =>$r['detilanggaran'].' [sisa : Rp. '.number_format($sisaNum).', kuota : Rp. '.number_format($kuotaNum).']',
-							'sisaNum'         =>$sisaNum,
+							'detilanggaran'   =>$r['detilanggaran'].' [sisa : '.setuang($r['anggaranSisa']).', kuota : '.setuang($r['anggaranKuota']).']',
+							'sisaNum'         =>setuang($r['anggaranSisa']),
 							'itemArr'         =>$itemArr
 						));
 			break;
 			// ambiledit -----------------------------------------------------------------
 		}
 	}echo $out;
-
-    // ---------------------- //
-    // -- created by rovi  -- //
-    // ---------------------- // 
 ?>

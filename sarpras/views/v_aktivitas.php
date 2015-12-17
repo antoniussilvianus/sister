@@ -14,7 +14,7 @@
 <div id="loadarea"></div>
 
 <button data-hint="Tambah Data" xclass="large" id="tambahBC"><span class="icon-plus-2"></span> </button>
-<button data-hint="Field Pencarian" xclass="large" id="cariBC"><span class="icon-search"></span> </button>
+<!-- <button data-hint="Field Pencarian" xclass="large" id="cariBC"><span class="icon-search"></span> </button> -->
 
 <div class="input-control select span3">
     <!-- (name & id) usahakan sama  -->
@@ -31,7 +31,7 @@
             <th class="text-center">Keterangan</th>
             <th class="text-center">Aksi</th>
         </tr>
-        <tr style="display:none;" id="cariTR" class="selected">
+        <tr xstyle="display:none;" id="cariTR" class="selected">
             <th></th>
             <th><div class="input-control text">    <input placeholder="cari ...." id="aktivitasS" name="aktivitasS"></div></th>
             <th></th>

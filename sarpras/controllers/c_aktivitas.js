@@ -57,9 +57,11 @@ var contentFR ='';
                             +'<button class="btn-date"></button>'
                         +'</div>'
 
-                        +'<label>History Pelunasan</label>'
+                        // +'<label>History Pelunasan</label>'
                         +'<div class="input-control text">'
-                            +'<a target="_blank" href="/sister/keuangan/transaksi">(lihat laporan sarpras)</a>'
+                            +'<a class="button fg-white bg-orange" target="_blank" href="/sister/keuangan/transaksi"><i class="icon-printer"></i> Report Sarpras </a>'
+                            +'<a onclick="$(\'#ssIMG\').toggle(\'slow\');" class="fg-white bg-lightGreen button" href="#"><i class="icon-info"></i> Petunjuk</a>'
+                            +'<img id="ssIMG" style="display:none;" src="img/sar_aktivitas_report_ss.png" alt="" />'
                             // +'<a href="keuangan/transaksi" target="_blank" >Lihat Keuangan : tab laporan sarpras</a>'
                         +'</div>'
 
@@ -98,7 +100,6 @@ var contentFR ='';
                         
                         +'<div class="form-actions">' 
                             +'<button class="button primary">simpan</button>&nbsp;'
-                            +'<button class="button" type="button" onclick="$.Dialog.close()">Batal</button> '
                         +'</div>'
                     +'</form>';
 
@@ -220,7 +221,7 @@ var contentFR ='';
             console.log(biayaSat);
             var mode = (typeof arr!='undefined')?'edit':'add';
 
-            tr+='<tr  class="itemTR  id="itemTR_'+ke+'">'
+            tr+='<tr class="itemTR"  id="itemTR_'+ke+'">'
             // tr+='<tr  class="itemTR '+(biayaTot2!=0?'bg-lightTeal':'bg-amber')+'" id="itemTR_'+ke+'">'
                     // item
                     +'<td align="center">'
@@ -280,7 +281,7 @@ var contentFR ='';
             padding: 10,
             onShow: function(){
                 var titlex;
-                setTimeout(function(){
+                // setTimeout(function(){
                     if(id==''){  //add mode
                         titlex='<span class="icon-plus-2"></span> Tambah ';
                         var u = dir2;
@@ -288,6 +289,7 @@ var contentFR ='';
                         ajax(u,d).done(function(dt){
                             $('#tanggal1TB').val(getToday());
                             $('#tanggal2TB').val(getToday());
+                            $('#tgltagihanTB').val(getToday());
                             $('#lokasiTB').val(dt.lokasi[0].nama);
                             $('#lokasiH').val($('#lokasiS').val());
                             addItemTR(1);
@@ -325,7 +327,7 @@ var contentFR ='';
                             }
                         });
                     }
-                },200);
+                // },200);
                 $.Dialog.title(titlex+' '+mnu); // edit by epiii
                 $.Dialog.content(contentFR);
             }
@@ -508,6 +510,8 @@ function notif(cont,clr) {
 // remove TR rekening
     function delItemTR (ke,iditem) {
         console.log('id item ='+iditem);
+        console.log(validDelRek().status);
+
         if(validDelRek().status==false){
             notif(validDelRek().msg,'red');
         }else{
@@ -594,21 +598,21 @@ function notif(cont,clr) {
                     'columnName':'tingkat',
                     'width':'15',
                     'label':'Jenjang'
+            },{ 
+                    'align':'right',
+                    'columnName':'kuotaCur',
+                    'width':'15',
+                    'label':'Kuota'
             },{   
-                    'align':'left',
-                    'columnName':'rekening',
-                    'width':'25',
-                    'label':'Rekening'
+                    'align':'right',
+                    'columnName':'terpakaiCur',
+                    'width':'15',
+                    'label':'Terpakai'
             },{   
                     'align':'right',
                     'columnName':'sisaCur',
                     'width':'15',
                     'label':'Sisa'
-            },{   
-                    'align':'right',
-                    'columnName':'kuotaCur',
-                    'width':'15',
-                    'label':'Kuota'
             }];
 
         urly = dir+urlx;
@@ -619,11 +623,11 @@ function notif(cont,clr) {
             url: urly,
             select: function( event, ui ) { // event setelah data terpilih 
                 $('#'+el+'H').val(ui.item.replid);
-                $('#'+el+'TB').val(ui.item.nama+' [ sisa :'+ui.item.sisaCur+'  kuota : '+ui.item.kuotaCur+' ]');
+                $('#'+el+'TB').val(ui.item.nama+' [ sisa :'+ui.item.kuotaCur+'  kuota : '+ui.item.sisaCur+' ]');
                 var x = el.substring(22);
-                $('#out_come_sisaanggaran'+x+'H').val(ui.item.sisaNum);
-                $('#out_come_rek'+x+'TB').html(ui.item.rekening);
-                $('#out_come_rek'+x+'H').val(ui.item.idrekening);
+                $('#out_come_sisaanggaran'+x+'H').val(getCurr(ui.item.sisaCur));
+                // $('#out_come_rek'+x+'TB').html(ui.item.rekening);
+                // $('#out_come_rek'+x+'H').val(ui.item.idrekening);
 
                 // validasi input (tidak sesuai data dr server)
                     $('#'+el+'TB').on('keyup', function(e){
