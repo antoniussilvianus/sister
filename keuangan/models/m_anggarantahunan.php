@@ -85,7 +85,8 @@
 							ath.replid,
 							da.detilanggaran,
 							da.keterangan,
-							getAnggaranPerItem(ath.replid)kuotaAnggaran
+							getAnggaranPerItem(ath.replid)anggaranKuota,
+							getAnggaranTerpakai(ath.replid)anggaranTerpakai
 						FROM
 							keu_detilanggaran da
 						LEFT JOIN keu_anggarantahunan ath ON ath.detilanggaran = da.replid
@@ -120,21 +121,25 @@
 										<i class="icon-pencil on-left"></i>
 									</button>
 								 </td>';
-										// <div class="slider" data-role="slider" data-position="0" data-accuracy="0" data-colors="blue, red, yellow, green"></div>									
+						// <div class="slider" data-role="slider" data-position="0" data-accuracy="0" data-colors="blue, red, yellow, green"></div>									
+						$terpakaiNum =intval($res['anggaranTerpakai']);
+						$kuotaNum    =intval($res['anggaranKuota']);
+						$terpakaiPerc=($terpakaiNum==0?0:($terpakaiNum/$kuotaNum*100));
+						// vd($terpakaiPerc);
 						$out.= '<tr>
 									<td rowspan="2">'.$res['detilanggaran'].'</td>
 									<td rowspan="2">'.$res['keterangan'].'</td>
 									<td colspan="2" xalign="right">
-										<div class="bg-green progress-bar" data-role="progress-bar" data-color="bg-red" data-value="25 "></div>
+										<div class="bg-green progress-bar" data-role="progress-bar" data-color="bg-red" data-value="'.$terpakaiPerc.'"></div>
 									</td>
 									'.$btn.'
 								</tr>
 								<tr>
 									<td align="right">
-										'.setuang($res['kuotaAnggaran']/4).' 	
+										'.setuang($res['anggaranTerpakai']).' 	
 									</td>
 									<td align="right">
-										'.setuang($res['kuotaAnggaran']).'
+										'.setuang($res['anggaranKuota']).'
 									</td>
 								</tr>';
 						$nox++;
@@ -151,12 +156,17 @@
 			// tampil ---------------------------------------------------------------------
 
 			case 'headerInfo':
-				$s ='SELECT getAnggaranPerKategori('.$_POST['kategorianggaran'].','.$_POST['tahunajaran'].') anggaranKuotaPerKategori';
+				$s  ='SELECT 
+						getAnggaranPerKategori('.$_POST['kategorianggaran'].','.$_POST['tahunajaran'].') anggaranKuotaPerKategori,
+						getAnggaranPerKategoriTerpakai('.$_POST['kategorianggaran'].','.$_POST['tahunajaran'].') anggaranTerpakaiPerKategori';
 				$e =mysql_query($s);
+				vd($s);
 				$r =mysql_fetch_assoc($e);
+				pr($r);
 				$out =json_encode(array(
-					'status'                   =>(!$e?'gagal':'sukses'),
-					'anggaranKuotaPerKategori' => setuang($r['anggaranKuotaPerKategori'])
+					'status'                           =>(!$e?'gagal':'sukses'),
+					'anggaranKuotaPerKategori'         => setuang($r['anggaranKuotaPerKategori']),
+					'anggaranTerpakaiPerKategoriTerpakai' => setuang($r2['anggaranTerpakaiPerKategori'])
 				));
 			break;
 

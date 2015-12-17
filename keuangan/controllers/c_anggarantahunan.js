@@ -654,11 +654,13 @@ var contentFR ='';
         var kat = $('#kategorianggaranS').val();
         if(thn=='' || kat==''){
             $('#anggaranKuotaPerKategoriTB').val('Rp. 0');
+            $('#anggaranTerpakaiPerKategoriTB').val('Rp. 0');
         }else{
             var u = dir ;
-            var d = 'aksi=headerInfo&tahunajaran='+$('#tahunajaranS').val()+'&kategorianggaran='+$('#kategorianggaranS').val();
+            var d = 'aksi=headerInfo&tingkat='+$('#tingkatS').val()+'&tahunajaran='+$('#tahunajaranS').val()+'&kategorianggaran='+$('#kategorianggaranS').val();
             ajax(u,d).done(function  (dt) {
                 $('#anggaranKuotaPerKategoriTB').val(dt.anggaranKuotaPerKategori);
+                $('#anggaranTerpakaiPerKategoriTB').val(dt.anggaranTerpakaiPerKategori);
             });
         }
     }

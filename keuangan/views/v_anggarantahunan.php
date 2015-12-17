@@ -39,12 +39,12 @@
     <select data-hint="Tahun Ajaran" class="cari" name="tahunajaranS" id="tahunajaranS" data-hint="tahunajaran" ></select>
 </div> 
 
-<div class="place-right input-control text size2">
+<!-- <div class="place-right input-control text size2">
     <input id="anggaranKuotaPerKategoriTB" data-hint="Total Kuota" data-hint-position="top" type="text" readonly class="text-right  bg-green fg-white">
 </div> 
 <div class="place-right input-control text size2">
     <input id="anggaranTerpakaiPerKategoriTB" data-hint-position="top" data-hint="Total Terpakai" type="text" readonly class="text-right bg-red fg-white">
-</div> 
+</div>  -->
 
 <div style="overflow:scroll;height:500px;">
     <table class="table hovered bordered striped">
@@ -58,8 +58,8 @@
             <tr id="a_cariTR" class="bg-blue fg-white">
                 <th class="text-center"><input data-transform="input-control" placeholder="cari ..." id="detilanggaranS" class="cari"></th>
                 <th class="text-center"><input data-transform="input-control" placeholder="cari ..." id="keteranganS" class="cari"></th>
-                <th class="text-center">Terpakai</th>
-                <th class="text-center">Kuota</th>
+                <th class="bg-red text-center">Terpakai</th>
+                <th class="bg-green text-center">Kuota</th>
                 <th class="text-center"></th>
             </tr>
         </thead>
