@@ -133,14 +133,15 @@ $no++;
 }
 echo '
 <tr align="left">
-<td colspan="24"><div align="right"><b>Total Gaji&nbsp;</b></div></td>
+<td colspan="27"><div align="right"><b>Total Gaji&nbsp;</b></div></td>
 <td><b>'.rupiah_format2($tgajibersih).'</b></td></tr>';
 echo '</table>';
 echo "</body</html>";
-
+/*
 if (isset($_GET['bulan'])){
 echo "<script language=javascript>
 window.print();
 </script>";
 }
+*/
 ?>
