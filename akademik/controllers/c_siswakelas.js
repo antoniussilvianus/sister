@@ -297,6 +297,24 @@ var contentFR ='';
         });
     }
 
+//pop up --> warning before delete  -
+    function warningFR(idsiswa){
+        $.Dialog({
+            shadow: true,
+            overlay: true,
+            draggable: true,
+            width: '10%',
+            height: 100,
+            padding: 10,
+            onShow: function(){
+                var titl='<b>WARNING !!!</b> <i class="icon-warning"></i>';
+                    warningBody='<div class="text-center">silahkan menghapus semua data <b class="fg-red">Pembayaran</b> yang terkait dengan siswa bersangkutan klik ---> <a class="button fg-white bg-orange" href="../keuangan/penerimaan-siswa" target="_blank">Penerimaan Siswa</a></div>';
+                $.Dialog.content(warningBody);
+                $.Dialog.title(titl);
+            }
+        });
+    }
+
 // // pilih barang yg akan dipinjam ---
     function siswaAdd (id,nisn,nama) {
         //         $('#siswaTBL').html('<tr><td>gjkasfdlkjsadklfjslkdj</td></tr>')

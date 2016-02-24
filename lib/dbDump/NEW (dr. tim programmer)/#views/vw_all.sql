@@ -142,7 +142,7 @@ CREATE
 ALGORITHM=UNDEFINED 
 DEFINER=`root`@`localhost` 
 SQL SECURITY DEFINER 
-VIEW `vw_siswa_biaya` AS 
+VIEW `vw_siswa_biaya`AS 
 SELECT
 	s.replid idsiswa,
 	db.replid iddetailbiaya,
@@ -169,6 +169,7 @@ SELECT
 	sb.isAngsur2,
 	sb.viabayar,
 	k.kelas,
+	dk.replid iddetailkelas,
 	t.tingkat,
 	st.subtingkat,
 	getStatusBayar(sb.replid)statusBayar,	
@@ -182,6 +183,7 @@ FROM
 	JOIN aka_subtingkat st on st.replid = db.subtingkat 
 	JOIN aka_tingkat t on t.replid = st.tingkat
 	JOIN aka_kelas k on k.subtingkat = st.replid
+	JOIN aka_detailkelas dk on dk.kelas= k.replid
 	JOIN aka_tahunajaran ta on ta.replid = dg.tahunajaran
 	JOIN aka_semester sm on sm.tahunajaran = ta.replid 
 	LEFT JOIN keu_penerimaansiswa p on p.siswabiaya = sb.replid ;

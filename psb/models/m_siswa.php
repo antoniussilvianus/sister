@@ -529,49 +529,54 @@
 							$siswabiayaStat=true;$xx=$n=0;
 							$ss='';
 							if(isset($_POST['iddetailbiayaTB'])){
-								foreach ($_POST['iddetailbiayaTB'] as $i => $v) {
-									$biaya = getField('biaya','psb_detailbiaya','replid',$v);
-									if(isset($_POST['idsiswabiaya'.$biaya.'TB']) && $_POST['idsiswabiaya'.$biaya.'TB']!=''){
-										$pre ='UPDATE ';
-										$f   ='';
-										$w   =' WHERE replid ="'.$_POST['idsiswabiaya'.$biaya.'TB'].'"';
-									}else{
-										$pre ='INSERT INTO ';
-										$f   =' siswa="'.(isset($siswaSV['id'])?$siswaSV['id']:'').'",';
-										$w   ='';
-									}
-									
-									$isAngsur2       = isset($_POST['isAngsur2'.$biaya.'TB'])?',isAngsur2 ="'.$_POST['isAngsur2'.$biaya.'TB'].'"':'';
-									$angsuran        = ',angsuran ='.($_POST['isAngsur2'.$biaya.'TB']=='1'?$_POST['angsuran'.$biaya.'TB']:'0');
-									$nodiskonkhusus  = isset($_POST['nodiskonkhusus'.$biaya.'TB'])?',nodiskonkhusus ='.getuang($_POST['nodiskonkhusus'.$biaya.'TB']):'';
-									$diskonkhusus    = isset($_POST['diskonkhusus'.$biaya.'TB'])?',diskonkhusus ='.getuang($_POST['diskonkhusus'.$biaya.'TB']):'';
-									$ketdiskonkhusus = isset($_POST['ketdiskonkhusus'.$biaya.'TB'])?',ketdiskonkhusus ="'.$_POST['ketdiskonkhusus'.$biaya.'TB'].'"':'';
-									$viabayar        = isset($_POST['viabayar'.$biaya.'TB'])?',viabayar ="'.$_POST['viabayar'.$biaya.'TB'].'"':'';
-									$siswabiayaS     = $pre.' psb_siswabiaya SET '.$f.' detailbiaya ='.$v.'
-														'.$angsuran.$diskonkhusus.$nodiskonkhusus.$ketdiskonkhusus.$isAngsur2.$viabayar.$w;
-														// pr($siswabiayaS);
-									$ss.=$siswabiayaS;
-									$siswabiayaE    = mysql_query($siswabiayaS);
-									$siswabiayaID   = (isset($_POST['idsiswabiaya'.$biaya.'TB']) && $_POST['idsiswabiaya'.$biaya.'TB']!='')?$_POST['idsiswabiaya'.$biaya.'TB']:mysql_insert_id();
-									$siswabiayaStat =!$siswabiayaE?false:true;
-									
-									// siswa - diskon  -----------------------------------------------------------------------------------------
-									if(isset($_POST['iddetaildiskonTB'][$biaya])){ 
-										foreach ($_POST['iddetaildiskonTB'][$biaya] as $ii => $vv) {
-											if(isset($_POST['idsiswadiskon'.$vv.'TB']) && $_POST['idsiswadiskon'.$vv.'TB']!=''){
-												$pre ='UPDATE '; 
-												$f   ='';
-												$w   =' WHERE replid='.$_POST['idsiswadiskon'.$vv.'TB'];
-											}else{
-												$pre ='INSERT INTO '; 
-												$f   ='siswabiaya = '.$siswabiayaID.',';
-												$w   ='';
-											}$diskRegS   =$pre.' psb_siswadiskon SET '.$f.' detaildiskon = '.$vv.$w;
-											$diskRegE    = mysql_query($diskRegS);
-											$diskRegStat =!$diskRegE?false:true;
+								if(isset($_POST['kriteriaDisTB']) && $_POST['kriteriaDisTB']=='1'){
+									$siswabiayaStat =true;
+									$diskRegStat    =true;
+								}else{
+									foreach ($_POST['iddetailbiayaTB'] as $i => $v) {
+										$biaya = getField('biaya','psb_detailbiaya','replid',$v);
+										if(isset($_POST['idsiswabiaya'.$biaya.'TB']) && $_POST['idsiswabiaya'.$biaya.'TB']!=''){
+											$pre ='UPDATE ';
+											$f   ='';
+											$w   =' WHERE replid ="'.$_POST['idsiswabiaya'.$biaya.'TB'].'"';
+										}else{
+											$pre ='INSERT INTO ';
+											$f   =' siswa="'.(isset($siswaSV['id'])?$siswaSV['id']:'').'",';
+											$w   ='';
 										}
-									}
-							 	}
+										
+										$isAngsur2       = isset($_POST['isAngsur2'.$biaya.'TB'])?',isAngsur2 ="'.$_POST['isAngsur2'.$biaya.'TB'].'"':'';
+										$angsuran        = ',angsuran ='.($_POST['isAngsur2'.$biaya.'TB']=='1'?$_POST['angsuran'.$biaya.'TB']:'0');
+										$nodiskonkhusus  = isset($_POST['nodiskonkhusus'.$biaya.'TB'])?',nodiskonkhusus ='.getuang($_POST['nodiskonkhusus'.$biaya.'TB']):'';
+										$diskonkhusus    = isset($_POST['diskonkhusus'.$biaya.'TB'])?',diskonkhusus ='.getuang($_POST['diskonkhusus'.$biaya.'TB']):'';
+										$ketdiskonkhusus = isset($_POST['ketdiskonkhusus'.$biaya.'TB'])?',ketdiskonkhusus ="'.$_POST['ketdiskonkhusus'.$biaya.'TB'].'"':'';
+										$viabayar        = isset($_POST['viabayar'.$biaya.'TB'])?',viabayar ="'.$_POST['viabayar'.$biaya.'TB'].'"':'';
+										$siswabiayaS     = $pre.' psb_siswabiaya SET '.$f.' detailbiaya ='.$v.'
+															'.$angsuran.$diskonkhusus.$nodiskonkhusus.$ketdiskonkhusus.$isAngsur2.$viabayar.$w;
+															// pr($siswabiayaS);
+										$ss.=$siswabiayaS;
+										$siswabiayaE    = mysql_query($siswabiayaS);
+										$siswabiayaID   = (isset($_POST['idsiswabiaya'.$biaya.'TB']) && $_POST['idsiswabiaya'.$biaya.'TB']!='')?$_POST['idsiswabiaya'.$biaya.'TB']:mysql_insert_id();
+										$siswabiayaStat =!$siswabiayaE?false:true;
+										
+										// siswa - diskon  -----------------------------------------------------------------------------------------
+										if(isset($_POST['iddetaildiskonTB'][$biaya])){ 
+											foreach ($_POST['iddetaildiskonTB'][$biaya] as $ii => $vv) {
+												if(isset($_POST['idsiswadiskon'.$vv.'TB']) && $_POST['idsiswadiskon'.$vv.'TB']!=''){
+													$pre ='UPDATE '; 
+													$f   ='';
+													$w   =' WHERE replid='.$_POST['idsiswadiskon'.$vv.'TB'];
+												}else{
+													$pre ='INSERT INTO '; 
+													$f   ='siswabiaya = '.$siswabiayaID.',';
+													$w   ='';
+												}$diskRegS   =$pre.' psb_siswadiskon SET '.$f.' detaildiskon = '.$vv.$w;
+												$diskRegE    = mysql_query($diskRegS);
+												$diskRegStat =!$diskRegE?false:true;
+											}
+										}
+								 	}
+								}
 								// pr($ss);
 							}
 							if(!$siswabiayaStat){
@@ -908,6 +913,13 @@
 				$biayaArr         = getFieldArr2('*',$tb7,'siswa',$_POST['replid']);
 				// TODO : fetch psb_siswabiaya (tingkat & subtingkat terakhir/paling tinggi )
 				// pr($biayaArr);
+				// untuk status siswa (diterima/pending/lulus)
+				$sc    ='SELECT COUNT(*)nsiswakel FROM aka_siswakelas WHERE siswa='.$_POST['replid'];
+				$ec    =mysql_query($sc);
+				$rc    =mysql_fetch_assoc($ec);
+				$statuskel  = $rc['nsiswakel']!=0?'diterima':'belum';
+				$nstatuskel = $rc['nsiswakel'];
+
 				$out = json_encode(array(
 							'status'                 =>$stat,
 							/*bio siswa*/
@@ -1012,7 +1024,10 @@
 							// kontak darurat
 							'kontakdaruratArr'       =>$kontakdaruratArr,
 							// saudara siswa
-							'saudaraArr'             =>$saudaraArr
+							'saudaraArr'             =>$saudaraArr,
+							// [aka]- status kelas
+							'statuskel'  =>$statuskel,
+							'nstatuskel' =>$nstatuskel,
 						));
 			break;
 			// ambiledit -----------------------------------------------------------------

@@ -82,6 +82,7 @@
 									sk.replid,
 									s.nis,
 									s.nisn,
+									s.replid idsiswa,
 									s.namasiswa,
 									s.tempatlahirsiswa,
 									s.tanggallahirsiswa
@@ -111,9 +112,24 @@
 						if($jum!=0){	
 							$nox = $starting+1;
 							while($res = mysql_fetch_assoc($result)){	
+								$sc='SELECT COUNT(*)nbayar
+									FROM keu_penerimaansiswa
+									WHERE
+										siswabiaya IN (
+											SELECT idsiswabiaya
+											FROM vw_siswa_biaya
+											WHERE idsiswa = '.$res['idsiswa'].' AND iddetailkelas = '.$detailkelas.'
+											GROUP BY idsiswabiaya
+										)';
+								$ec=mysql_query($sc);
+								$rc=mysql_fetch_assoc($ec);
+								// $onclick = $rc['nbayar']!=0?'alert(\'silahkan hapus data terkait --> KEUANGAN/Penerimaan-Siswa\')':'del('.$res['replid'].');';
+								$onclick = $rc['nbayar']!=0?'warningFR();':'del('.$res['replid'].');';
+								$button  = $rc['nbayar']!=0?'warning':'cancel-2';
+								$color   = $rc['nbayar']!=0?'yellow':'red';
 								$btn ='<td>
-											<button data-hint="hapus"  class="button fg-white bg-red" onclick="del('.$res['replid'].');">
-												<i class="icon-cancel-2"></i>
+											<button data-hint="hapus"  class="button fg-white bg-'.$color.'" onclick="'.$onclick.'">
+												<i class="icon-'.$button.'"></i>
 											</button>
 										 </td>';
 								$out.= '<tr class="siswakelasTR" id="siswakelas'.$res['replid'].'TR">

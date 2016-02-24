@@ -54,7 +54,7 @@ var subdokumen_contentFR =siswa_contentFR = status_contentFR='';
                                 +'</tr>'
                             +'</table>'
                             //nis`
-                            +'<label>NIS</label>'
+                            +'<label>NIS</label><span class="fg-red" id="nisInfo"></span>'
                             +'<input type="number" placeholder="NIS" data-transform="input-control" xrequired id="nisTB" name="nisTB">'
                             // nisn
                             +'<label>NISN</label>'
@@ -111,12 +111,14 @@ var subdokumen_contentFR =siswa_contentFR = status_contentFR='';
 
         siswa_contentFR +='<form id="siswaFR" data-role="scrollbox" data-scroll="vertical" style="overflow:scroll;height:560px;" xstyle="height:300px;"  enctype="multipart/form-data" autocomplete="off" onsubmit="siswaSV(); return false;">' 
                         +'<input type="hidden" name="idformTB" id="idformTB" />'
+                        +'<input type="hidden" name="kriteriaDisTB" id="kriteriaDisTB" />'
                         // accordion
                         +'<div class="accordion with-marker xspan3 xplace-left margin10" data-role="accordion" data-closeany="true">'
                             // kriteria
                             +'<div class="accordion-frame active">'
                                 +'<a class="heading bg-red fg-white" href="#">Kriteria Siswa <sub>*wajib diisi</sub></a>'
                                 +'<div  style="display: block;" class="content grid">'
+                                    +'<h5 id="kriteriaInfo" class="text-center fg-red"></h5>'
                                     // baris 1
                                     +'<div class="row">'
                                         // kolom1
@@ -1109,15 +1111,31 @@ var subdokumen_contentFR =siswa_contentFR = status_contentFR='';
                     ajax(u,d).done(function  (dt) {
                         if(dt.status!='sukses') notif(dt.status,'red');
                         else{
-                        // kriteria siswa 
-                            cmbdepartemen('form',dt.iddepartemen);
-                            cmbtahunajaran('form',dt.idtahunajaran);
-                            cmbdetailgelombang('form',dt.detailgelombang,dt.iddepartemen,dt.idtahunajaran);
-                            cmbtingkatZ('form',dt.tingkat,dt.iddepartemen);
-                            cmbsubtingkat('form',dt.tingkat,dt.subtingkat);
-                            cmbgolongan('form',dt.golongan);
-                        // biaya 
-                            biayaFC(idsiswa);
+                            // alert(dt.nstatuskel);
+                        // tab "kriteria siswa"
+                            if(dt.nstatuskel!=0){
+                                // combobox kriteria 
+                                $('#departemenTB').attr('disabled',true);
+                                $('#tahunajaranTB').attr('disabled',true);
+                                $('#detailgelombangTB').attr('disabled',true);
+                                $('#tingkatTBZ').attr('disabled',true);
+                                $('#subtingkatTB').attr('disabled',true);
+                                $('#golonganTBZ').attr('disabled',true);
+                                // item rincian biaya
+                                var disabled='disabled';
+                                $('#kriteriaDisTB').val('1');
+                                $('#kriteriaInfo').html('<i class="icon-warning"></i>Untuk merubah data "kriteria siswa" silahkan menghapus semua data history kelas yang terkait dengan siswa di AKADEMIK,<a href="../akademik/siswa-kelas" target="_blank" class="button fg-white bg-orange">Kelas Siswa</a>');
+                            }
+                            // kriteria siswa 
+                                cmbdepartemen('form',dt.iddepartemen);
+                                cmbtahunajaran('form',dt.idtahunajaran);
+                                cmbdetailgelombang('form',dt.detailgelombang,dt.iddepartemen,dt.idtahunajaran);
+                                cmbtingkatZ('form',dt.tingkat,dt.iddepartemen);
+                                cmbsubtingkat('form',dt.tingkat,dt.subtingkat);
+                                cmbgolongan('form',dt.golongan);
+                            // biaya 
+                            biayaFC(idsiswa,disabled);
+
                         // bioadata siswa
                             var agm = {'ayah':dt.agamaayah,'siswa':dt.agamasiswa,'ibu':dt.agamaibu};
                             cmbagama(agm);
@@ -1232,7 +1250,7 @@ var subdokumen_contentFR =siswa_contentFR = status_contentFR='';
                     cmbsubtingkat('form','','');
                     cmbgolongan('form','');
                     cmbangsuran('');
-                    biayaFC('');
+                    biayaFC('','');
                     // subdokumenFC();
                     // kontakdaruratFC();
                 }
@@ -1451,7 +1469,9 @@ function notif(cont,clr) {
         });
     }
 
-    function biayaFC(siswa){
+    // function biayaFC(siswa){
+    function biayaFC(siswa,disabled){
+        // alert(disabled);
         var d='aksi=tampil&subaksi=biaya'+(siswa!=''?'&siswa='+siswa:'');
         ajax(dir,d).done(function (dt){
             var out='';
@@ -1490,7 +1510,14 @@ function notif(cont,clr) {
                                     out+='<tr>'
                                         +'<td>Diskon Reguler</td>'
                                         +'<td>'
-                                            +'<div class="input-control text"><input class="detaildiskonTB" '+(siswa==''?'disabled':'')+' onfocus="multiAutoSuggest(\'detaildiskon\','+item.replid+')" onkeyup="multiAutoSuggest(\'detaildiskon\','+item.replid+')" placeholder="cari diskon (backspace / panah bawah) " type="text" id="detaildiskon'+item.replid+'TB"></div>'
+                                            // +'<input type="text" disabled />'
+                                            +'<div class="input-control text">'
+                                                +'<input '+(disabled=='disabled'?'readonly':'')+'  class="detaildiskonTB" '
+                                                    +(siswa==''?'disabled':'')+' onfocus="multiAutoSuggest(\'detaildiskon\','+item.replid+','+(disabled=='disabled'?true:false)+')"'
+                                                    +' onkeyup="multiAutoSuggest(\'detaildiskon\','+item.replid+','+(disabled=='disabled'?true:false)+')"' 
+                                                    +' placeholder="cari diskon (backspace / panah bawah) " type="text" '
+                                                    +' id="detaildiskon'+item.replid+'TB">'
+                                            +'</div>'
                                             +'<table width="100%">'
                                                 +'<thead class="fg-white bg-blue">'
                                                     +'<th align="center">Diskon</th>'
@@ -1512,11 +1539,11 @@ function notif(cont,clr) {
                                     out+='<tr>'
                                         +'<td>Diskon Khusus </td>'
                                         +'<td><div class="input-control text">'
-                                            +'<input data-hint="No.SK" data-transform="input-control" type="text" placeholder="no. SK" id="noskTB" name="noskTB" />'
-                                            +'<input data-hint="Keterangan" value="'+(item.ketdiskonkhusus!=''?item.ketdiskonkhusus:'')+'" '+(dt.levelurutan==1 || dt.levelurutan==2?' name="ketdiskonkhusus'+item.replid+'TB"':'disabled')+' placeholder="keterangan diskon" type="text" id="ketdiskonkhusus'+item.replid+'TB" /></div>'
+                                            +'<input '+disabled+' data-hint="No.SK" data-transform="input-control" type="text" placeholder="no. SK" id="noskTB" name="noskTB" />'
+                                            +'<input '+disabled+' data-hint="Keterangan" value="'+(item.ketdiskonkhusus!=''?item.ketdiskonkhusus:'')+'" '+(dt.levelurutan==1 || dt.levelurutan==2?' name="ketdiskonkhusus'+item.replid+'TB"':'disabled')+' placeholder="keterangan diskon" type="text" id="ketdiskonkhusus'+item.replid+'TB" /></div>'
                                         +'</td>'
                                         +'<td>'
-                                            +'<div class="input-control text"><input onkeyup="getBiayaNett('+item.replid+');" value="'+(item.diskonkhusus!=''?item.diskonkhusus:'Rp. 0')+'" class="text-right diskonkhususTB" onfocus="inputuang(this);" placeholder="nominal" type="text" id="diskonkhusus'+item.replid+'TB" '+(dt.levelurutan==1 || dt.levelurutan==2?' name="diskonkhusus'+item.replid+'TB"':'disabled')+'></div>'
+                                            +'<div class="input-control text"><input  '+disabled+'  onkeyup="getBiayaNett('+item.replid+');" value="'+(item.diskonkhusus!=''?item.diskonkhusus:'Rp. 0')+'" class="text-right diskonkhususTB" onfocus="inputuang(this);" placeholder="nominal" type="text" id="diskonkhusus'+item.replid+'TB" '+(dt.levelurutan==1 || dt.levelurutan==2?' name="diskonkhusus'+item.replid+'TB"':'disabled')+'></div>'
                                             +'<sup style="font-weight:bold;" class="fg-red">* Diisi oleh Petugas Khusus </sup>'
                                         +'</td>'
                                     +'</tr>';
@@ -1543,12 +1570,12 @@ function notif(cont,clr) {
                                         +'<td>Cara Bayar </td>'
                                         +'<td>' 
                                             +'<div xclass="input-control radio">'
-                                                +'<label><input id="isAngsur2'+item.replid+'0TB" onclick="isAngsur2FC('+item.replid+',0)" value="0" required name="isAngsur2'+item.replid+'TB" '+(item.isAngsur=='0'?'checked':'')+' type="radio"> Kontan</label>'
+                                                +'<label><input '+disabled+' id="isAngsur2'+item.replid+'0TB" onclick="isAngsur2FC('+item.replid+',0)" value="0" required name="isAngsur2'+item.replid+'TB" '+(item.isAngsur=='0'?'checked':'')+' type="radio"> Kontan</label>'
                                                 +'<label '+(item.isAngsur=='0'?'class="fg-gray"':'')+' >'
-                                                    +'<input  id="isAngsur2'+item.replid+'1TB" onclick="isAngsur2FC('+item.replid+',1)"  value="1" required name="isAngsur2'+item.replid+'TB"  '+(item.isAngsur=='0'?'disabled':'')+' type="radio"> Angsur'
+                                                    +'<input  '+disabled+' id="isAngsur2'+item.replid+'1TB" onclick="isAngsur2FC('+item.replid+',1)"  value="1" required name="isAngsur2'+item.replid+'TB"  '+(item.isAngsur=='0'?'disabled':'')+' type="radio"> Angsur'
                                                 +'</label>'
                                             +'</div>'
-                                            +'<select style="display:none;" data-transform="input-control" class="text-center" id="angsuran'+item.replid+'TB" name="angsuran'+item.replid+'TB"><option value=""></option></select>'
+                                            +'<select '+disabled+' style="display:none;" data-transform="input-control" class="text-center" id="angsuran'+item.replid+'TB" name="angsuran'+item.replid+'TB"><option value=""></option></select>'
                                         +'</td>'
                                         +'<td class="text-right" id="'+item.isDiskon+'TD"></td>'
                                     +'</tr>';
@@ -1556,7 +1583,7 @@ function notif(cont,clr) {
                                 out+='<tr>'
                                     +'<td>Via</td>'
                                     +'<td>'
-                                        +'<select data-transform="input-control" name="viabayar'+item.replid+'TB" id="viabayar'+item.replid+'TB"></select>'
+                                        +'<select '+disabled+' data-transform="input-control" name="viabayar'+item.replid+'TB" id="viabayar'+item.replid+'TB"></select>'
                                     +'</td>'
                                     +'<td></td>'
                                 +'</tr>';
@@ -1585,7 +1612,7 @@ function notif(cont,clr) {
                         ajax(dir,'aksi=tampil&subaksi=detaildiskon&siswabiaya='+item.idsiswabiaya).done(function (dtx){
                             console.log('loop diskon reg @biaya ='+item.idsiswabiaya);
                             $.each(dtx.detaildiskonArr, function (idx,itemx){
-                                detaildiskonAdd (item.replid,itemx.idsiswadiskon,itemx.replid,itemx.diskon,itemx.nilai,itemx.keterangan);
+                                detaildiskonAdd (item.replid,itemx.idsiswadiskon,itemx.replid,itemx.diskon,itemx.nilai,itemx.keterangan,(disabled=='disabled'?true:false));
                             });
                         });
                     });
@@ -1607,7 +1634,7 @@ function notif(cont,clr) {
         });
     }
 
-    function multiAutoSuggest(el,idx){
+    function multiAutoSuggest(el,idx,dis){
         var col =[], par='';
         if(el=='detaildiskon'){
             col =[{
@@ -1638,21 +1665,21 @@ function notif(cont,clr) {
             colModel: col,
             url: dir+'?aksi=autocomp&subaksi='+el+par,
             select: function( event, ui ) {
-                detaildiskonAdd(idx, '', ui.item.replid, ui.item.diskon, ui.item.nilai, ui.item.keterangan);
+                detaildiskonAdd(idx, '', ui.item.replid, ui.item.diskon, ui.item.nilai, ui.item.keterangan,dis);
                 $('#detaildiskon'+idx+'TB').val('');
                 return false;
             }
         });
     }
 //                        idbiaya,iddetaildiskon                                           
-    function detaildiskonAdd (idx,siswadiskon,replid,diskon,nilai,keterangan) {
+    function detaildiskonAdd (idx,siswadiskon,replid,diskon,nilai,keterangan,dis) {
         var tr ='<tr val="'+replid+'" class="detaildiskon'+idx+'TR" id="detaildiskon'+replid+'TR">'
                     +'<td>'+diskon
                         +'<input type="hidden" name="idsiswadiskon'+replid+'TB" value="'+(siswadiskon!=''?siswadiskon:'')+'" />'
                         +'<input type="hidden" name="iddetaildiskonTB['+idx+'][]" value="'+replid+'" />'
                     +'</td>'
                     +'<td>'+nilai+'</td>'
-                    +'<td><a href="#" class="bg-white fg-red" onclick="detaildiskonDel('+idx+','+replid+',\''+siswadiskon+'\'); return false;"><i class="icon-cancel-2"></a></i></td>'
+                    +'<td><a href="#" class="bg-white fg-'+(dis==true?'gray':'red')+'" onclick="'+(dis==true?'alert(\'maaf anda tidak dapat menghapus \');':'detaildiskonDel('+idx+','+replid+',\''+siswadiskon+'\');')+'"><i class="icon-cancel-2"></a></i></td>'
                 +'</tr>';
         $('#detaildiskon'+idx+'TBL').append(tr); 
         detaildiskonArr(idx);
@@ -1871,6 +1898,14 @@ function notif(cont,clr) {
                         $('#tahunajaranTD').html(': '+dt.tahunajaran);
                         $('#nisTB').val(dt.nis);
                         $('#nisnTB').val(dt.nisn);
+                        if(dt.nstatuskel!=0){
+                            $('#nisTB').attr('disabled',true);
+                            $('#nisInfo').html('untuk merubah NIS silahkan hapus semua kelas siswa terkait, klik --> <a class="button fg-white bg-orange" href="../akademik/siswa-kelas" target="_blank">Pendataan Kelas</a> ');
+                        }else{
+                            $('#nisTB').removeAttr('disabled');
+                            $('#nisInfo').html('');
+                        } 
+
                     }
                 });
                 titlex='<span class="icon-plus-2"></span> Tambah ';

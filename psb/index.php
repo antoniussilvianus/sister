@@ -144,6 +144,9 @@
                     case 'vpenerimaan':
                         require $d.'v_penerimaan.php';
                     break;
+                    case 'vceksiswa':
+                        require $d.'v_ceksiswa.php';
+                    break;
                     default:
                         require $d.'v_home.php';
                     break;
