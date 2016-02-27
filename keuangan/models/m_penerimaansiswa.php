@@ -156,6 +156,7 @@
 						if($res['isSiswaKelas']=='0'){
 							$onclick1 = $onclick2  ='warningFR();';
 							$color = $color2    = 'gray';
+							
 						}else{
 							$color    = $res['statusBayar']=='lunas'?'green':($res['statusBayar']=='belum'?'red':'yellow');
 							$color2    = 'blue';

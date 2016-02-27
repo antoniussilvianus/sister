@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../css/chosen/prism.css">
   <link rel="stylesheet" href="../css/chosen/chosen.css">
  -->
-<h4 style="color:white;">Pendataan Siswa (kelas)</h4>
+<h4 style="color:white;">Siswa Kelas </h4>
 <div id="loadarea"></div>
 
 <button <?php echo isAksi('siswa','c')?'onclick="viewFR(\'\')"':'disabled  '; ?> data-hint="Tambah Data" id="tambahBC"><span class="icon-plus-2"></span> </button>
