@@ -30,7 +30,9 @@
 						$s2 = 'SELECT
 									db.replid,
 									db.nominal,
-									b.biaya
+									b.biaya,(
+										SELECT COUNT(*) FROM psb_siswabiaya sb WHERE sb.detailbiaya = db.replid
+									)used
 								FROM
 									'.$tb.' db JOIN psb_biaya b on b.replid = db.biaya
 								WHERE
@@ -45,13 +47,20 @@
 							if(!isAksi('detailbiaya','u')){
 								$field=setuang($r2['nominal']);
 							}else{
-								$field='<div class="input-control text" >
-											<input data-hint="'.$r2['biaya'].'" class="text-right" value="Rp. '.number_format($r2['nominal']).'" 
-											onclick="inputuang(this);" onfocus="inputuang(this);" type="text" name="nominalTB['.$r2['replid'].']">
-										</div>';
-									// <a onclick="viewFR('.$r2['replid'].');" class="button fg-white bg-blue" href="#" data-hint="rekening">
-									// 	<i class=" icon-cc-nc"></i>
-									// </a>
+								if($r2['used']!=0){
+									$field=setuang($r2['nominal']);
+									$field.='<a onclick="warningFR();return false;" class="place-left button fg-white bg-yellow" href="#" target="_blank" data-hint="data telah digunakan"><i class="icon-warning"></i> Info</a>';
+									$field.='<input name="nominalTB['.$r2['replid'].']" type="hidden" value="'.$r2['nominal'].'">';
+
+								}else{
+									$field='<div class="input-control text" >
+												<input data-hint="'.$r2['biaya'].'" class="text-right" value="Rp. '.number_format($r2['nominal']).'" 
+												onclick="inputuang(this);" onfocus="inputuang(this);" type="text" name="nominalTB['.$r2['replid'].']">
+											</div>';
+										// <a onclick="viewFR('.$r2['replid'].');" class="button fg-white bg-blue" href="#" data-hint="rekening">
+										// 	<i class=" icon-cc-nc"></i>
+										// </a>
+								}
 							}$out.='<td align="right">'.$field.'</td>';
 						}$out.='</tr>';
 						$nox++;

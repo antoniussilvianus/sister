@@ -261,6 +261,43 @@ var contentFR = '';
 // end of view table ---
     
 // form ---
+    function warningFR(){
+        $.Dialog({
+            shadow: true,
+            overlay: true,
+            draggable: true,
+            width: 300,
+            padding: 10,
+            onShow: function(){
+                var titl='<i class="icon-warning"></i> <b>WARNING !!!</b> ';
+                    warningBody='<b align="center" class="fg-red">*Detail Biaya telah digunakan pada "PSB (siswa)" atau "Keuangan (Penerimaan-Siswa)" Agar Dapat Mengedit Nominal Detail Biaya, Silahkan ikuti langkah :</b>'
+                                +'<ol> '
+                                    +'<li>Klik '
+                                    +'<a class="button fg-white bg-orange" href="../keuangan/penerimaan-siswa" target="_blank">KEU(Penerimaan Siswa)</a>'
+                                    +'  ~> <b>*Filtering Data</b>  ~> hapus "SEMUA" history <b>Pembayaran Siswa</b>  terkait  '
+                                    +'</li><li>Klik '
+                                    +'<a class="button fg-white bg-orange" href="../psb/siswa" target="_blank">PSB(Siswa)</a>'
+                                    +' ~> <b>*Filtering Data</b> ~> hapus "SEMUA" <b>Data Siswa</b> yang terkait dengan detail biaya'
+                                    +'</li><li>Kembali  '
+                                    +'<a class="button fg-white bg-orange" href="../psb/siswa" target="_blank">KEU(Detail-Biaya)</a>'
+                                    +' ~> Edit Nominal Biaya '
+                                    +'</li>'
+                                +'</ol>'
+                                +'<ul class="fg-white bg-green" style="bg-green font-size:12px;list-style:none;"><b>*Filtering Data</b> ( Pilih ComboBox Sesuai comboBox pada Detail-Biaya) :'
+                                    +'<li><i class="icon-checkmark"></i> Departemen</li>'
+                                    +'<li><i class="icon-checkmark"></i> Tahun Ajaran</li>'
+                                    +'<li><i class="icon-minus"></i> Gelombang</li>'
+                                    +'<li><i class="icon-checkmark"></i> Tingkat</li>'
+                                    +'<li><i class="icon-checkmark"></i> Sub Tingkat</li>'
+                                +'</ul>';
+                $.Dialog.content(warningBody);
+                $.Dialog.title(titl);
+            }
+        });
+    }
+// end of form ---
+
+// form ---
     function viewFR(id){
         $.Dialog({
             shadow: true,

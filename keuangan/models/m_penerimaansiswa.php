@@ -107,31 +107,33 @@
 				$statusbayar   = isset($_POST['statusS']) && $_POST['statusS']!=''?' AND getStatusBayar(idsiswabiaya) ="'.filter($_POST['statusS']).'"':'';
 
 				$sql = 'SELECT
-							idsiswa,
-							nopendaftaran,
-							nis,
-							nisn,
-							namasiswa,
-							idtingkat,
-							getBiayaNett(idsiswabiaya)tagihan,
-							getBiayaTerbayar(idsiswabiaya)terbayar,
-							getStatusBayar(idsiswabiaya)statusBayar
-						FROM vw_siswa_biaya 
+							if(k.idsiswakelas IS NULL, 0,1)isSiswaKelas,
+							b.idsiswa,
+							b.nopendaftaran,
+							b.nis,
+							b.nisn,
+							b.namasiswa,
+							b.idtingkat,
+							getBiayaNett(b.idsiswabiaya)tagihan,
+							getBiayaTerbayar(b.idsiswabiaya)terbayar,
+							getStatusBayar(b.idsiswabiaya)statusBayar
+						FROM vw_siswa_biaya b
+							LEFT JOIN vw_siswa_kelas k on k.idsiswa = b.idsiswa
 						WHERE
-							status != "2"
-							AND nopendaftaran LIKE "%'.$nopendaftaran.'%"
-							AND idtahunajaran = '.$tahunajaran.'
-							AND iddepartemen= '.$departemen.'
-							AND idsubtingkat= '.$subtingkat.'
-							AND idbiaya = '.$biaya.'
-							AND namasiswa LIKE "%'.$namasiswa.'%" 
-							AND nis LIKE "%'.$nis.'%" 
-							AND nisn LIKE "%'.$nisn.'%" 
+							b.status != "2"
+							AND b.nopendaftaran LIKE "%'.$nopendaftaran.'%"
+							AND b.idtahunajaran = '.$tahunajaran.'
+							AND b.iddepartemen= '.$departemen.'
+							AND b.idsubtingkat= '.$subtingkat.'
+							AND b.idbiaya = '.$biaya.'
+							AND b.namasiswa LIKE "%'.$namasiswa.'%" 
+							AND b.nis LIKE "%'.$nis.'%" 
+							AND b.nisn LIKE "%'.$nisn.'%" 
 							'.$statusbayar.$semester.'
 						GROUP BY
-							idsiswa
+							b.idsiswa
 						ORDER BY
-							idsubtingkat asc';
+							b.idsubtingkat asc';
 							// pr($sql);
 				if(isset($_POST['starting'])){ 
 					$starting=$_POST['starting'];
@@ -151,9 +153,17 @@
 				if($jum!=0){	
 					$nox = $starting+1;
 					while($res = mysql_fetch_assoc($result)){
-						$color  = $res['statusBayar']=='lunas'?'green':($res['statusBayar']=='belum'?'red':'yellow');
+						if($res['isSiswaKelas']=='0'){
+							$onclick1 = $onclick2  ='warningFR();';
+							$color = $color2    = 'gray';
+						}else{
+							$color    = $res['statusBayar']=='lunas'?'green':($res['statusBayar']=='belum'?'red':'yellow');
+							$color2    = 'blue';
+							$onclick1  ='viewFR('.$res['idsiswa'].');';
+							$onclick2  ='viewFR2('.$res['idsiswa'].');';
+						}
 						$btn ='<td align="center">
-									<button style="font-weight:bold;" onclick="viewFR('.$res['idsiswa'].')"; class="fg-white bg-'.$color.'">
+									<button style="font-weight:bold;" onclick="'.$onclick1.'"; class="fg-white bg-'.$color.'">
 										'.$res['statusBayar'].'
 									</button>
 							   </td>';
@@ -166,7 +176,7 @@
 									<td>'.setuang($res['terbayar']).'</td>
 									'.$btn.'
 									<td align="center">
-										<button style="font-weight:bold;" onclick="viewFR2('.$res['idsiswa'].')"; class="fg-white bg-blue">
+										<button style="font-weight:bold;" onclick="'.$onclick2.'"; class="fg-white bg-'.$color2.'">
 											<i class="icon-copy"></i>
 										</button>
 									</td>

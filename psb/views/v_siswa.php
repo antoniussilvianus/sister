@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="../css/combogrid/jquery-ui-1.10.1.custom.css"/>
 <link rel="stylesheet" type="text/css" media="screen" href="../css/combogrid/jquery.ui.combogrid.css"/>
 
-<h4 style="color:white;">Pendataan Siswa</h4>
+<h4 style="color:white;">Siswa</h4>
 
 <button <?php echo isAksi('siswa','c')?'onclick="viewFR(\'\')"':'disabled  '; ?> data-hint="Tambah Data" id="tambahBC"><span class="icon-plus-2"></span> </button>
 <button onclick="switchPN('view','');"  data-hint="Lihat Data" id="lihatBC" style="display:none;"><span class="icon-list"></span> </button>

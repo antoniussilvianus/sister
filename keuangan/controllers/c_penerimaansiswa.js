@@ -350,6 +350,43 @@ var contentFR = contentFR2 ='';
         }
     }
 
+// form ---
+    function warningFR(){
+        $.Dialog({
+            shadow: true,
+            overlay: true,
+            draggable: true,
+            width: 300,
+            padding: 10,
+            onShow: function(){
+                var titl='<i class="icon-warning"></i> <b>WARNING !!!</b> ';
+                    warningBody='<b align="center" class="fg-red">*Siswa tidak bisa melakukan pembayaran, Silahkan ikuti langkah :</b>'
+                                +'<ol> '
+                                    +'<li>Klik '
+                                    +'<a class="button fg-white bg-orange" href="../akademik/siswa-kelas" target="_blank">AKA(Siswa Kelas)</a>'
+                                    +'  ~>  <b>*Filtering Data</b> & cari siswa bersangkutan  ~> jika siswa tidak ada dalam daftar kelas, silahkan set kelas dg cara klik tombol <button><i class="icon-plus-2"></i></button> '
+                                    +'</li><li>Klik '
+                                    +'<a class="button fg-white bg-orange" href="../psb/siswa" target="_blank">PSB(Siswa)</a>'
+                                    +'  ~>  <b>*Filtering Data</b> & cari siswa bersangkutan  ~> jika status siswa <button class="fg-white bg-red">Belum Diterima</button>, silahkan terima siswa dengan cara input NIS '
+                                    +'</li><li>Kembali '
+                                    +'<a class="button fg-white bg-orange" href="../keuangan/penerimaan-siswa" target="_blank">KEU(Penerimaan-Siswa)</a>'
+                                    +'  ~>  <b>*Filtering Data</b> & cari siswa bersangkutan  ~> cek status siswa ~> jika tampil <button class="fg-white bg-red">belum</button> maka dapat melakukan pembayaran '
+                                    +'</li>'
+                                +'</ol>'
+                                +'<ul class="fg-white bg-green" style="bg-green font-size:12px;list-style:none;"><b>*Filtering Data</b> ( Pilih ComboBox Sesuai comboBox pada Penerimaan-Siswa) :'
+                                    +'<li><i class="icon-checkmark"></i> Departemen</li>'
+                                    +'<li><i class="icon-checkmark"></i> Tahun Ajaran</li>'
+                                    +'<li><i class="icon-minus"></i> Gelombang</li>'
+                                    +'<li><i class="icon-checkmark"></i> Tingkat</li>'
+                                    +'<li><i class="icon-checkmark"></i> Sub Tingkat</li>'
+                                +'</ul>';
+                $.Dialog.content(warningBody);
+                $.Dialog.title(titl);
+            }
+        });
+    }
+// end of form ---
+
     // form pop up
     function viewFR2(idsiswa){
         $.Dialog({
