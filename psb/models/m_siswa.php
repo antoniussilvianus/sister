@@ -350,8 +350,12 @@
 			case 'getBiayaNett':
 				if(!isset($_POST['iddetailbiaya'])) $o = array('status' =>'invalid_no_post' );
 				else{
-					$biaya = getBiayaNett($_POST['iddetailbiaya'],(isset($_POST['diskonreguler'])?$_POST['diskonreguler']:null),(isset($_POST['diskonkhusus'])?getuang($_POST['diskonkhusus']):0));
-					$stat  = $biaya==0?'diskon melebihi biaya':'sukses';
+					$iddetailbiaya = $_POST['iddetailbiaya'];
+					$diskonreguler = (isset($_POST['diskonreguler'])?$_POST['diskonreguler']:null);
+					$diskonkhusus  = (isset($_POST['diskonkhusus'])?getuang($_POST['diskonkhusus']):0);
+					$biaya = getBiayaNett($iddetailbiaya,$diskonreguler,$diskonkhusus);
+						// '],(isset($_POST['diskonreguler'])?$_POST['diskonreguler']:null),(isset($_POST['diskonkhusus'])?getuang($_POST['diskonkhusus']):0));
+					$stat  = $biaya<0?'diskon melebihi biaya':'sukses';
 				}$out = json_encode(array('status'=>$stat,'biayaNett'=>$biaya));
 			break;
 
